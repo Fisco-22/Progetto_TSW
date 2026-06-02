@@ -1,2 +1,377 @@
 @charset "UTF-8";
 
+/* CSS RESET & GENERAL STYLES */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --primary-green: #00aa6c;
+    --dark-emerald: #093325;
+    --expedia-blue: #002f56;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --bg-light: #f8fafc;
+    --border-color: #cbd5e1;
+    --radius: 8px;
+    --font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    font-family: var(--font-family);
+    color: var(--text-main);
+    background-color: #ffffff;
+    overflow-x: hidden;
+    line-height: 1.5;
+}
+
+/* NAVBAR SULLO SFONDO */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    border-bottom: 1px solid #e2e8f0;
+    background: #fff;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--dark-emerald);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 24px;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-main);
+    font-weight: 500;
+    font-size: 15px;
+    transition: color 0.2s;
+}
+
+.nav-links a:hover {
+    color: var(--primary-green);
+}
+
+.btn-nav-login {
+    background-color: var(--dark-emerald);
+    color: #fff !important;
+    padding: 10px 22px;
+    border-radius: 20px;
+    font-weight: 600 !important;
+    transition: background 0.2s;
+}
+
+.btn-nav-login:hover {
+    background-color: #124d39;
+}
+
+/* HERO SECTION DI SFONDO */
+.hero {
+    padding: 60px 40px;
+    background: linear-gradient(to bottom, #f0fdf4, #ffffff);
+    text-align: center;
+    min-height: 85vh;
+}
+
+.hero h1 {
+    font-size: 42px;
+    color: var(--expedia-blue);
+    margin-bottom: 16px;
+    font-weight: 700;
+}
+
+.hero p {
+    color: var(--text-muted);
+    font-size: 18px;
+    margin-bottom: 40px;
+}
+
+/* BARRA DI RICERCA */
+.search-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+    display: flex;
+    gap: 15px;
+}
+
+.search-field {
+    flex: 1;
+    text-align: left;
+}
+
+.search-field label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+}
+
+.search-field input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    font-size: 14px;
+}
+
+.btn-search {
+    background-color: var(--primary-green);
+    color: white;
+    border: none;
+    padding: 0 30px;
+    border-radius: var(--radius);
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-search:hover {
+    background-color: #00915c;
+}
+
+/* MODAL POP-UP SYSTEM (Ispirazione Layout Foto) */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(2px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-box {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 560px;
+    border-radius: 16px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    position: relative;
+    padding: 35px 40px;
+    max-height: 92vh;
+    overflow-y: auto;
+    transform: translateY(-20px);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-box {
+    transform: translateY(0);
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #1e293b;
+    cursor: pointer;
+    font-weight: 300;
+    transition: color 0.2s;
+}
+
+.modal-close:hover {
+    color: #000;
+}
+
+.auth-tabs {
+    display: flex;
+    border-bottom: 2px solid #f1f5f9;
+    margin-bottom: 25px;
+}
+
+.tab-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    padding: 12px 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-muted);
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+}
+
+.tab-btn.active {
+    color: var(--dark-emerald);
+    border-bottom: 3px solid var(--primary-green);
+}
+
+.modal-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: #000000;
+    line-height: 1.3;
+    margin-bottom: 25px;
+    text-align: left;
+    letter-spacing: -0.5px;
+}
+
+/* FORM DI AUTENTICAZIONE */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 18px;
+    position: relative;
+}
+
+.form-row .form-group {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 6px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #888888;
+    border-radius: 6px;
+    font-size: 15px;
+    color: var(--text-main);
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus {
+    border-color: var(--primary-green);
+    box-shadow: 0 0 0 3px rgba(0, 170, 108, 0.15);
+}
+
+.password-toggle {
+    position: absolute;
+    right: 14px;
+    top: 38px;
+    cursor: pointer;
+    color: var(--text-muted);
+    user-select: none;
+    display: flex;
+    align-items: center;
+}
+
+.legal-text {
+    font-size: 11px;
+    color: #555555;
+    line-height: 1.5;
+    margin-bottom: 18px;
+    text-align: left;
+}
+
+.legal-text a {
+    color: #000;
+    text-decoration: underline;
+}
+
+.marketing-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13px;
+    color: #000000;
+    margin-bottom: 25px;
+    cursor: pointer;
+    text-align: left;
+}
+
+.marketing-checkbox input {
+    margin-top: 3px;
+    accent-color: var(--dark-emerald);
+    width: 16px;
+    height: 16px;
+}
+
+.btn-submit {
+    background-color: var(--dark-emerald);
+    color: #ffffff;
+    border: none;
+    padding: 14px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    text-align: center;
+    width: 85%;
+    margin: 0 auto;
+    display: block;
+}
+
+.btn-submit:hover {
+    background-color: #051d15;
+}
+
+.toggle-form-link {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.toggle-form-link span {
+    color: var(--primary-green);
+    cursor: pointer;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+/* Classi condizionali controllate dallo stato dei tab tramite JS */
+.signup-only {
+    display: block;
+}
+
+.modal-box.mode-login .signup-only {
+    display: none;
+}
