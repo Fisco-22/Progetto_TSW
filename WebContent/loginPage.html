@@ -1,10 +1,190 @@
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
-<meta charset="UTF-8">
-<title>Login Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelBooking Agenzia di Viaggi - Prenota Voli, Hotel e Esperienze</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <header class="navbar">
+        <a href="#" class="logo">
+            <span>Wanderlust</span>
+        </a>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#">Scopri</a></li>
+                <li><a href="#">Recensioni</a></li>
+                <li><a href="#">Offerte</a></li>
+                <li><a href="#" id="openModalBtn" class="btn-nav-login">Accedi</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="hero">
+        <h1>Trova il meglio per il tuo prossimo viaggio</h1>
+        <p>Ispirato ai migliori servizi di prenotazione globali. Accedi per sbloccare sconti riservati fino al 30%.</p>
+        
+        <div class="search-container">
+            <div class="search-field">
+                <label>Meta o Nome Hotel</label>
+                <input type="text" placeholder="Es. Roma, Parigi, Tokyo...">
+            </div>
+            <div class="search-field">
+                <label>Check-in / Check-out</label>
+                <input type="text" placeholder="Aggiungi date">
+            </div>
+            <button class="btn-search">Ricerca</button>
+        </div>
+    </main>
+
+    <div class="modal-overlay" id="authModal">
+        <div class="modal-box" id="modalBox">
+            
+            <button class="modal-close" id="closeModalBtn" aria-label="Chiudi finestra">&times;</button>
+            
+            <div class="auth-tabs">
+                <button class="tab-btn" id="tabLogin">Accedi</button>
+                <button class="tab-btn active" id="tabSignup">Iscriviti</button>
+            </div>
+
+            <h2 class="modal-title" id="modalTitle">Iscriviti per scoprire il meglio di Wanderlust</h2>
+
+            <form class="auth-form" id="authForm" action="AuthServlet" method="POST">
+                
+                <input type="hidden" name="actionType" id="actionType" value="signup">
+
+                <div class="form-row signup-only">
+                    <div class="form-group">
+                        <label for="regNome">Nome</label>
+                        <input type="text" id="regNome" name="nome" placeholder="Nome">
+                    </div>
+                    <div class="form-group">
+                        <label for="regCognome">Cognome</label>
+                        <input type="text" id="regCognome" name="cognome" placeholder="Cognome">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="authEmail">Indirizzo email</label>
+                    <input type="email" id="authEmail" name="email" placeholder="Email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="authPassword" id="passwordLabel">Crea una password</label>
+                    <input type="password" id="authPassword" name="password" placeholder="Password" required>
+                    <span class="password-toggle" id="passwordToggle" role="button" aria-label="Mostra password">👁️</span>
+                </div>
+
+                <div class="legal-text" id="legalText">
+                    Wanderlust fornisce una piattaforma online e i relativi servizi consentendo agli utenti di cercare e prenotare viaggi, alloggi, esperienze e ristoranti. I servizi sono forniti regolarmente in forma gratuita. Per contattare il team di assistenza clienti per qualsiasi motivo, inclusa la disattivazione dell'account, vai alla pagina <a href="#">Chi siamo</a>. Potresti avere diritti riconosciuti dalla legge in relazione ai servizi offerti.
+                </div>
+
+                <label class="marketing-checkbox signup-only">
+                    <input type="checkbox" name="newsletter" value="true" checked>
+                    <span>Sì, informatemi su offerte e nuove funzionalità. Posso revocare il consenso in qualsiasi momento.</span>
+                </label>
+
+                <button type="submit" class="btn-submit" id="btnSubmit">Iscriviti</button>
+            </form>
+
+            <div class="toggle-form-link" id="toggleFormLink">
+                Hai già un account? <span id="switchToLogin">Accedi</span>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        const modalOverlay = document.getElementById('authModal');
+        const modalBox = document.getElementById('modalBox');
+        const openModalBtn = document.getElementById('openModalBtn');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        
+        const tabLogin = document.getElementById('tabLogin');
+        const tabSignup = document.getElementById('tabSignup');
+        
+        const modalTitle = document.getElementById('modalTitle');
+        const passwordLabel = document.getElementById('passwordLabel');
+        const btnSubmit = document.getElementById('btnSubmit');
+        const actionType = document.getElementById('actionType');
+        const toggleFormLink = document.getElementById('toggleFormLink');
+        
+        const passwordInput = document.getElementById('authPassword');
+        const passwordToggle = document.getElementById('passwordToggle');
+
+        const regNome = document.getElementById('regNome');
+        const regCognome = document.getElementById('regCognome');
+
+        openModalBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            modalOverlay.classList.add('active');
+        });
+
+        closeModalBtn.addEventListener('click', () => {
+            modalOverlay.classList.remove('active');
+        });
+
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) {
+                modalOverlay.classList.remove('active');
+            }
+        });
+
+        function setLoginMode() {
+            modalBox.classList.add('mode-login');
+            tabLogin.classList.add('active');
+            tabSignup.classList.remove('active');
+            
+            modalTitle.textContent = "Accedi al tuo account Wanderlust";
+            passwordLabel.textContent = "Inserisci la tua password";
+            btnSubmit.textContent = "Accedi";
+            actionType.value = "login";
+            toggleFormLink.innerHTML = 'Non hai un account? <span id="switchToSignup">Iscriviti</span>';
+            
+            regNome.removeAttribute('required');
+            regCognome.removeAttribute('required');
+
+            document.getElementById('switchToSignup').addEventListener('click', setSignupMode);
+        }
+
+        function setSignupMode() {
+            modalBox.classList.remove('mode-login');
+            tabSignup.classList.add('active');
+            tabLogin.classList.remove('active');
+            
+            modalTitle.textContent = "Iscriviti per scoprire il meglio di Wanderlust";
+            passwordLabel.textContent = "Crea una password";
+            btnSubmit.textContent = "Iscriviti";
+            actionType.value = "signup";
+            toggleFormLink.innerHTML = 'Hai già un account? <span id="switchToLogin">Accedi</span>';
+            
+            regNome.setAttribute('required', '');
+            regCognome.setAttribute('required', '');
+
+            document.getElementById('switchToLogin').addEventListener('click', setLoginMode);
+        }
+
+        tabLogin.addEventListener('click', setLoginMode);
+        tabSignup.addEventListener('click', setSignupMode);
+        document.getElementById('switchToLogin').addEventListener('click', setLoginMode);
+
+        passwordToggle.addEventListener('click', () => {
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                passwordToggle.textContent = '🔒';
+            } else {
+                passwordInput.type = 'password';
+                passwordToggle.textContent = '👁️';
+            }
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                modalOverlay.classList.add('active');
+            }, 800);
+        });
+    </script>
 </body>
 </html>
