@@ -11,7 +11,7 @@ public class Utente_Bean implements Serializable{
     private String password;
     private String indirizzo;
     private String dataNascita;
-    private boolean newsletter;
+    
     
     public Utente_Bean(){}
 
@@ -63,13 +63,9 @@ public class Utente_Bean implements Serializable{
 		this.dataNascita = dataNascita;
 	}
 
-	public boolean isNewsletter() {
-		return newsletter;
-	}
 
-	public void setNewsletter(boolean newsletter) {
-		this.newsletter = newsletter;
-	}
+
+
 
 	
     
