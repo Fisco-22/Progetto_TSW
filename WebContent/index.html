@@ -2,98 +2,235 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TravelBooking Agenzia di Viaggi - Prenota Voli, Hotel e Esperienze</title>
+    <title>TravelBooking - Piattaforma di Prenotazione Viaggi</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header class="navbar">
-        <a href="#" class="logo">
-            <span>TravelBooking</span>
-        </a>
-        <nav>
-            <ul class="nav-links">
-                <li><a href="#">Scopri</a></li>
-                <li><a href="#">Recensioni</a></li>
-                <li><a href="#">Offerte</a></li>
-                <li><a href="#" id="openModalBtn" class="btn-nav-login">Accedi</a></li>
-            </ul>
-        </nav>
+    <nav class="navbar">
+        <a href="index.html" class="logo">TravelBooking</a>
+        <div class="nav-links">
+            <span class="nav-info">📞 Assistenza clienti: <strong class="phone-placeholder">+39 089 1234567</strong></span>
+            <a href="#">Recensioni</a>
+            <a href="#" class="cart-link"> I miei viaggi <span class="cart-badge">0</span>
+            </a>
+            <a href="#" id="openModalBtn" class="btn-accedi">Accedi</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>Personalizza il tuo viaggio perfetto</h1>
+        <p>Trova le migliori combinazioni esclusive per Voli, Hotel e Alloggi</p>
     </header>
 
-    <main class="hero">
-        <h1>Trova il meglio per il tuo prossimo viaggio</h1>
-        <p>Ispirato ai migliori servizi di prenotazione globali. Accedi per sbloccare sconti riservati fino al 30%.</p>
-        
-        <div class="search-container">
-            <div class="search-field">
-                <label>Meta o Nome Hotel</label>
-                <input type="text" placeholder="Es. Roma, Parigi, Tokyo...">
-            </div>
-            <div class="search-field">
-                <label>Check-in / Check-out</label>
-                <input type="text" placeholder="Aggiungi date">
-            </div>
-            <button class="btn-search">Ricerca</button>
+    <section class="search-container">
+        <div class="search-box">
+            <label>Destinazione</label>
+            <input type="text" placeholder="Inserisci località o struttura...">
         </div>
+        <div class="search-box">
+            <label>Tipologia Alloggio</label>
+            <select>
+                <option>Hotel</option>
+                <option>Appartamento</option>
+                <option>Resort</option>
+                <option>Villa</option>
+            </select>
+        </div>
+        <div class="search-box">
+            <label>Codice Volo (Opzionale)</label>
+            <input type="text" placeholder="Es. AZ412">
+        </div>
+        <button class="btn-cerca">Cerca</button>
+    </section>
+
+    <main class="main-content">
+        
+        <section class="catalog-section">
+            <div class="section-header">
+                <h2>Esplora Pacchetti Completi</h2>
+                <p>Le combinazioni Volo + Hotel più scelte della settimana</p>
+            </div>
+            
+            <div class="cards-grid">
+                <div class="travel-card">
+                    <div class="card-image-wrap">
+                        <img src="https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=500&q=80" alt="Barcellona">
+                        <span class="badge-combo">✈️+🏨 Volo + Hotel</span>
+                        <span class="badge-countdown">⚡ Offerta Lampo</span>
+                    </div>
+                    <div class="card-body">
+                        <span class="card-location">📍 Barcellona, Spagna</span>
+                        <h3>Hotel Moderno Bcn</h3>
+                        <p class="card-tagline">Ottima posizione, a 20 metri dalla Ramblas, per chi vuole godersi al massimo il soggiorno.</p>
+                        <div class="card-rating">
+                            <span class="rating-score">8.2</span>
+                            <span class="rating-text">Ottimo (1494 recensioni)</span>
+                        </div>
+                        <div class="card-footer-price">
+                            <span class="price-label">da</span>
+                            <span class="price-amount">109 €</span>
+                            <span class="price-unit">/ persona</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="travel-card">
+                    <div class="card-image-wrap">
+                        <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=500&q=80" alt="Parigi">
+                        <span class="badge-combo">✈️+🏨 Volo + Hotel</span>
+                        <span class="badge-countdown">⏰ Scade a breve</span>
+                    </div>
+                    <div class="card-body">
+                        <span class="card-location">📍 Parigi, Francia</span>
+                        <h3>Mercure Paris Montparnasse</h3>
+                        <p class="card-tagline">Hotel in stile informale con arredi ispirati al design moderno e vicino ai musei principali.</p>
+                        <div class="card-rating">
+                            <span class="rating-score">8.4</span>
+                            <span class="rating-text">Ottimo (1648 recensioni)</span>
+                        </div>
+                        <div class="card-footer-price">
+                            <span class="price-label">da</span>
+                            <span class="price-amount">164 €</span>
+                            <span class="price-unit">/ persona</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="travel-card">
+                    <div class="card-image-wrap">
+                        <img src="https://images.unsplash.com/photo-1534351590666-13e3e96b5017?auto=format&fit=crop&w=500&q=80" alt="Amsterdam">
+                        <span class="badge-combo">✈️+🏨 Volo + Hotel</span>
+                    </div>
+                    <div class="card-body">
+                        <span class="card-location">📍 Amsterdam, Paesi Bassi</span>
+                        <h3>BUNK Hotel Amsterdam</h3>
+                        <p class="card-tagline">Splendido alloggio ricavato in una struttura storica, con diverse tipologie di camere.</p>
+                        <div class="card-rating">
+                            <span class="rating-score">8.8</span>
+                            <span class="rating-text">Eccellente (5494 recensioni)</span>
+                        </div>
+                        <div class="card-footer-price">
+                            <span class="price-label">da</span>
+                            <span class="price-amount">260 €</span>
+                            <span class="price-unit">/ persona</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="catalog-section">
+            <div class="section-header">
+                <h2>Offerte Flash del Weekend</h2>
+                <p>Soggiorni brevi a tariffe agevolate per staccare la spina nel fine settimana</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="travel-card">
+                    <div class="card-image-wrap">
+                        <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=500&q=80" alt="Roma">
+                        <span class="badge-combo">🏨 Solo Hotel</span>
+                    </div>
+                    <div class="card-body">
+                        <span class="card-location">📍 Roma, Italia</span>
+                        <h3>Occidental Aran Park</h3>
+                        <p class="card-tagline">Camere spaziose immerse nel verde del quartiere EUR, ottimi collegamenti con il centro storico.</p>
+                        <div class="card-rating">
+                            <span class="rating-score">8.0</span>
+                            <span class="rating-text">Buono (2100 recensioni)</span>
+                        </div>
+                        <div class="card-footer-price">
+                            <span class="price-label">2 notti</span>
+                            <span class="price-amount">128 €</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="travel-card">
+                    <div class="card-image-wrap">
+                        <img src="https://images.unsplash.com/photo-1520175480921-4edfa2983e0f?auto=format&fit=crop&w=500&q=80" alt="Venezia">
+                        <span class="badge-combo">🏨 Solo Hotel</span>
+                        <span class="badge-countdown">🔥 Super Sconto</span>
+                    </div>
+                    <div class="card-body">
+                        <span class="card-location">📍 Venezia, Italia</span>
+                        <h3>Hotel Canal Grande</h3>
+                        <p class="card-tagline">Affacciato direttamente sulle acque del canale principale, interni eleganti in stile veneziano.</p>
+                        <div class="card-rating">
+                            <span class="rating-score">9.1</span>
+                            <span class="rating-text">Superbo (920 recensioni)</span>
+                        </div>
+                        <div class="card-footer-price">
+                            <span class="price-label">2 notti</span>
+                            <span class="price-amount">195 €</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <div class="modal-overlay" id="authModal">
         <div class="modal-box" id="modalBox">
+            <button class="close-btn" id="closeModalBtn">&times;</button>
             
-            <button class="modal-close" id="closeModalBtn" aria-label="Chiudi finestra">&times;</button>
-            
-            <div class="auth-tabs">
-                <button class="tab-btn" id="tabLogin">Accedi</button>
-                <button class="tab-btn active" id="tabSignup">Iscriviti</button>
+            <div class="modal-tabs">
+                <div class="tab active" id="tabLogin">Accedi</div>
+                <div class="tab" id="tabSignup">Iscriviti</div>
             </div>
 
-            <h2 class="modal-title" id="modalTitle">Iscriviti per scoprire il meglio di TravelBooking</h2>
+            <h3 id="modalTitle">Accedi al tuo account TravelBooking</h3>
 
-            <form class="auth-form" id="authForm" action="AuthServlet" method="POST">
-                
-                <input type="hidden" name="actionType" id="actionType" value="signup">
+            <form action="AuthServlet" method="POST" id="authForm">
+                <input type="hidden" name="actionType" id="actionType" value="login">
 
                 <div class="form-row signup-only">
                     <div class="form-group">
                         <label for="regNome">Nome</label>
-                        <input type="text" id="regNome" name="nome" placeholder="Nome">
+                        <input type="text" name="nome" id="regNome" placeholder="Nome">
                     </div>
                     <div class="form-group">
                         <label for="regCognome">Cognome</label>
-                        <input type="text" id="regCognome" name="cognome" placeholder="Cognome">
+                        <input type="text" name="cognome" id="regCognome" placeholder="Cognome">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="authEmail">Indirizzo email</label>
-                    <input type="email" id="authEmail" name="email" placeholder="Email" required>
+                    <input type="email" name="email" id="authEmail" placeholder="Email" required>
                 </div>
 
-                <div class="form-group">
-                    <label for="authPassword" id="passwordLabel">Crea una password</label>
-                    <input type="password" id="authPassword" name="password" placeholder="Password" required>
-                    <span class="password-toggle" id="passwordToggle" role="button" aria-label="Mostra password">👁️</span>
+                <div class="form-group signup-only">
+                    <label for="regIndirizzo">Indirizzo di Residenza</label>
+                    <input type="text" name="indirizzo" id="regIndirizzo" placeholder="Via/Piazza, Città">
                 </div>
 
-                <div class="legal-text" id="legalText">
-                    TravelBooking fornisce una piattaforma online e i relativi servizi consentendo agli utenti di cercare e prenotare viaggi, alloggi, esperienze e ristoranti. I servizi sono forniti regolarmente in forma gratuita. Per contattare il team di assistenza clienti per qualsiasi motivo, inclusa la disattivazione dell'account, vai alla pagina <a href="#">Chi siamo</a>. Potresti avere diritti riconosciuti dalla legge in relazione ai servizi offerti.
+                <div class="form-group signup-only">
+                    <label for="regDataNascita">Data di Nascita</label>
+                    <input type="date" name="dataNascita" id="regDataNascita">
                 </div>
 
-                <label class="marketing-checkbox signup-only">
-                    <input type="checkbox" name="newsletter" value="true" checked>
-                    <span>Sì, informatemi su offerte e nuove funzionalità. Posso revocare il consenso in qualsiasi momento.</span>
-                </label>
+                <div class="form-group password-container">
+                    <label id="passwordLabel" for="authPassword">Inserisci la tua password</label>
+                    <input type="password" name="password" id="authPassword" placeholder="Password" required>
+                    <button type="button" class="toggle-password" id="passwordToggle">👁️</button>
+                </div>
 
-                <button type="submit" class="btn-submit" id="btnSubmit">Iscriviti</button>
+                <div class="form-group checkbox-group signup-only">
+                    <input type="checkbox" name="newsletter" id="regNewsletter" value="true" checked>
+                    <label for="regNewsletter">Sì, desidero ricevere via mail codici promozionali e offerte last minute sui pacchetti turistici.</label>
+                </div>
+
+                <button type="submit" class="btn-submit" id="btnSubmit">Accedi</button>
+
+                <p class="toggle-text" id="toggleFormLink">
+                    Non hai un account? <span id="switchToSignup">Iscriviti</span>
+                </p>
             </form>
-
-            <div class="toggle-form-link" id="toggleFormLink">
-                Hai già un account? <span id="switchToLogin">Accedi</span>
-            </div>
-
         </div>
     </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
