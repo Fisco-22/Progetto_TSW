@@ -52,7 +52,6 @@ if(connesso == null){
                 <p><strong>Account verificato per le opzioni assicurative dirette.</strong></p>
             </div>
     	</div>
-    		
     </div>
 </body>
 </html>
