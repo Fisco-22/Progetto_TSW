@@ -71,9 +71,7 @@ public class Utente_Bean implements Serializable{
 		this.newsletter = newsletter;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+	
     
     
 }
