@@ -16,6 +16,7 @@ if(connesso == null){
 <link rel="stylesheet" href="style.css">
 </head>
 <body style="background-color : #f4f6f9;">
+	<!-- NAVBAR -->
     <nav class="navbar">
         <a href="index.html" class="logo">TravelBooking</a>
         <div class="nav-links">
@@ -26,5 +27,32 @@ if(connesso == null){
             <a href="index.html" class="logout" style="margin-left: 20px;">Scollegati</a>
         </div>
     </nav>
+    <!-- DASHBOARD -->
+    <div class="container_dashboard">
+    	<div class="header-dash">
+    		<h1>Bentornato, <%= connesso.getNome() %>!</h1>
+            <p>Pannello di controllo Utente Registrato</p>
+    	</div>
+    	
+    	<div class="grid-features">
+    		<div class="card-feature">
+    			<h3>I miei Viaggi</h3>
+    			<p>Hai attualmente 0 biglietti pronti per il pagamento elettronico.
+    			<a href="index.html" class="btn-action">Trova Biglietti</a>
+    		</div>
+    		
+    		<div class="grid-features">
+    			<h3>Recensioni</h3>
+    			<p>Lascia una recensione sui luoghi dove sei andato.
+    		</div>
+    		
+    		<div class="card-feature">
+                <h3>👤 Dati Anagrafici del Profilo</h3>
+                <p><strong>Email:</strong> <%= connesso.getEmail() %></p>
+                <p><strong>Account verificato per le opzioni assicurative dirette.</strong></p>
+            </div>
+    	</div>
+    		
+    </div>
 </body>
 </html>
