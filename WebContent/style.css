@@ -406,20 +406,34 @@ body {
     border-color: var(--brand-primary);
 }
 
-.password-container { position: relative; }
-.password-container input { padding-right: 45px; }
+.password-container { 
+	position: relative; 
+	}
+.password-container input { 
+	padding-right: 45px; 
+	}
 
 .toggle-password {
     position: absolute; right: 14px; top: 36px;
     background: none; border: none; cursor: pointer; font-size: 18px;
 }
 
-.signup-only { display: block; }
-.mode-login .signup-only { display: none; }
+.signup-only { 
+	display: block; 
+	}
+.mode-login .signup-only { 
+	display: none; 
+	}
 
-.checkbox-group { display: flex; gap: 10px; margin-top: 8px; }
-.checkbox-group input { width: 16px; height: 16px; accent-color: var(--brand-dark); }
-.checkbox-group label { font-size: 13px; color: #475569; }
+.checkbox-group { 
+	display: flex; gap: 10px; margin-top: 8px; 
+}
+.checkbox-group input { 
+	width: 16px; height: 16px; accent-color: var(--brand-dark); 
+}
+.checkbox-group label { 
+	font-size: 13px; color: #475569; 
+	}
 
 .btn-submit {
     width: 100%; padding: 14px; background-color: var(--brand-dark);
@@ -427,5 +441,10 @@ body {
     font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 25px;
 }
 
-.toggle-text { text-align: center; margin-top: 20px; font-size: 14px; color: var(--text-muted); }
-.toggle-text span { color: var(--brand-primary); font-weight: 700; cursor: pointer; text-decoration: underline; }
+.toggle-text { 
+	text-align: center; margin-top: 20px; font-size: 14px; color: var(--text-muted); 
+	}
+.toggle-text span { 
+	color: var(--brand-primary); font-weight: 700; cursor: pointer; text-decoration: underline; 
+	}
+
