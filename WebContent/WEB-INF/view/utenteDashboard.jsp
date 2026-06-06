@@ -3,7 +3,7 @@
 <% 
 Utente_Bean connesso = (Utente_Bean) session.getAttribute("user");
 if(connesso == null){
-	response.sendRedirect("index.html");
+	response.sendRedirect("WebContent/index.html");
 	return;
 }
 
@@ -13,7 +13,7 @@ if(connesso == null){
 <head>
 <meta charset="UTF-8">
 <title>TravelBooking - Area Personale</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="WebContent/style.css">
 </head>
 <body style="background-color : #f4f6f9;">
 	<!-- NAVBAR -->

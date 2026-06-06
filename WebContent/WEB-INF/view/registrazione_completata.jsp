@@ -3,7 +3,7 @@
 <%
     Utente_Bean utente = (Utente_Bean) request.getAttribute("registeredUser");
     if (utente == null) {
-        response.sendRedirect("index.html");
+        response.sendRedirect("WebContent/index.html");
         return;
     }
 %>
@@ -11,9 +11,22 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Account Creato</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Benvenuto in TravelBooking</title>
+<link rel="stylesheet" href="WebContent/style.css">
 </head>
-<body>
-
+<body style="background-color: #f4f6f9; margin: 0;">
+	<div class="container-successo">
+		<div class="card-successo">
+			<h2>Registrazione Completata!</h2>
+			<p class="p-intro">Grazie per esserti registrato, <strong><%= utente.getNome() %> <%= utente.getCognome() %></strong>.
+			
+			<div class="info-riepilogo">
+				<p>La tua email: <strong><%= utente.getEmail() %></strong>.</p>
+                <p>Indirizzo registrato: <strong><%= utente.getIndirizzo() %></strong></p>
+                <p>Profilo abilitato per la gestione dello storico viaggi ed il rilascio di feedback social.</p>
+            </div>
+		</div>
+	</div>
 </body>
 </html>
