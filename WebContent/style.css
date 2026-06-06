@@ -447,4 +447,87 @@ body {
 .toggle-text span { 
 	color: var(--brand-primary); font-weight: 700; cursor: pointer; text-decoration: underline; 
 	}
+	
+/* ==========================================================================
+   SCHERMATA DI SUCCESSO (Registrazione Completata)
+   ========================================================================== */
+
+/* Contenitore principale centrato nella pagina */
+.container-successo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* La scheda bianca con i bordi arrotondati e l'ombra sfumata */
+.card-successo {
+    background-color: #ffffff;
+    max-width: 550px;
+    width: 100%;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    border-top: 5px solid #004f32; /* Verde scuro TripAdvisor */
+}
+
+/* Titolo principale */
+.card-successo h2 {
+    color: #004f32;
+    font-size: 28px;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+/* Sottotitolo descrittivo */
+.card-successo .p-intro {
+    color: #4a5568;
+    font-size: 16px;
+    margin-bottom: 25px;
+}
+
+/* Box grigio/verde chiaro per il riepilogo dei dati anagrafici */
+.info-riepilogo {
+    background-color: #f4f7f5;
+    border-left: 4px solid #00aa6c; /* Verde brillante per l'accento */
+    padding: 20px;
+    border-radius: 8px;
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.info-riepilogo p {
+    margin: 8px 0;
+    color: #2d3748;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.info-riepilogo strong {
+    color: #004f32;
+}
+
+/* Pulsante per tornare alla Home Page coordinato con lo stile dei bottoni principali */
+.btn-home {
+    display: inline-block;
+    background-color: #000000; /* Bottone nero elegante stile TA */
+    color: #ffffff;
+    padding: 14px 30px;
+    border-radius: 100px; /* Bordi totalmente arrotondati */
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-home:hover {
+    background-color: #004f32; /* Cambia in verde scuro al passaggio del mouse */
+}
+
+.btn-home:active {
+    transform: scale(0.98);
+}
 
