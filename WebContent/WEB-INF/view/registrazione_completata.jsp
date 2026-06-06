@@ -26,6 +26,8 @@
                 <p>Indirizzo registrato: <strong><%= utente.getIndirizzo() %></strong></p>
                 <p>Profilo abilitato per la gestione dello storico viaggi ed il rilascio di feedback social.</p>
             </div>
+            
+            <a href="WebContent/index.html" class="btn-home">Torna alla Home ed Effettua il Login</a>
 		</div>
 	</div>
 </body>
