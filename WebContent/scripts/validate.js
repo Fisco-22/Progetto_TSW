@@ -84,3 +84,42 @@ function validateFormElem(formElem, spanError, errorMessage) {
 
 	    return valid;
 	}
+	
+	function addPhone() {
+	    let container = document.getElementById("phonesContainer");
+	    if (!container) return;
+
+	    let div = document.createElement("div");
+	    div.className = "phone-row";
+	    div.id = "phoneRow" + phoneCount;
+
+	    let input = document.createElement("input");
+	    input.type = "text";
+	    input.name = "phone";
+	    input.id = "phone" + phoneCount;
+	    input.pattern = "^([0-9]{3}-[0-9]{7})$";
+	    input.required = true;
+	    input.placeholder = "###-#######";
+
+	    let btnRemove = document.createElement("button");
+	    btnRemove.type = "button";
+	    btnRemove.className = "btn-remove-phone";
+	    btnRemove.textContent = "-";
+	    btnRemove.onclick = function() { div.remove(); };
+
+	    let span = document.createElement("span");
+	    span.id = "errorPhone" + phoneCount;
+	    span.className = "error-span";
+
+	    // Listener in tempo reale al cambio di focus
+	    input.addEventListener("change", function() {
+	        validateFormElem(input, span, phoneErrorMessage);
+	    });
+
+	    div.appendChild(input);
+	    div.appendChild(btnRemove);
+	    div.appendChild(span);
+	    container.appendChild(div);
+	    
+	    phoneCount++;
+	}
