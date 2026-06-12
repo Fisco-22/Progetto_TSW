@@ -4,4 +4,46 @@ const emailErrorMessage = "The email field should be in the form username@domain
 const phoneErrorMessage = "The number field should be in the form ###-#######";
 const emptyFieldErrorMessage = "This field cannot be empty"
 
+function validateFormElem(formElem, spanError, errorMessage) {
+    if (!formElem) return true; // Se l'elemento non esiste, consideralo valido
 
+    if (formElem.checkValidity()) {
+        formElem.classList.remove("error-field");
+        spanError.style.color = "transparent";
+        spanError.innerHTML = "";
+        return true;
+    }
+	
+	formElem.classList.add("error-field");
+	    spanError.style.color = "#ef4444"; // Rosso moderno
+	    
+	    if (formElem.validity.valueMissing) {
+	        spanError.innerHTML = emptyFieldErrorMessage;
+	    } else {
+	        spanError.innerHTML = errorMessage;
+	    }
+	    return false;
+	}
+	
+	function validateLogin() {
+	    let valid = true;
+
+	    // Recupero elementi dal DOM del pop-up di Login
+	    const loginEmail = document.getElementById("loginEmail");
+	    const errorLoginEmail = document.getElementById("errorLoginEmail");
+	    
+	    const loginPassword = document.getElementById("loginPassword");
+	    const errorLoginPassword = document.getElementById("errorLoginPassword");
+
+	    // Validazione Email
+	    if (!validateFormElem(loginEmail, errorLoginEmail, emailErrorMessage)) {
+	        valid = false;
+	    }
+
+	    // Validazione Password
+	    if (!validateFormElem(loginPassword, errorLoginPassword, passwordErrorMessage)) {
+	        valid = false;
+	    }
+
+	    return valid;
+	}
