@@ -123,3 +123,26 @@ function validateFormElem(formElem, spanError, errorMessage) {
 	    
 	    phoneCount++;
 	}
+	
+	document.addEventListener("DOMContentLoaded", () => {
+	    const formLogin = document.getElementById("formLoginPopUp");
+	    const formSignup = document.getElementById("formSignupPopUp");
+
+	    // Se l'utente clicca sul submit del login, fermiamo l'invio se i campi non sono validi
+	    if (formLogin) {
+	        formLogin.addEventListener("submit", (event) => {
+	            if (!validateLogin()) {
+	                event.preventDefault(); // Blocca l'invio alla Servlet e tiene aperto il pop-up
+	            }
+	        });
+	    }
+
+	    // Se l'utente clicca sul submit della registrazione
+	    if (formSignup) {
+	        formSignup.addEventListener("submit", (event) => {
+	            if (!validateSignup()) {
+	                event.preventDefault(); // Blocca l'invio
+	            }
+	        });
+	    }
+	});
