@@ -47,3 +47,40 @@ function validateFormElem(formElem, spanError, errorMessage) {
 
 	    return valid;
 	}
+	
+	function validateSignup() {
+	    let valid = true;
+
+	    const signupNome = document.getElementById("signupNome");
+	    const errorNome = document.getElementById("errorNome");
+	    if (!validateFormElem(signupNome, errorNome, nameOrLastnameErrorMessage)) valid = false;
+
+	    const signupCognome = document.getElementById("signupCognome");
+	    const errorCognome = document.getElementById("errorCognome");
+	    if (!validateFormElem(signupCognome, errorCognome, nameOrLastnameErrorMessage)) valid = false;
+
+	    const signupEmail = document.getElementById("signupEmail");
+	    const errorEmail = document.getElementById("errorEmail");
+	    if (!validateFormElem(signupEmail, errorEmail, emailErrorMessage)) valid = false;
+
+	    const signupPassword = document.getElementById("signupPassword");
+	    const errorPassword = document.getElementById("errorPassword");
+	    if (!validateFormElem(signupPassword, errorPassword, passwordErrorMessage)) valid = false;
+
+	    const signupIndirizzo = document.getElementById("signupIndirizzo");
+	    const errorIndirizzo = document.getElementById("errorIndirizzo");
+	    if (!validateFormElem(signupIndirizzo, errorIndirizzo, emptyFieldErrorMessage)) valid = false;
+
+	    // Validazione Telefoni Dinamici (se presenti)
+	    for (let i = 0; i < phoneCount; i++) {
+	        let spanPhone = document.getElementById("errorPhone" + i);
+	        let inputPhone = document.getElementById("phone" + i);
+	        if (spanPhone && inputPhone) {
+	            if (!validateFormElem(inputPhone, spanPhone, phoneErrorMessage)) {
+	                valid = false;
+	            }
+	        }
+	    }
+
+	    return valid;
+	}
