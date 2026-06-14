@@ -39,10 +39,32 @@ public class LoginServlet extends HttpServlet {
 			if(uAutentificato != null) {
 				session.setAttribute("user", uAutentificato);
 				session.setAttribute("userEmail", uAutentificato.getEmail());
-				RequestDispatcher dispatcher = request.getRequestDispatcher("view/...");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("view/utenteDashboard.jsp");
+				dispatcher.forward(request, response);
+			} else {
+				response.sendRedirect("index.html?auth_error=true");
+			}
+		} else if("signup".equals(actionType)) {
+			Utente_Bean newUser = new Utente_Bean();
+			newUser.setNome(request.getParameter("nome"));
+			newUser.setCognome(request.getParameter("cognome"));
+			newUser.setEmail(email);
+			newUser.setPassword(password);
+			newUser.setIndirizzo(request.getParameter("indirizzo"));
+			newUser.setDataNascita(request.getParameter("dataNascita"));
+			
+			boolean signupSuccess = dao.salvaUtente(newUser);
+			
+			if(signupSuccess) {
+				request.setAttribute("registeredUser", newUser);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("view/registrazione_completata.jsp");
+				dispatcher.forward(request, response);
+			} else {
+				response.sendRedirect("index.html?signup_error=true");
+			}
 			}
 		}
-	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

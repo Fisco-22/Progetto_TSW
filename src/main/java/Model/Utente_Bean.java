@@ -62,5 +62,5 @@ public class Utente_Bean implements Serializable{
 	public void setDataNascita(String dataNascita) {
 		this.dataNascita = dataNascita;
 	}
-
+	
 }
