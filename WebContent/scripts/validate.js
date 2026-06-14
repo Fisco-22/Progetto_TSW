@@ -204,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
             errorMsg.style.textAlign = 'center';
             errorMsg.style.fontWeight = 'bold';
             errorMsg.style.fontSize = '14px';
-            errorMsg.innerHTML = '❌ Email o password errate. Riprova.';
+            errorMsg.innerHTML = 'Email o password errate. Riprova.';
             
             formLogin.prepend(errorMsg);
         }
