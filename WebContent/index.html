@@ -182,52 +182,24 @@
 
             <h3 id="modalTitle">Accedi al tuo account TravelBooking</h3>
 
-            <form action="AuthServlet" method="POST" id="authForm">
-                <input type="hidden" name="actionType" id="actionType" value="login">
+            <form action="LoginServlet" method="POST" id="formLoginPopUp">
+    <!-- ActionType nascosto per far capire alla Servlet cosa fare -->
+    			<input type="hidden" name="actionType" value="login">
 
-                <div class="form-row signup-only">
-                    <div class="form-group">
-                        <label for="regNome">Nome</label>
-                        <input type="text" name="nome" id="regNome" placeholder="Nome">
-                    </div>
-                    <div class="form-group">
-                        <label for="regCognome">Cognome</label>
-                        <input type="text" name="cognome" id="regCognome" placeholder="Cognome">
-                    </div>
-                </div>
+    <div class="input-group">
+        <label for="loginEmail">Indirizzo Email</label>
+        <input type="email" id="loginEmail" name="email" required placeholder="es. mario@email.it">
+        <span id="errorLoginEmail" class="error-span"></span>
+    </div>
 
-                <div class="form-group">
-                    <label for="authEmail">Indirizzo email</label>
-                    <input type="email" name="email" id="authEmail" placeholder="Email" required>
-                </div>
+    <div class="input-group">
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" name="password" required pattern=".{6,}" maxlength="20">
+        <span id="errorLoginPassword" class="error-span"></span>
+    </div>
 
-                <div class="form-group signup-only">
-                    <label for="regIndirizzo">Indirizzo di Residenza</label>
-                    <input type="text" name="indirizzo" id="regIndirizzo" placeholder="Via/Piazza, Città">
-                </div>
-
-                <div class="form-group signup-only">
-                    <label for="regDataNascita">Data di Nascita</label>
-                    <input type="date" name="dataNascita" id="regDataNascita">
-                </div>
-
-                <div class="form-group password-container">
-                    <label id="passwordLabel" for="authPassword">Inserisci la tua password</label>
-                    <input type="password" name="password" id="authPassword" placeholder="Password" required>
-                    <button type="button" class="toggle-password" id="passwordToggle"></button>
-                </div>
-
-                <div class="form-group checkbox-group signup-only">
-                    <input type="checkbox" name="newsletter" id="regNewsletter" value="true" checked>
-                    <label for="regNewsletter">Sì, desidero ricevere via mail codici promozionali e offerte last minute sui pacchetti turistici.</label>
-                </div>
-
-                <button type="submit" class="btn-submit" id="btnSubmit">Accedi</button>
-
-                <p class="toggle-text" id="toggleFormLink">
-                    Non hai un account? <span id="switchToSignup">Iscriviti</span>
-                </p>
-            </form>
+    <button type="submit" class="btn-submit-login">Accedi</button>
+		</form>
         </div>
     </div>
 

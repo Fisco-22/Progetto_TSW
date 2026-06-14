@@ -124,25 +124,34 @@ function validateFormElem(formElem, spanError, errorMessage) {
 	    phoneCount++;
 	}
 	
-	document.addEventListener("DOMContentLoaded", () => {
-	    const formLogin = document.getElementById("formLoginPopUp");
-	    const formSignup = document.getElementById("formSignupPopUp");
-
-	    // Se l'utente clicca sul submit del login, fermiamo l'invio se i campi non sono validi
-	    if (formLogin) {
-	        formLogin.addEventListener("submit", (event) => {
-	            if (!validateLogin()) {
-	                event.preventDefault(); // Blocca l'invio alla Servlet e tiene aperto il pop-up
-	            }
-	        });
-	    }
-
-	    // Se l'utente clicca sul submit della registrazione
-	    if (formSignup) {
-	        formSignup.addEventListener("submit", (event) => {
-	            if (!validateSignup()) {
-	                event.preventDefault(); // Blocca l'invio
-	            }
-	        });
+	document.addEventListener('DOMContentLoaded', () => {
+	    const urlParams = new URLSearchParams(window.location.search);
+	    
+	    // Se la servlet ha rifiutato il login, intercetta il parametro
+	    if (urlParams.has('auth_error')) {
+	        const modalOverlay = document.getElementById('modalOverlay'); // Assicurati di avere questo ID nel tuo overlay
+	        const formLogin = document.getElementById('formLoginPopUp');
+	        
+	        // 1. Apri la modale forzatamente
+	        if (modalOverlay) {
+	            modalOverlay.classList.add('active');
+	        }
+	        
+	        // 2. Mostra l'errore sopra il form
+	        const errorMsg = document.createElement('div');
+	        errorMsg.style.color = '#ef4444';
+	        errorMsg.style.backgroundColor = '#fef2f2';
+	        errorMsg.style.border = '1px solid #f87171';
+	        errorMsg.style.padding = '10px';
+	        errorMsg.style.borderRadius = '6px';
+	        errorMsg.style.marginBottom = '15px';
+	        errorMsg.style.textAlign = 'center';
+	        errorMsg.style.fontWeight = 'bold';
+	        errorMsg.innerHTML = 'Email o password errate. Riprova.';
+	        
+	        formLogin.prepend(errorMsg);
+	        
+	        // (Opzionale) Pulisci l'URL per evitare che ricaricando la pagina l'errore rimanga
+	        window.history.replaceState({}, document.title, window.location.pathname);
 	    }
 	});
