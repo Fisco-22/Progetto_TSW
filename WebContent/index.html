@@ -12,8 +12,7 @@
         <div class="nav-links">
             <span class="nav-info">Assistenza clienti: <strong class="phone-placeholder">+39 089 1234567</strong></span>
             <a href="#">Recensioni</a>
-            <a href="#" class="cart-link"> I miei viaggi <span class="cart-badge">0</span>
-            </a>
+            <a href="#" class="cart-link"> I miei viaggi <span class="cart-badge">0</span></a>
             <a href="#" id="openModalBtn" class="btn-accedi">Accedi</a>
         </div>
     </nav>
@@ -28,6 +27,7 @@
             <label>Destinazione</label>
             <input type="text" placeholder="Inserisci località o struttura...">
         </div>
+        
         <div class="search-box">
             <label>Tipologia Alloggio</label>
             <select>
@@ -37,13 +37,19 @@
                 <option>Villa</option>
             </select>
         </div>
+
         <div class="search-box">
-            <label>Codice Volo (Opzionale)</label>
-            <input type="text" placeholder="Es. AZ412">
+            <label for="dataPartenza">Data di Partenza</label>
+            <input type="date" id="dataPartenza" name="dataPartenza" required>
         </div>
+
+        <div class="search-box">
+            <label for="dataRitorno">Data di Ritorno</label>
+            <input type="date" id="dataRitorno" name="dataRitorno" required>
+        </div>
+
         <button class="btn-cerca">Cerca</button>
     </section>
-
     <main class="main-content">
         
         <section class="catalog-section">
@@ -183,23 +189,22 @@
             <h3 id="modalTitle">Accedi al tuo account TravelBooking</h3>
 
             <form action="LoginServlet" method="POST" id="formLoginPopUp">
-    <!-- ActionType nascosto per far capire alla Servlet cosa fare -->
-    			<input type="hidden" name="actionType" value="login">
+                <input type="hidden" name="actionType" value="login">
 
-    <div class="input-group">
-        <label for="loginEmail">Indirizzo Email</label>
-        <input type="email" id="loginEmail" name="email" required placeholder="es. mario@email.it">
-        <span id="errorLoginEmail" class="error-span"></span>
-    </div>
+                <div class="input-group">
+                    <label for="loginEmail">Indirizzo Email</label>
+                    <input type="email" id="loginEmail" name="email" required placeholder="es. mario@email.it">
+                    <span id="errorLoginEmail" class="error-span"></span>
+                </div>
 
-    <div class="input-group">
-        <label for="loginPassword">Password</label>
-        <input type="password" id="loginPassword" name="password" required pattern=".{6,}" maxlength="20">
-        <span id="errorLoginPassword" class="error-span"></span>
-    </div>
+                <div class="input-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" name="password" required pattern=".{6,}" maxlength="20">
+                    <span id="errorLoginPassword" class="error-span"></span>
+                </div>
 
-    <button type="submit" class="btn-submit-login">Accedi</button>
-		</form>
+                <button type="submit" class="btn-submit-login">Accedi</button>
+            </form>
         </div>
     </div>
 
