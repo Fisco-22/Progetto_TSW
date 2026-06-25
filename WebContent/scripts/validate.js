@@ -122,28 +122,29 @@ function addPhone() {
 // ================= GESTIONE EVENTI DOMOMLOADED =================
 document.addEventListener('DOMContentLoaded', () => {
     
-    // A. RECUPERO ELEMENTI PER APERTURA/CHIUSURA MODALE
+    // -- ELEMENTI LATO INDEX (Login Modale) --
     const openModalBtn = document.getElementById("openModalBtn");
     const authModal = document.getElementById("authModal");
     const closeModalBtn = document.getElementById("closeModalBtn");
     const formLogin = document.getElementById("formLoginPopUp");
 
-    // Click su "Accedi" nella Navbar -> Mostra Modale
+    // -- ELEMENTI LATO REGISTRAZIONE (Pagina Separata) --
+    const formSignup = document.getElementById("formSignupPage");
+
+    // 1. Apertura e chiusura Modale (solo se siamo su index.html)
     if (openModalBtn && authModal) {
         openModalBtn.addEventListener("click", (e) => {
-            e.preventDefault(); // Impedisce il comportamento di default del link #
+            e.preventDefault();
             authModal.style.display = "flex";
         });
     }
 
-    // Click sulla (X) -> Chiudi Modale
     if (closeModalBtn && authModal) {
         closeModalBtn.addEventListener("click", () => {
             authModal.style.display = "none";
         });
     }
 
-    // Click fuori dal rettangolo bianco -> Chiudi Modale
     if (authModal) {
         authModal.addEventListener("click", (e) => {
             if (e.target === authModal) {
@@ -152,63 +153,135 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // B. GESTIONE DEI TAB (Accedi / Iscriviti)
-    const tabLogin = document.getElementById("tabLogin");
-    const tabSignup = document.getElementById("tabSignup");
-    const modalTitle = document.getElementById("modalTitle");
-
-    if (tabLogin && tabSignup) {
-        tabLogin.addEventListener("click", () => {
-            tabLogin.classList.add("active");
-            tabSignup.classList.remove("active");
-            if (modalTitle) modalTitle.textContent = "Accedi al tuo account TravelBooking";
-            if (formLogin) formLogin.style.display = "block";
-        });
-
-        tabSignup.addEventListener("click", () => {
-            tabSignup.classList.add("active");
-            tabLogin.classList.remove("active");
-            if (modalTitle) modalTitle.textContent = "Crea il tuo account TravelBooking";
-            if (formLogin) formLogin.style.display = "none"; // Nasconde il login in attesa del form signup
+    // 2. Validazione invio Login (solo su index.html)
+    if (formLogin) {
+        formLogin.addEventListener("submit", (e) => {
+            if (!validateLogin()) e.preventDefault();
         });
     }
 
-    // C. AGGANCIO VALIDAZIONE LATO CLIENT AL SUBMIT DEL FORM
-    if (formLogin) {
-        formLogin.addEventListener("submit", (e) => {
-            if (!validateLogin()) {
-                e.preventDefault(); // Blocca l'invio alla Servlet se i dati non sono validi
+    // 3. Validazione invio Registrazione (solo se siamo su registrazione.html)
+    if (formSignup) {
+        formSignup.addEventListener("submit", (e) => {
+            if (!validateSignup()) e.preventDefault();
+        });
+        
+        // Aggiungo il primo campo telefono di default quando si apre la pagina
+        addPhone();
+    }
+
+    // 4. Intercettazione Errore Backend (Login)
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('auth_error') && formLogin) {
+        if (authModal) authModal.style.display = 'flex';
+        
+        const vecchioErrore = formLogin.querySelector('.backend-error');
+        if (vecchioErrore) vecchioErrore.remove();
+
+        const errorMsg = document.createElement('div');
+        errorMsg.className = 'backend-error'; 
+        errorMsg.style.color = '#ef4444';
+        errorMsg.style.backgroundColor = '#fef2f2';
+        errorMsg.style.border = '1px solid #f87171';
+        errorMsg.style.padding = '10px';
+        errorMsg.style.borderRadius = '6px';
+        errorMsg.style.marginBottom = '15px';
+        errorMsg.style.textAlign = 'center';
+        errorMsg.style.fontWeight = 'bold';
+        errorMsg.style.fontSize = '14px';
+        errorMsg.innerHTML = 'Email o password errate. Riprova.';
+        
+        formLogin.prepend(errorMsg);
+        window.history.replaceState({}, document.title, window.location.pathname);
+    }
+	
+	// === GESTIONE SCAMBIO LOGIN / REGISTRAZIONE NELLA PAGINA DEDICATA ===
+	    const linkMostraIscrizione = document.getElementById("linkMostraIscrizione");
+	    const linkMostraLogin = document.getElementById("linkMostraLogin");
+	    const sezioneLogin = document.getElementById("sezioneLogin");
+	    const sezioneRegistrazione = document.getElementById("sezioneRegistrazione");
+
+	    if (linkMostraIscrizione && linkMostraLogin) {
+	        // Quando clicco "clicca su iscriviti"
+	        linkMostraIscrizione.addEventListener("click", (e) => {
+	            e.preventDefault(); // Evita che la pagina salti in cima
+	            sezioneLogin.style.display = "none";
+	            sezioneRegistrazione.style.display = "block";
+	            
+	            // Assicuriamoci che ci sia almeno un campo telefono quando si apre
+	            const phonesContainer = document.getElementById("phonesContainer");
+	            if (phonesContainer && phonesContainer.children.length === 0) {
+	                if (typeof addPhone === "function") addPhone();
+	            }
+	        });
+
+	        // Quando clicco "Accedi qui"
+	        linkMostraLogin.addEventListener("click", (e) => {
+	            e.preventDefault();
+	            sezioneRegistrazione.style.display = "none";
+	            sezioneLogin.style.display = "block";
+	        });
+	    }
+});
+// === FUNZIONE DI VALIDAZIONE DINAMICA ===
+    function validaCampiVuoti(formElement) {
+        let isValid = true;
+        
+        // Prende tutti gli input del form tranne i bottoni e i campi nascosti
+        const inputs = formElement.querySelectorAll('input:not([type="hidden"]):not([type="button"]):not([type="submit"])');
+        
+        inputs.forEach(input => {
+            // Cerca lo span subito dopo l'input
+            const errorSpan = input.nextElementSibling;
+            
+            // Se il campo è vuoto
+            if (input.value.trim() === '') {
+                if (errorSpan && errorSpan.classList.contains('error-span')) {
+                    errorSpan.textContent = "Campo obbligatorio";
+                }
+                input.style.border = "2px solid #ef4444"; // Colora il bordo di rosso
+                isValid = false;
+            } else {
+                // Se il campo è compilato, pulisce l'errore
+                if (errorSpan && errorSpan.classList.contains('error-span')) {
+                    errorSpan.textContent = "";
+                }
+                input.style.border = "1px solid #ccc"; // Riporta il bordo alla normalità
+            }
+        });
+        
+        return isValid;
+    }
+
+    // === AGGANCIO AL LOGIN PAGE ===
+    const formLoginPage = document.getElementById("formLoginPage");
+    if (formLoginPage) {
+        formLoginPage.addEventListener("submit", (e) => {
+            if (!validaCampiVuoti(formLoginPage)) {
+                e.preventDefault(); // Blocca l'invio se c'è un errore
             }
         });
     }
 
-    // D. INTERCETTAZIONE ERRORE BACKEND (Dalla Servlet)
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.has('auth_error')) {
-        if (authModal) {
-            authModal.style.display = 'flex';
-        }
-        
-        if (formLogin) {
-            const vecchioErrore = formLogin.querySelector('.backend-error');
-            if (vecchioErrore) vecchioErrore.remove();
-
-            const errorMsg = document.createElement('div');
-            errorMsg.className = 'backend-error'; 
-            errorMsg.style.color = '#ef4444';
-            errorMsg.style.backgroundColor = '#fef2f2';
-            errorMsg.style.border = '1px solid #f87171';
-            errorMsg.style.padding = '10px';
-            errorMsg.style.borderRadius = '6px';
-            errorMsg.style.marginBottom = '15px';
-            errorMsg.style.textAlign = 'center';
-            errorMsg.style.fontWeight = 'bold';
-            errorMsg.style.fontSize = '14px';
-            errorMsg.innerHTML = 'Email o password errate. Riprova.';
-            
-            formLogin.prepend(errorMsg);
-        }
-        
-        window.history.replaceState({}, document.title, window.location.pathname);
+    // === AGGANCIO ALLA REGISTRAZIONE PAGE ===
+    const formSignupPage = document.getElementById("formSignupPage");
+    if (formSignupPage) {
+        formSignupPage.addEventListener("submit", (e) => {
+            if (!validaCampiVuoti(formSignupPage)) {
+                e.preventDefault(); // Blocca l'invio se c'è un errore
+            }
+        });
     }
-});
+
+    // (Opzionale) Rimuove l'errore in tempo reale non appena l'utente inizia a scrivere!
+    document.querySelectorAll('input').forEach(input => {
+        input.addEventListener('input', function() {
+            if (this.value.trim() !== '') {
+                const errorSpan = this.nextElementSibling;
+                if (errorSpan && errorSpan.classList.contains('error-span')) {
+                    errorSpan.textContent = "";
+                }
+                this.style.border = "1px solid #ccc";
+            }
+        });
+    });

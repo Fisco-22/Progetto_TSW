@@ -556,5 +556,123 @@ body {
     align-items: flex-end; /* Allinea i campi e il bottone sulla stessa linea di base */
 }
 
+/* =========================================
+   STILI PAGINA AUTENTICAZIONE / REGISTRAZIONE
+   ========================================= */
+
+/* Sfondo della pagina intera */
+.auth-body {
+    background-color: #f4f6f9;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+/* Link specifico per tornare alla home nella navbar */
+.link-torna-home {
+    margin-left: 20px;
+    font-weight: bold;
+    color: #00aa6c;
+    text-decoration: none;
+}
+
+/* Contenitore che centra la card nello schermo */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 80px);
+    padding: 40px 20px;
+}
+
+/* La card bianca vera e propria */
+.auth-card {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    width: 100%;
+    max-width: 500px;
+}
+
+/* Titoli "Accedi" e "Crea Account" */
+.auth-title {
+    margin-top: 0;
+    color: #333;
+    text-align: center;
+}
+
+/* Stile base per tutti i bottoni di tipo submit all'interno dei form */
+.btn-submit-login, .btn-submit-signup {
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Colore specifico per il tasto di Login */
+.btn-submit-login {
+    background-color: #007bff; /* Sostituisci col colore del tuo brand se preferisci */
+}
+.btn-submit-login:hover {
+    background-color: #0056b3;
+}
+
+/* Colore specifico per il tasto di Registrazione */
+.btn-submit-signup {
+    background-color: #00aa6c;
+    margin-top: 25px; /* Spaziatura leggermente diversa richiesta dalla registrazione */
+}
+.btn-submit-signup:hover {
+    background-color: #008a57;
+}
+
+/* Bottone per aggiungere il telefono dinamicamente */
+.btn-add-phone {
+    margin-top: 5px;
+    background: #e2e8f0;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #333;
+}
+.btn-add-phone:hover {
+    background: #cbd5e1;
+}
+
+/* I testi in basso per passare da Login a Iscriviti (e viceversa) */
+.auth-switch-text {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 14px;
+    color: #64748b;
+}
+
+/* I link "clicca su iscriviti" e "Accedi qui" */
+.auth-link {
+    color: #00aa6c;
+    font-weight: bold;
+    text-decoration: none;
+}
+.auth-link:hover {
+    text-decoration: underline;
+}
+
+/* Spazio per i messaggi di errore (i campi vuoti) */
+.error-span {
+    color: #ef4444;
+    font-size: 13px;
+    font-weight: 500;
+    margin-top: 4px;
+    display: block;
+}
+
 
 
