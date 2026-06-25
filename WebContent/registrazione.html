@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelBooking - Registrazione</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="background-color: #f4f6f9; margin: 0; font-family: sans-serif;">
+
+    <nav class="navbar">
+        <a href="index.html" class="logo">TravelBooking</a>
+        <div class="nav-links">
+            <span class="nav-info">Assistenza clienti: <strong class="phone-placeholder">+39 089 1234567</strong></span>
+            <a href="index.html" style="margin-left: 20px; font-weight: bold; color: #00aa6c;">Torna alla Home</a>
+        </div>
+    </nav>
+
+    <div style="display: flex; justify-content: center; align-items: center; min-height: calc(100vh - 80px); padding: 40px 20px;">
+        <div style="background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); width: 100%; max-width: 500px;">
+            <h2 style="margin-top: 0; color: #333; text-align: center;">Crea il tuo Account</h2>
+            <p style="text-align: center; color: #64748b; margin-bottom: 30px;">Unisciti a TravelBooking per organizzare i tuoi viaggi</p>
+
+            <form action="RegistrationServlet" method="POST" id="formSignupPage">
+                <input type="hidden" name="actionType" value="registration">
+
+                <div class="input-group">
+                    <label for="signupNome">Nome</label>
+                    <input type="text" id="signupNome" name="nome" required placeholder="es. Mario">
+                    <span id="errorNome" class="error-span"></span>
+                </div>
+
+                <div class="input-group">
+                    <label for="signupCognome">Cognome</label>
+                    <input type="text" id="signupCognome" name="cognome" required placeholder="es. Rossi">
+                    <span id="errorCognome" class="error-span"></span>
+                </div>
+
+                <div class="input-group">
+                    <label for="signupEmail">Indirizzo Email</label>
+                    <input type="email" id="signupEmail" name="email" required placeholder="es. mario.rossi@email.it">
+                    <span id="errorEmail" class="error-span"></span>
+                </div>
+
+                <div class="input-group">
+                    <label for="signupPassword">Password (Min 6 caratteri)</label>
+                    <input type="password" id="signupPassword" name="password" required pattern=".{6,}" maxlength="20">
+                    <span id="errorPassword" class="error-span"></span>
+                </div>
+
+                <div class="input-group">
+                    <label for="signupIndirizzo">Indirizzo di Residenza</label>
+                    <input type="text" id="signupIndirizzo" name="indirizzo" required placeholder="es. Via Roma 10, Napoli">
+                    <span id="errorIndirizzo" class="error-span"></span>
+                </div>
+
+                <div class="input-group">
+                    <label>Numeri di Telefono</label>
+                    <div id="phonesContainer"></div>
+                    <button type="button" class="btn-add-phone" onclick="addPhone()" style="margin-top: 5px; background: #e2e8f0; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; color: #333;">+ Aggiungi Telefono</button>
+                </div>
+
+                <button type="submit" class="btn-submit-login" style="background-color: #00aa6c; width: 100%; margin-top: 25px;">Registrati</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="scripts/validate.js"></script>
+</body>
+</html>
