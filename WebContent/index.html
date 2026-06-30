@@ -13,7 +13,7 @@
             <span class="nav-info">Assistenza clienti: <strong class="phone-placeholder">+39 089 1234567</strong></span>
             <a href="#">Recensioni</a>
             <a href="#" class="cart-link"> I miei viaggi <span class="cart-badge">0</span></a>
-            <a href="#" id="openModalBtn" class="btn-accedi">Accedi</a>
+            <a href="registrazione.html" class="btn-accedi">Accedi</a>
         </div>
     </nav>
 
@@ -177,32 +177,5 @@
         </section>
     </main>
 
-    <div class="modal-overlay" id="authModal">
-        <div class="modal-box" id="modalBox">
-            <button class="close-btn" id="closeModalBtn">&times;</button>
-
-            <h3 id="modalTitle">Accedi al tuo account TravelBooking</h3>
-
-            <form action="LoginServlet" method="POST" id="formLoginPopUp">
-                <input type="hidden" name="actionType" value="login">
-
-                <div class="input-group">
-                    <label for="loginEmail">Indirizzo Email</label>
-                    <input type="email" id="loginEmail" name="email" required placeholder="es. mario@email.it">
-                    <span id="errorLoginEmail" class="error-span"></span>
-                </div>
-
-                <div class="input-group">
-                    <label for="loginPassword">Password</label>
-                    <input type="password" id="loginPassword" name="password" required pattern=".{6,}" maxlength="20">
-                    <span id="errorLoginPassword" class="error-span"></span>
-                </div>
-
-                <button type="submit" class="btn-submit-login">Accedi</button>
-            </form>
-        </div>
-    </div>
-
-    
 </body>
 </html>

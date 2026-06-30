@@ -21,19 +21,17 @@
             <div id="sezioneLogin">
                 <h2 style="margin-top: 0; color: #333; text-align: center;">Accedi a TravelBooking</h2>
                 
-                <form action="LoginServlet" method="POST" id="formLoginPage" novalidate>
+                <form action="LoginServlet" method="POST" id="formLoginPage">
                     <input type="hidden" name="actionType" value="login">
 
                     <div class="input-group">
                         <label for="loginEmailPage"> Email</label>
                         <input type="email" id="loginEmailPage" name="email" required placeholder="es. mario@email.it">
-                        <span class="error-span"></span>
                     </div>
 
                     <div class="input-group">
                         <label for="loginPasswordPage">Password</label>
                         <input type="password" id="loginPasswordPage" name="password" required pattern=".{6,}" maxlength="20" placeholder="password">
-                        <span class="error-span"></span>
                     </div>
 
                     <button type="submit" class="btn-submit-login" style="width: 100%; margin-top: 20px;">Accedi</button>
@@ -54,37 +52,31 @@
                     <div class="input-group">
                         <label for="signupNome">Nome</label>
                         <input type="text" id="signupNome" name="nome" required placeholder="nome">
-                        <span class="error-span"></span>
                     </div>
 
                     <div class="input-group">
                         <label for="signupCognome">Cognome</label>
                         <input type="text" id="signupCognome" name="cognome" required placeholder="cognome">
-                        <span class="error-span"></span>
                     </div>
 
                     <div class="input-group">
                         <label for="signupDataNascita">Data di Nascita</label>
                         <input type="date" id="signupDataNascita" name="data_nascita" required>
-                        <span class="error-span"></span>
                     </div>
 
                     <div class="input-group">
                         <label for="signupEmail"> Email</label>
                         <input type="email" id="signupEmail" name="email" required placeholder="es. mario.rossi@email.it">
-                        <span class="error-span"></span>
                     </div>
 
                     <div class="input-group">
                         <label for="signupPassword">Password </label>
                         <input type="password" id="signupPassword" name="password" required pattern=".{6,}" maxlength="20" placeholder="password">
-                        <span class="error-span"></span>
                     </div>
 
                     <div class="input-group">
                         <label for="signupIndirizzo">Indirizzo di Residenza</label>
                         <input type="text" id="signupIndirizzo" name="indirizzo" required placeholder="es. Via Roma 10, Napoli">
-                        <span class="error-span"></span>
                     </div>
 
                     <div class="input-group">
