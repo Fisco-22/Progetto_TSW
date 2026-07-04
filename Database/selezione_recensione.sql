@@ -1,0 +1,1 @@
+SELECT Codice_Viaggio, Email_Utente, Voto, Commento FROM RECENSIONE;

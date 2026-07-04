@@ -1,0 +1,1 @@
+SELECT Codice_Viaggio, Destinazione, Costo_Totale, Email_Admin FROM VIAGGIO;

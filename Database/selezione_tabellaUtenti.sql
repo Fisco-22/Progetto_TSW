@@ -1,0 +1,1 @@
+SELECT Email, Nome, Ruolo FROM UTENTE;
