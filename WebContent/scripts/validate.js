@@ -1,131 +1,169 @@
-// 1. VARIABILI GLOBALI
+// ==========================================================================
+// 1. VARIABILI GLOBALI E MESSAGGI DI ERRORE
+// ==========================================================================
 let phoneCount = 1;
 
-// Aggiunta dinamica dei telefoni (Mantieni questa!)
-function addPhone() {
-    let container = document.getElementById("phonesContainer");
-    if (!container) return;
+const nameOrLastnameErrorMessage = "Questo campo deve contenere solo lettere.";
+const emailErrorMessage = "Inserisci un'email valida (es. utente@dominio.it).";
+const phoneErrorMessage = "Il formato deve essere ###-#######.";
+const emptyFieldErrorMessage = "Questo campo non può essere vuoto.";
+const passwordErrorMessage = "La password è obbligatoria.";
 
-    let div = document.createElement("div");
-    div.className = "phone-row";
-    div.id = "phoneRow" + phoneCount;
-
-    let input = document.createElement("input");
-    input.type = "text";
-    input.name = "phone";
-    input.id = "phone" + phoneCount;
-    input.pattern = "^([0-9]{3}-[0-9]{7})$";
-    input.required = true;
-    input.placeholder = "es. 333-1234567";
-
-    let btnRemove = document.createElement("button");
-    btnRemove.type = "button";
-    btnRemove.className = "btn-remove-phone";
-    btnRemove.textContent = "-";
-    btnRemove.onclick = function() { div.remove(); };
-
-    div.appendChild(input);
-    div.appendChild(btnRemove);
-    container.appendChild(div);
+// ==========================================================================
+// 2. FUNZIONE DI VALIDAZIONE VISIVA
+// ==========================================================================
+function validateFormElem(formElem, span, errorMessage) {
+    if (!formElem || !span) return true;
     
-    phoneCount++;
+    if(formElem.checkValidity()){
+        formElem.style.borderColor = "#ccc"; // Torna normale se corretto
+        span.innerHTML = "";
+        return true;
+    }
+    
+    formElem.style.borderColor = "#ef4444"; // Bordo rosso se errato
+    span.style.color = "#ef4444";
+    span.style.fontSize = "13px";
+    span.style.fontWeight = "500";
+    span.style.display = "block";
+    span.style.marginTop = "4px";
+    
+    if (formElem.validity.valueMissing){
+        span.innerHTML = emptyFieldErrorMessage;
+    } else {
+        span.innerHTML = errorMessage;
+    }
+    return false;
 }
 
-// ================= GESTIONE EVENTI DOMContentLoaded =================
-document.addEventListener('DOMContentLoaded', () => {
+// ==========================================================================
+// 3. EVENTI IN TEMPO REALE (CARICATI ALL'AVVIO DELLA PAGINA)
+// ==========================================================================
+document.addEventListener("DOMContentLoaded", () => {
+    const formLogin = document.getElementById("formLogin");
+    const loginGeneralError = document.getElementById("loginGeneralError");
     
-    // -- ELEMENTI LATO INDEX (Se hai deciso di mantenere il pop-up su index.html) --
-    const openModalBtn = document.getElementById("openModalBtn");
-    const authModal = document.getElementById("authModal");
-    const closeModalBtn = document.getElementById("closeModalBtn");
-    const formLogin = document.getElementById("formLoginPopUp");
-
-    // 1. Apertura e chiusura Modale (se usi la modale)
-    if (openModalBtn && authModal) {
-        openModalBtn.addEventListener("click", (e) => {
-            e.preventDefault();
-            authModal.style.display = "flex";
+    if (formLogin) {
+        // A. Validazione IN TEMPO REALE mentre l'utente digita
+        formLogin.email.addEventListener("input", function() {
+            validateFormElem(formLogin.email, document.getElementById("errorEmailLogin"), emailErrorMessage);
+            loginGeneralError.style.display = "none"; // Nascondi l'avviso generale se riprova a scrivere
         });
-    }
-
-    if (closeModalBtn && authModal) {
-        closeModalBtn.addEventListener("click", () => {
-            authModal.style.display = "none";
-        });
-    }
-
-    if (authModal) {
-        authModal.addEventListener("click", (e) => {
-            if (e.target === authModal) {
-                authModal.style.display = "none";
-            }
-        });
-    }
-
-    // 2. Intercettazione Errore Backend (Login)
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.has('auth_error')) {
-        // Cerca il form sia nel pop-up che nella pagina di login dedicata
-        const targetForm = formLogin || document.getElementById("formLoginPage"); 
         
-        if (targetForm) {
-            if (authModal) authModal.style.display = 'flex';
-            
-            const vecchioErrore = targetForm.querySelector('.backend-error');
-            if (vecchioErrore) vecchioErrore.remove();
+        formLogin.password.addEventListener("input", function() {
+            validateFormElem(formLogin.password, document.getElementById("errorPasswordLogin"), passwordErrorMessage);
+            loginGeneralError.style.display = "none";
+        });
 
-            const errorMsg = document.createElement('div');
-            errorMsg.className = 'backend-error'; 
-            errorMsg.style.color = '#ef4444';
-            errorMsg.style.backgroundColor = '#fef2f2';
-            errorMsg.style.border = '1px solid #f87171';
-            errorMsg.style.padding = '10px';
-            errorMsg.style.borderRadius = '6px';
-            errorMsg.style.marginBottom = '15px';
-            errorMsg.style.textAlign = 'center';
-            errorMsg.style.fontWeight = 'bold';
-            errorMsg.style.fontSize = '14px';
-            errorMsg.innerHTML = 'Email o password errate. Riprova.';
+        // B. Blocco dell'invio (Previene il 404!)
+        formLogin.addEventListener("submit", function(event) {
+            let isEmailValid = validateFormElem(formLogin.email, document.getElementById("errorEmailLogin"), emailErrorMessage);
+            let isPasswordValid = validateFormElem(formLogin.password, document.getElementById("errorPasswordLogin"), passwordErrorMessage);
             
-            targetForm.prepend(errorMsg);
-            window.history.replaceState({}, document.title, window.location.pathname);
-        }
-    }
-	
-	// === GESTIONE SCAMBIO LOGIN / REGISTRAZIONE NELLA PAGINA DEDICATA ===
-    const linkMostraIscrizione = document.getElementById("linkMostraIscrizione");
-    const linkMostraLogin = document.getElementById("linkMostraLogin");
-    const sezioneLogin = document.getElementById("sezioneLogin");
-    const sezioneRegistrazione = document.getElementById("sezioneRegistrazione");
-
-    if (linkMostraIscrizione && linkMostraLogin) {
-        // Quando clicco "clicca su iscriviti"
-        linkMostraIscrizione.addEventListener("click", (e) => {
-            e.preventDefault(); 
-            sezioneLogin.style.display = "none";
-            sezioneRegistrazione.style.display = "block";
-            
-            // Assicuriamoci che ci sia almeno un campo telefono quando si apre
-            const phonesContainer = document.getElementById("phonesContainer");
-            if (phonesContainer && phonesContainer.children.length === 0) {
-                if (typeof addPhone === "function") addPhone();
+            if (!isEmailValid || !isPasswordValid) {
+                event.preventDefault(); // FERMA IL CARICAMENTO DELLA PAGINA
+                loginGeneralError.style.display = "block"; // Mostra "Hai inserito dati non validi"
             }
         });
-
-        // Quando clicco "Accedi qui"
-        linkMostraLogin.addEventListener("click", (e) => {
-            e.preventDefault();
-            sezioneRegistrazione.style.display = "none";
-            sezioneLogin.style.display = "block";
-        });
     }
+});
 
-    // Aggiungo il primo campo telefono di default quando si apre la pagina di registrazione
-    const formSignup = document.getElementById("formSignupPage");
-    if (formSignup) {
+// ==========================================================================
+// 4. CAMBIO SCHEDA E TELEFONI (Mantenuti dal codice precedente)
+// ==========================================================================
+function cambiaScheda(scheda) {
+    const formLogin = document.getElementById('formLogin');
+    const formSignup = document.getElementById('formSignup');
+    const tabLogin = document.getElementById('tabLogin');
+    const tabSignup = document.getElementById('tabSignup');
+
+    if (scheda === 'login') {
+        formLogin.style.display = 'block';
+        formSignup.style.display = 'none';
+        tabLogin.classList.add('active');
+        tabSignup.classList.remove('active');
+    } else {
+        formLogin.style.display = 'none';
+        formSignup.style.display = 'block';
+        tabSignup.classList.add('active');
+        tabLogin.classList.remove('active');
+        
         const phonesContainer = document.getElementById("phonesContainer");
         if (phonesContainer && phonesContainer.children.length === 0) {
             addPhone();
         }
     }
-});
+}
+
+function addPhone() {
+    let container = document.getElementById("phonesContainer");
+    if (!container) return;
+
+    let wrapper = document.createElement("div");
+    wrapper.style.marginBottom = "15px";
+    wrapper.id = "phoneWrapper" + phoneCount;
+
+    let div = document.createElement("div");
+    div.className = "phone-row";
+    div.style.display = "flex";
+    div.style.gap = "10px";
+
+    let input = document.createElement("input");
+    input.type = "text";
+    input.name = "telefono"; 
+    input.id = "phone" + phoneCount;
+    input.pattern = "^([0-9]{3}-[0-9]{7})$";
+    input.required = true;
+    input.placeholder = "es. 333-1234567";
+    input.style.flex = "1";
+
+    let btnRemove = document.createElement("button");
+    btnRemove.type = "button";
+    btnRemove.textContent = "✖";
+    btnRemove.style.padding = "0 15px";
+    btnRemove.style.background = "#ef4444"; 
+    btnRemove.style.color = "white";
+    btnRemove.style.border = "none";
+    btnRemove.style.borderRadius = "6px";
+    btnRemove.style.cursor = "pointer";
+    btnRemove.onclick = function() { wrapper.remove(); };
+
+    let span = document.createElement("span");
+    span.id = "errorPhone" + phoneCount;
+
+    input.addEventListener("input", function() { validateFormElem(input, span, phoneErrorMessage) });
+
+    div.appendChild(input);
+    div.appendChild(btnRemove);
+    wrapper.appendChild(div);
+    wrapper.appendChild(span);
+    container.appendChild(wrapper);
+    
+    phoneCount++;
+}
+
+function validateRegistrazione() {
+    let valid = true;	
+    let form = document.getElementById("formSignup");
+    
+    let spanName = document.getElementById("errorNome");
+    if(!validateFormElem(form.nome, spanName, nameOrLastnameErrorMessage)) valid = false;
+    
+    let spanLastname = document.getElementById("errorCognome");
+    if (!validateFormElem(form.cognome, spanLastname, nameOrLastnameErrorMessage)) valid = false;
+    
+    let spanEmail = document.getElementById("errorEmailSignup");
+    if (!validateFormElem(form.email, spanEmail, emailErrorMessage)) valid = false;
+
+    let spanPassword = document.getElementById("errorPasswordSignup");
+    if (!validateFormElem(form.password, spanPassword, passwordErrorMessage)) valid = false;
+    
+    for (let i = 1; i <= phoneCount; i++){
+        let spanPhone = document.getElementById("errorPhone" + i);
+        let phoneInput = document.getElementById("phone" + i);
+        if (spanPhone && phoneInput) {
+            if (!validateFormElem(phoneInput, spanPhone, phoneErrorMessage)) valid = false;
+        }	
+    }
+    return valid;
+}

@@ -102,8 +102,16 @@ body {
     background-color: #002f20;
 }
 
+/* Link specifico per tornare alla home nella navbar delle pagine di errore/auth */
+.link-torna-home {
+    margin-left: 20px;
+    font-weight: bold;
+    color: var(--brand-primary);
+    text-decoration: none;
+}
+
 /* ==========================================================================
-   3. HERO & SEARCH BAR BOUNDARIES
+   3. HERO & SEARCH BAR (Unificata e Responsiva)
    ========================================================================== */
 .hero {
     text-align: center;
@@ -126,12 +134,15 @@ body {
     border-radius: var(--radius-lg);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
     display: flex;
+    flex-wrap: wrap;
     gap: 16px;
     align-items: flex-end;
+    justify-content: center;
 }
 
 .search-box {
     flex: 1;
+    min-width: 180px;
     display: flex;
     flex-direction: column;
 }
@@ -161,10 +172,15 @@ body {
     font-size: 15px;
     font-weight: 700;
     cursor: pointer;
+    transition: background-color var(--transition-fast);
+}
+
+.btn-cerca:hover {
+    background-color: #008a57;
 }
 
 /* ==========================================================================
-   4. SEZIONI CATALOGO PRODOTTI SOTTO LA RICERCA (Griglia Card)
+   4. SEZIONI CATALOGO PRODOTTI (Griglia Card)
    ========================================================================== */
 .main-content {
     max-width: 1150px;
@@ -191,14 +207,12 @@ body {
     font-size: 15px;
 }
 
-/* Griglia responsiva per i pacchetti */
 .cards-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 25px;
 }
 
-/* Card layout simile a Flash Sales */
 .travel-card {
     background: var(--bg-card);
     border-radius: var(--radius-md);
@@ -215,7 +229,6 @@ body {
     box-shadow: 0 12px 20px rgba(0,0,0,0.1);
 }
 
-/* Wrapper Immagini e Badge sovrapposti */
 .card-image-wrap {
     position: relative;
     height: 200px;
@@ -254,7 +267,6 @@ body {
     border-radius: var(--radius-sm);
 }
 
-/* Corpo della scheda informativa */
 .card-body {
     padding: 20px;
     display: flex;
@@ -283,7 +295,6 @@ body {
     flex: 1;
 }
 
-/* Sistema di Punteggio Recensioni */
 .card-rating {
     display: flex;
     align-items: center;
@@ -306,7 +317,6 @@ body {
     font-weight: 500;
 }
 
-/* Allineamento prezzo in basso */
 .card-footer-price {
     border-top: 1px solid #f1f5f9;
     padding-top: 12px;
@@ -331,21 +341,20 @@ body {
 }
 
 /* ==========================================================================
-   5. POP-UP MODALE STRUTTURATO
+   5. POP-UP MODALE (Risolto Conflitto Duplicazione)
    ========================================================================== */
 .modal-overlay {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(15, 23, 42, 0.6);
     backdrop-filter: blur(4px);
-    display: flex; justify-content: center; align-items: center;
-    opacity: 0; pointer-events: none;
-    transition: opacity var(--transition-normal);
+    display: none; /* Gestito via JS o classe .active */
+    justify-content: center; align-items: center;
     z-index: 9999;
 }
 
 .modal-overlay.active {
-    opacity: 1; pointer-events: auto;
+    display: flex;
 }
 
 .modal-box {
@@ -354,11 +363,6 @@ body {
     border-radius: var(--radius-lg); padding: 40px;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     position: relative; max-height: 85vh; overflow-y: auto;
-    transform: scale(0.95); transition: transform var(--transition-normal);
-}
-
-.modal-overlay.active .modal-box {
-    transform: scale(1);
 }
 
 .close-btn {
@@ -381,37 +385,13 @@ body {
     color: var(--brand-primary); border-bottom: 3px solid var(--brand-primary);
 }
 
-.form-group {
-    margin-bottom: 20px; display: flex; flex-direction: column;
-}
-
-.form-row {
-    display: flex; gap: 16px; margin-bottom: 20px;
-}
-
-.form-row .form-group {
-    flex: 1; margin-bottom: 0;
-}
-
-.form-group label {
-    font-size: 14px; font-weight: 700; margin-bottom: 6px;
-}
-
-.form-group input {
-    padding: 12px; border: 1px solid #cbd5e1;
-    border-radius: var(--radius-md); font-size: 15px; outline: none;
-}
-
-.form-group input:focus {
-    border-color: var(--brand-primary);
-}
-
 .password-container { 
-	position: relative; 
-	}
+    position: relative; 
+}
+
 .password-container input { 
-	padding-right: 45px; 
-	}
+    padding-right: 45px; 
+}
 
 .toggle-password {
     position: absolute; right: 14px; top: 36px;
@@ -419,82 +399,84 @@ body {
 }
 
 .signup-only { 
-	display: block; 
-	}
+    display: block; 
+}
+
 .mode-login .signup-only { 
-	display: none; 
-	}
+    display: none; 
+}
 
 .checkbox-group { 
-	display: flex; gap: 10px; margin-top: 8px; 
+    display: flex; gap: 10px; margin-top: 8px; 
 }
+
 .checkbox-group input { 
-	width: 16px; height: 16px; accent-color: var(--brand-dark); 
+    width: 16px; height: 16px; accent-color: var(--brand-dark); 
 }
+
 .checkbox-group label { 
-	font-size: 13px; color: #475569; 
-	}
+    font-size: 13px; color: #475569; 
+}
 
 .btn-submit {
     width: 100%; padding: 14px; background-color: var(--brand-dark);
     color: white; border: none; border-radius: var(--radius-pill);
     font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 25px;
+    transition: background-color var(--transition-fast);
+}
+
+.btn-submit:hover {
+    background-color: #002f20;
 }
 
 .toggle-text { 
-	text-align: center; margin-top: 20px; font-size: 14px; color: var(--text-muted); 
-	}
+    text-align: center; margin-top: 20px; font-size: 14px; color: var(--text-muted); 
+}
+
 .toggle-text span { 
-	color: var(--brand-primary); font-weight: 700; cursor: pointer; text-decoration: underline; 
-	}
+    color: var(--brand-primary); font-weight: 700; cursor: pointer; text-decoration: underline; 
+}
 	
 /* ==========================================================================
-   SCHERMATA DI SUCCESSO (Registrazione Completata)
+   6. SCHERMATA DI SUCCESSO (Registrazione Completata)
    ========================================================================== */
-
-/* Contenitore principale centrato nella pagina */
 .container-successo {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 80vh;
     padding: 20px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* La scheda bianca con i bordi arrotondati e l'ombra sfumata */
 .card-successo {
     background-color: #ffffff;
     max-width: 550px;
     width: 100%;
     padding: 40px;
-    border-radius: 16px;
+    border-radius: var(--radius-lg);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     text-align: center;
-    border-top: 5px solid #004f32; /* Verde scuro TripAdvisor */
+    border-top: 5px solid var(--brand-dark); 
 }
 
-/* Titolo principale */
 .card-successo h2 {
-    color: #004f32;
+    color: var(--brand-dark);
     font-size: 28px;
     margin-bottom: 10px;
     font-weight: 700;
 }
 
-/* Sottotitolo descrittivo */
 .card-successo .p-intro {
     color: #4a5568;
     font-size: 16px;
     margin-bottom: 25px;
 }
 
-/* Box grigio/verde chiaro per il riepilogo dei dati anagrafici */
 .info-riepilogo {
     background-color: #f4f7f5;
-    border-left: 4px solid #00aa6c; /* Verde brillante per l'accento */
+    border-left: 4px solid var(--brand-primary); 
     padding: 20px;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     text-align: left;
     margin-bottom: 30px;
 }
@@ -507,75 +489,36 @@ body {
 }
 
 .info-riepilogo strong {
-    color: #004f32;
+    color: var(--brand-dark);
 }
 
-/* Pulsante per tornare alla Home Page coordinato con lo stile dei bottoni principali */
 .btn-home {
     display: inline-block;
-    background-color: #000000; /* Bottone nero elegante stile TA */
+    background-color: #000000; 
     color: #ffffff;
     padding: 14px 30px;
-    border-radius: 100px; /* Bordi totalmente arrotondati */
+    border-radius: var(--radius-pill); 
     text-decoration: none;
     font-weight: 600;
     font-size: 15px;
-    transition: background-color 0.2s ease, transform 0.1s ease;
+    transition: background-color var(--transition-fast), transform 0.1s ease;
 }
 
 .btn-home:hover {
-    background-color: #004f32; /* Cambia in verde scuro al passaggio del mouse */
+    background-color: var(--brand-dark); 
 }
 
 .btn-home:active {
     transform: scale(0.98);
 }
 
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Sfondo scuro semitrasparente */
-    
-    /* STRUTTURA DI BASE: Nascosto */
-    display: none; 
-    
-    /* Centra la modal-box perfettamente sia in verticale che in orizzontale */
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-}
-
-.search-container {
-    display: flex;
-    flex-wrap: wrap; /* Permette ai box di andare a capo se lo spazio finisce */
-    gap: 15px;
-    justify-content: center;
-    align-items: flex-end; /* Allinea i campi e il bottone sulla stessa linea di base */
-}
-
-/* =========================================
-   STILI PAGINA AUTENTICAZIONE / REGISTRAZIONE
-   ========================================= */
-
-/* Sfondo della pagina intera */
+/* ==========================================================================
+   7. PAGINE DI UTENTICAZIONE / REGISTRAZIONE STRUTTURATE (Allineate al Brand)
+   ========================================================================== */
 .auth-body {
-    background-color: #f4f6f9;
-    margin: 0;
-    font-family: sans-serif;
+    background-color: var(--bg-main);
 }
 
-/* Link specifico per tornare alla home nella navbar */
-.link-torna-home {
-    margin-left: 20px;
-    font-weight: bold;
-    color: #00aa6c;
-    text-decoration: none;
-}
-
-/* Contenitore che centra la card nello schermo */
 .auth-container {
     display: flex;
     justify-content: center;
@@ -584,80 +527,103 @@ body {
     padding: 40px 20px;
 }
 
-/* La card bianca vera e propria */
 .auth-card {
     background: white;
     padding: 40px;
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     box-shadow: 0 4px 20px rgba(0,0,0,0.08);
     width: 100%;
     max-width: 500px;
 }
 
-/* Titoli "Accedi" e "Crea Account" */
 .auth-title {
     margin-top: 0;
-    color: #333;
+    color: var(--text-main);
     text-align: center;
+    font-weight: 800;
+    margin-bottom: 25px;
 }
 
-/* Stile base per tutti i bottoni di tipo submit all'interno dei form */
+/* Corretti gli input riutilizzando lo schema globale */
+.form-container .form-group, .auth-card .form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-container .form-group label, .auth-card .form-group label {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 6px;
+}
+
+.form-container .form-group input, .auth-card .form-group input {
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    font-size: 15px;
+    outline: none;
+    transition: border-color var(--transition-fast);
+}
+
+.form-container .form-group input:focus, .auth-card .form-group input:focus {
+    border-color: var(--brand-primary);
+}
+
+/* Allineati i bottoni submit al brand (Verde scuro e Verde brillante) */
 .btn-submit-login, .btn-submit-signup {
     width: 100%;
     margin-top: 20px;
     padding: 12px;
     border: none;
-    border-radius: 6px;
+    border-radius: var(--radius-sm);
     color: white;
     font-weight: bold;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color var(--transition-fast);
 }
 
-/* Colore specifico per il tasto di Login */
 .btn-submit-login {
-    background-color: #007bff; /* Sostituisci col colore del tuo brand se preferisci */
+    background-color: var(--brand-dark);
 }
 .btn-submit-login:hover {
-    background-color: #0056b3;
+    background-color: #002f20;
 }
 
-/* Colore specifico per il tasto di Registrazione */
 .btn-submit-signup {
-    background-color: #00aa6c;
-    margin-top: 25px; /* Spaziatura leggermente diversa richiesta dalla registrazione */
+    background-color: var(--brand-primary);
+    margin-top: 25px; 
 }
 .btn-submit-signup:hover {
     background-color: #008a57;
 }
 
-/* Bottone per aggiungere il telefono dinamicamente */
 .btn-add-phone {
     margin-top: 5px;
     background: #e2e8f0;
     border: none;
     padding: 8px 15px;
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
     cursor: pointer;
     font-weight: bold;
     color: #333;
+    transition: background var(--transition-fast);
 }
 .btn-add-phone:hover {
     background: #cbd5e1;
 }
 
-/* I testi in basso per passare da Login a Iscriviti (e viceversa) */
 .auth-switch-text {
     text-align: center;
     margin-top: 25px;
     font-size: 14px;
-    color: #64748b;
+    color: var(--text-muted);
 }
 
-/* I link "clicca su iscriviti" e "Accedi qui" */
 .auth-link {
-    color: #00aa6c;
+    color: var(--brand-primary);
     font-weight: bold;
     text-decoration: none;
 }
@@ -665,7 +631,6 @@ body {
     text-decoration: underline;
 }
 
-/* Spazio per i messaggi di errore (i campi vuoti) */
 .error-span {
     color: #ef4444;
     font-size: 13px;
@@ -674,5 +639,83 @@ body {
     display: block;
 }
 
+/* ==========================================================================
+   8. NUOVA SEZIONE: AREA PERSONALE (Migrata da codice incorporato)
+   ========================================================================== */
+.profile-container {
+    max-width: 1150px;
+    margin: 50px auto;
+    display: flex;
+    gap: 30px;
+    padding: 0 20px;
+}
 
+@media (max-width: 768px) {
+    .profile-container {
+        flex-direction: column;
+    }
+}
 
+.profile-card {
+    flex: 1;
+    background: var(--bg-card);
+    padding: 25px;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    border: 1px solid #e2e8f0;
+    height: fit-content;
+}
+
+.profile-card h3 {
+    color: var(--brand-dark);
+    font-size: 20px;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.profile-card p {
+    margin-bottom: 12px;
+    font-size: 15px;
+    color: var(--text-main);
+}
+
+.orders-section {
+    flex: 2;
+}
+
+.orders-section h2 {
+    font-size: 26px;
+    color: var(--text-main);
+    margin-bottom: 5px;
+    font-weight: 800;
+}
+
+.orders-section p {
+    color: var(--text-muted);
+    margin-bottom: 20px;
+}
+
+.order-card {
+    background: var(--bg-card);
+    padding: 20px;
+    border-radius: var(--radius-md);
+    border-left: 5px solid var(--brand-primary);
+    margin-bottom: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    border-top: 1px solid #e2e8f0;
+    border-right: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.order-card h4 {
+    font-size: 16px;
+    color: var(--brand-dark);
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.order-card p {
+    margin-bottom: 6px;
+    font-size: 14px;
+    color: var(--text-main);
+}

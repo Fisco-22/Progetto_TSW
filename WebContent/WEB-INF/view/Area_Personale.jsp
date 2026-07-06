@@ -4,34 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Area Personale - TravelBooking</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        .profile-container {
-            max-width: 900px;
-            margin: 50px auto;
-            display: flex;
-            gap: 30px;
-        }
-        .profile-card {
-            flex: 1;
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            height: fit-content;
-        }
-        .orders-section {
-            flex: 2;
-        }
-        .order-card {
-            background: white;
-            padding: 15px 20px;
-            border-radius: 8px;
-            border-left: 5px solid #0b5cff;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
-    </style>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/style.css">
+    
 </head>
 <body>
 

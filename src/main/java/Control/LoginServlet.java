@@ -12,66 +12,40 @@ import java.io.IOException;
 
 import Model.*;
 import DAO.*;
-/**
- * Servlet implementation class LoginServlet
- */
+
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
- 
+    private static final long serialVersionUID = 1L;
+    
+    private UtenteDAO dao = new UtenteDAO();
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	private UtenteDAO dao = new UtenteDAO();
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		
-		String actionType = request.getParameter("actionType");
-		String email = request.getParameter("email");
-		String password = request.getParameter("password");
-		
-		HttpSession session = request.getSession();
-		
-		if("login".equals(actionType)) {
-			Utente_Bean uAutentificato= dao.checkLogin(email, password);
-			
-			if(uAutentificato != null) {
-				session.setAttribute("user", uAutentificato);
-				session.setAttribute("userEmail", uAutentificato.getEmail());
-				RequestDispatcher dispatcher = request.getRequestDispatcher("view/utenteDashboard.jsp");
-				dispatcher.forward(request, response);
-			} else {
-				response.sendRedirect("index.html?auth_error=true");
-			}
-		} else if("signup".equals(actionType)) {
-			Utente_Bean newUser = new Utente_Bean();
-			newUser.setNome(request.getParameter("nome"));
-			newUser.setCognome(request.getParameter("cognome"));
-			newUser.setEmail(email);
-			newUser.setPassword(password);
-			newUser.setIndirizzo(request.getParameter("indirizzo"));
-			newUser.setDataNascita(request.getParameter("dataNascita"));
-			
-			boolean signupSuccess = dao.salvaUtente(newUser);
-			
-			if(signupSuccess) {
-				request.setAttribute("registeredUser", newUser);
-				RequestDispatcher dispatcher = request.getRequestDispatcher("view/registrazione_completata.jsp");
-				dispatcher.forward(request, response);
-			} else {
-				response.sendRedirect("index.html?signup_error=true");
-			}
-			}
-		}
-	
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // La prassi migliore è gestire l'invio dei form (dati sensibili) nel doPost
+        request.setCharacterEncoding("UTF-8");
+        
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        
+        Utente_Bean uAutentificato = dao.checkLogin(email, password);
+        
+        if (uAutentificato != null) {
+            // Login OK: Creiamo la sessione e andiamo alla dashboard
+            HttpSession session = request.getSession();
+            session.setAttribute("user", uAutentificato);
+            session.setAttribute("userEmail", uAutentificato.getEmail());
+            
+            RequestDispatcher dispatcher = request.getRequestDispatcher("view/utenteDashboard.jsp");
+            dispatcher.forward(request, response);
+        } else {
+            // Login Fallito: Inviamo un messaggio d'errore alla nostra pagina unificata
+            request.setAttribute("messaggioErrore", "Email o password errate. Riprova.");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("registrazione.jsp");
+            dispatcher.forward(request, response);
+        }
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Se qualcuno prova ad accedere alla servlet tramite URL (GET), lo rimandiamo al POST
+        doPost(request, response);
+    }
 }

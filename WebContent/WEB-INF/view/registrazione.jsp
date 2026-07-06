@@ -3,62 +3,85 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Registrazione - TravelBooking</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        /* Stili aggiuntivi per il form (da mettere in style.css se preferisci) */
-        .form-container {
-            max-width: 500px;
-            margin: 50px auto;
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; font-weight: bold; margin-bottom: 5px; }
-        .form-group input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; }
-        .error-message { color: #d9534f; font-weight: bold; margin-bottom: 15px; text-align: center; }
-    </style>
+    <title>Autenticazione - TravelBooking</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/style.css">
+    <script src="${pageContext.request.contextPath}/validate.js" defer></script>
 </head>
-<body>
+<body class="auth-body">
 
     <nav class="navbar">
-        <a href="index.html" class="logo">TravelBooking</a>
+        <a href="${pageContext.request.contextPath}/index.html" class="logo">TravelBooking</a>
         <div class="nav-links">
             <span class="nav-info">Assistenza clienti: <strong>+39 089 1234567</strong></span>
-            <a href="registrazione.jsp" class="btn-accedi">Accedi / Registrati</a>
         </div>
     </nav>
 
-    <div class="form-container">
-        <h2>Crea il tuo account</h2>
-        
-        <div class="error-message">${messaggioErrore}</div>
-
-        <form action="RegistrazioneServlet" method="POST">
-            <div class="form-group">
-                <label for="nome">Nome</label>
-                <input type="text" id="nome" name="nome" required>
+    <div class="auth-container">
+        <div class="auth-card">
+            
+            <div class="modal-tabs">
+                <div class="tab active" id="tabLogin" onclick="cambiaScheda('login')">Accedi</div>
+                <div class="tab" id="tabSignup" onclick="cambiaScheda('signup')">Registrati</div>
             </div>
             
-            <div class="form-group">
-                <label for="cognome">Cognome</label>
-                <input type="text" id="cognome" name="cognome" required>
-            </div>
+            <span class="error-span" style="text-align: center; display: block; margin-bottom: 15px; color: red;">${messaggioErrore}</span>
 
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
-            </div>
+            <form id="formLogin" action="LoginServlet" method="POST" novalidate>
+    
+    		<div id="loginGeneralError" style="display: none; background-color: #ef4444; color: white; padding: 10px; border-radius: 6px; margin-bottom: 15px; text-align: center; font-weight: bold; font-size: 14px;">
+       			 Hai inserito dati non validi.
+			</div>
 
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
-            </div>
+    		<div class="form-group">
+        		<label for="login-email">Email</label>
+        		<input type="email" id="login-email" name="email" required>
+        		<span id="errorEmailLogin"></span>
+    		</div>
 
-            <button type="submit" class="btn-cerca" style="width: 100%; margin-top: 10px;">Registrati</button>
-        </form>
+    		<div class="form-group">
+        		<label for="login-password">Password</label>
+        		<input type="password" id="login-password" name="password" required>
+        		<span id="errorPasswordLogin"></span>
+    		</div>
+
+    			<button type="submit" class="btn-submit-login">Accedi</button>
+			</form>
+
+            <form id="formSignup" action="RegistrazioneServlet" method="POST" style="display: none;" novalidate onsubmit="return validateRegistrazione();">
+                <div class="form-group">
+                    <label for="nome">Nome</label>
+                    <input type="text" id="nome" name="nome" pattern="^[a-zA-Z\s]+$" required>
+                    <span id="errorNome"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="cognome">Cognome</label>
+                    <input type="text" id="cognome" name="cognome" pattern="^[a-zA-Z\s]+$" required>
+                    <span id="errorCognome"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" name="email" required>
+                    <span id="errorEmailSignup"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" name="password" required>
+                    <span id="errorPasswordSignup"></span>
+                </div>
+
+                <div class="form-group">
+                    <label>Numeri di Telefono</label>
+                    <div id="phonesContainer"></div>
+                    <button type="button" class="btn-add-phone" onclick="addPhone()">+ Aggiungi un altro numero</button>
+                </div>
+
+                <button type="submit" class="btn-submit-signup" style="margin-top: 15px;">Crea Account</button>
+            </form>
+
+        </div>
     </div>
 
 </body>
