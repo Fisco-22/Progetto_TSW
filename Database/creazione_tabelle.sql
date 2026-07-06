@@ -19,6 +19,8 @@ CREATE TABLE UTENTE (
 CREATE TABLE VIAGGIO (
     Codice_Viaggio INT PRIMARY KEY AUTO_INCREMENT,
     Destinazione VARCHAR(32) NOT NULL,
+    Descrizione TEXT,
+    Immagine_URL VARCHAR(500),
     Costo_Totale FLOAT DEFAULT 0.0 CHECK(Costo_Totale >= 0),
     n_posti SMALLINT DEFAULT 0 CHECK(n_posti >= 0),
     Email_Admin VARCHAR(128) NOT NULL,
