@@ -16,12 +16,12 @@ function validateFormElem(formElem, span, errorMessage) {
     if (!formElem || !span) return true;
     
     if(formElem.checkValidity()){
-        formElem.style.borderColor = "#ccc"; // Torna normale se corretto
+        formElem.style.borderColor = "#ccc"; 
         span.innerHTML = "";
         return true;
     }
     
-    formElem.style.borderColor = "#ef4444"; // Bordo rosso se errato
+    formElem.style.borderColor = "#ef4444"; 
     span.style.color = "#ef4444";
     span.style.fontSize = "13px";
     span.style.fontWeight = "500";
@@ -37,45 +37,55 @@ function validateFormElem(formElem, span, errorMessage) {
 }
 
 // ==========================================================================
-// 3. EVENTI IN TEMPO REALE (CARICATI ALL'AVVIO DELLA PAGINA)
+// 3. EVENTI IN TEMPO REALE (LOGIN)
 // ==========================================================================
 document.addEventListener("DOMContentLoaded", () => {
     const formLogin = document.getElementById("formLogin");
     const loginGeneralError = document.getElementById("loginGeneralError");
     
-    if (formLogin) {
-        // A. Validazione IN TEMPO REALE mentre l'utente digita
-        formLogin.email.addEventListener("input", function() {
-            validateFormElem(formLogin.email, document.getElementById("errorEmailLogin"), emailErrorMessage);
-            loginGeneralError.style.display = "none"; // Nascondi l'avviso generale se riprova a scrivere
+    // Recupero esattamente i campi tramite il loro ID
+    const inputEmail = document.getElementById("login-email");
+    const inputPassword = document.getElementById("login-password");
+    const spanEmail = document.getElementById("errorEmailLogin");
+    const spanPassword = document.getElementById("errorPasswordLogin");
+    
+    if (formLogin && inputEmail && inputPassword) {
+        
+        // Controllo mentre scrivi l'email
+        inputEmail.addEventListener("input", function() {
+            validateFormElem(inputEmail, spanEmail, emailErrorMessage);
+            if(loginGeneralError) loginGeneralError.style.display = "none";
         });
         
-        formLogin.password.addEventListener("input", function() {
-            validateFormElem(formLogin.password, document.getElementById("errorPasswordLogin"), passwordErrorMessage);
-            loginGeneralError.style.display = "none";
+        // Controllo mentre scrivi la password
+        inputPassword.addEventListener("input", function() {
+            validateFormElem(inputPassword, spanPassword, passwordErrorMessage);
+            if(loginGeneralError) loginGeneralError.style.display = "none";
         });
 
-        // B. Blocco dell'invio (Previene il 404!)
+        // Blocco dell'invio (Evita l'errore 404!)
         formLogin.addEventListener("submit", function(event) {
-            let isEmailValid = validateFormElem(formLogin.email, document.getElementById("errorEmailLogin"), emailErrorMessage);
-            let isPasswordValid = validateFormElem(formLogin.password, document.getElementById("errorPasswordLogin"), passwordErrorMessage);
+            let isEmailValid = validateFormElem(inputEmail, spanEmail, emailErrorMessage);
+            let isPasswordValid = validateFormElem(inputPassword, spanPassword, passwordErrorMessage);
             
             if (!isEmailValid || !isPasswordValid) {
-                event.preventDefault(); // FERMA IL CARICAMENTO DELLA PAGINA
-                loginGeneralError.style.display = "block"; // Mostra "Hai inserito dati non validi"
+                event.preventDefault(); // QUESTA RIGA BLOCCA IL 404!
+                if(loginGeneralError) loginGeneralError.style.display = "block";
             }
         });
     }
 });
 
 // ==========================================================================
-// 4. CAMBIO SCHEDA E TELEFONI (Mantenuti dal codice precedente)
+// 4. CAMBIO SCHEDA
 // ==========================================================================
 function cambiaScheda(scheda) {
     const formLogin = document.getElementById('formLogin');
     const formSignup = document.getElementById('formSignup');
     const tabLogin = document.getElementById('tabLogin');
     const tabSignup = document.getElementById('tabSignup');
+
+    if (!formLogin || !formSignup) return;
 
     if (scheda === 'login') {
         formLogin.style.display = 'block';
@@ -95,6 +105,9 @@ function cambiaScheda(scheda) {
     }
 }
 
+// ==========================================================================
+// 5. TELEFONI DINAMICI E VALIDAZIONE REGISTRAZIONE
+// ==========================================================================
 function addPhone() {
     let container = document.getElementById("phonesContainer");
     if (!container) return;
@@ -144,19 +157,22 @@ function addPhone() {
 
 function validateRegistrazione() {
     let valid = true;	
-    let form = document.getElementById("formSignup");
     
-    let spanName = document.getElementById("errorNome");
-    if(!validateFormElem(form.nome, spanName, nameOrLastnameErrorMessage)) valid = false;
+    let inputNome = document.getElementById("nome");
+    let spanNome = document.getElementById("errorNome");
+    if(!validateFormElem(inputNome, spanNome, nameOrLastnameErrorMessage)) valid = false;
     
-    let spanLastname = document.getElementById("errorCognome");
-    if (!validateFormElem(form.cognome, spanLastname, nameOrLastnameErrorMessage)) valid = false;
+    let inputCognome = document.getElementById("cognome");
+    let spanCognome = document.getElementById("errorCognome");
+    if (!validateFormElem(inputCognome, spanCognome, nameOrLastnameErrorMessage)) valid = false;
     
-    let spanEmail = document.getElementById("errorEmailSignup");
-    if (!validateFormElem(form.email, spanEmail, emailErrorMessage)) valid = false;
+    let inputEmailSignup = document.getElementById("signup-email");
+    let spanEmailSignup = document.getElementById("errorEmailSignup");
+    if (!validateFormElem(inputEmailSignup, spanEmailSignup, emailErrorMessage)) valid = false;
 
-    let spanPassword = document.getElementById("errorPasswordSignup");
-    if (!validateFormElem(form.password, spanPassword, passwordErrorMessage)) valid = false;
+    let inputPasswordSignup = document.getElementById("signup-password");
+    let spanPasswordSignup = document.getElementById("errorPasswordSignup");
+    if (!validateFormElem(inputPasswordSignup, spanPasswordSignup, passwordErrorMessage)) valid = false;
     
     for (let i = 1; i <= phoneCount; i++){
         let spanPhone = document.getElementById("errorPhone" + i);
