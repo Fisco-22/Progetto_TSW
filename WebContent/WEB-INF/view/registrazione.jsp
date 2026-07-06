@@ -27,7 +27,7 @@
         <a href="index.html" class="logo">TravelBooking</a>
         <div class="nav-links">
             <span class="nav-info">Assistenza clienti: <strong>+39 089 1234567</strong></span>
-            <a href="WEB-INF/view/registrazione.jsp" class="btn-accedi">Accedi / Registrati</a>
+            <a href="registrazione.jsp" class="btn-accedi">Accedi / Registrati</a>
         </div>
     </nav>
 
