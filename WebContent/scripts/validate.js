@@ -129,6 +129,9 @@ function addPhone() {
     input.required = true;
     input.placeholder = "es. 333-1234567";
     input.style.flex = "1";
+    
+    // NOVITÀ 1: Blocca fisicamente la digitazione oltre gli 11 caratteri (3 numeri + 1 trattino + 7 numeri)
+    input.maxLength = 11; 
 
     let btnRemove = document.createElement("button");
     btnRemove.type = "button";
@@ -144,7 +147,21 @@ function addPhone() {
     let span = document.createElement("span");
     span.id = "errorPhone" + phoneCount;
 
-    input.addEventListener("input", function() { validateFormElem(input, span, phoneErrorMessage) });
+    // NOVITÀ 2: Intercetta ogni tasto premuto per formattare il testo
+    input.addEventListener("input", function(e) { 
+        // A. Rimuove istantaneamente qualsiasi lettera o simbolo (lascia solo i numeri)
+        let rawValue = e.target.value.replace(/\D/g, '');
+        
+        // B. Inserisce automaticamente il trattino dopo le prime 3 cifre
+        if (rawValue.length > 3) {
+            e.target.value = rawValue.substring(0, 3) + '-' + rawValue.substring(3, 10);
+        } else {
+            e.target.value = rawValue;
+        }
+        
+        // C. Controlla la validazione per far scomparire la scritta rossa se è corretto
+        validateFormElem(input, span, phoneErrorMessage);
+    });
 
     div.appendChild(input);
     div.appendChild(btnRemove);
