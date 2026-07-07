@@ -179,7 +179,7 @@ function validateRegistrazione() {
     let spanNome = document.getElementById("errorNome");
     if(!validateFormElem(inputNome, spanNome, nameOrLastnameErrorMessage)) valid = false;
     
-    let inputCognome = document.getElementById("cognome");
+    let inputCognome = document.getElementById("cognome\");
     let spanCognome = document.getElementById("errorCognome");
     if (!validateFormElem(inputCognome, spanCognome, nameOrLastnameErrorMessage)) valid = false;
     
@@ -191,12 +191,23 @@ function validateRegistrazione() {
     let spanPasswordSignup = document.getElementById("errorPasswordSignup");
     if (!validateFormElem(inputPasswordSignup, spanPasswordSignup, passwordErrorMessage)) valid = false;
     
+    // NOUVI CONTROLLI AGGIUNTI QUI:
+    let inputIndirizzo = document.getElementById("indirizzo");
+    let spanIndirizzo = document.getElementById("errorIndirizzo");
+    if (!validateFormElem(inputIndirizzo, spanIndirizzo, emptyFieldErrorMessage)) valid = false;
+
+    let inputDataNascita = document.getElementById("dataNascita");
+    let spanDataNascita = document.getElementById("errorDataNascita");
+    if (!validateFormElem(inputDataNascita, spanDataNascita, emptyFieldErrorMessage)) valid = false;
+    
+    // Controllo dei telefoni (lascialo com'è sotto)
     for (let i = 1; i <= phoneCount; i++){
         let spanPhone = document.getElementById("errorPhone" + i);
         let phoneInput = document.getElementById("phone" + i);
         if (spanPhone && phoneInput) {
             if (!validateFormElem(phoneInput, spanPhone, phoneErrorMessage)) valid = false;
-        }	
+        }
     }
+    
     return valid;
 }

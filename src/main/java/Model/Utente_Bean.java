@@ -2,18 +2,31 @@ package Model;
 
 import java.io.Serializable;
 
-public class Utente_Bean implements Serializable{
+public class Utente_Bean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-    private String nome;
-    private String cognome;
-    private String email;
-    private String password;
-    private String indirizzo;
-    private String dataNascita;
+	
+	private int id; 
+	private String nome;
+	private String cognome;
+	private String email;
+	private String password;
+	private String indirizzo;
+	private String dataNascita;
+	private String[] telefoni; 
+	private boolean admin; 
     
-    
-    public Utente_Bean(){}
+	public Utente_Bean() {}
+
+	// --- GETTER E SETTER ---
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getNome() {
 		return nome;
@@ -62,5 +75,20 @@ public class Utente_Bean implements Serializable{
 	public void setDataNascita(String dataNascita) {
 		this.dataNascita = dataNascita;
 	}
-	
+
+	public String[] getTelefoni() {
+		return telefoni;
+	}
+
+	public void setTelefoni(String[] telefoni) {
+		this.telefoni = telefoni;
+	}
+
+	public boolean isAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
 }

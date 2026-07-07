@@ -59,7 +59,19 @@
                     <input type="text" id="cognome" name="cognome" pattern="^[a-zA-Z\s]+$" required>
                     <span id="errorCognome"></span>
                 </div>
+				
+				<div class="form-group">
+                    <label for="indirizzo">Indirizzo di Residenza</label>
+                    <input type="text" id="indirizzo" name="indirizzo" required>
+                    <span id="errorIndirizzo"></span>
+                </div>
 
+                <div class="form-group">
+                    <label for="dataNascita">Data di Nascita</label>
+                    <input type="date" id="dataNascita" name="dataNascita" required>
+                    <span id="errorDataNascita"></span>
+                </div>
+                
                 <div class="form-group">
                     <label for="signup-email">Email</label>
                     <input type="email" id="signup-email" name="email" required>
