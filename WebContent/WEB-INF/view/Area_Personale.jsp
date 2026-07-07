@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Area Personale - TravelBooking</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/style.css">
     
 </head>
 <body>
@@ -20,7 +20,7 @@
         
         <div class="profile-card">
             <h3>I tuoi dati</h3>
-            <hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0;">
+            <hr style="border: 0; border-top: 1px solid rgb(255, 255, 255); margin: 15px 0;">
             <p><strong>Nome:</strong> ${utente.nome}</p>
             <p><strong>Cognome:</strong> ${utente.cognome}</p>
             <p><strong>Email:</strong> ${utente.email}</p>

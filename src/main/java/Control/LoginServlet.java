@@ -20,7 +20,6 @@ public class LoginServlet extends HttpServlet {
     private UtenteDAO dao = new UtenteDAO();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // La prassi migliore è gestire l'invio dei form (dati sensibili) nel doPost
         request.setCharacterEncoding("UTF-8");
         
         String email = request.getParameter("email");
@@ -29,17 +28,20 @@ public class LoginServlet extends HttpServlet {
         Utente_Bean uAutentificato = dao.checkLogin(email, password);
         
         if (uAutentificato != null) {
-            // Login OK: Creiamo la sessione e andiamo alla dashboard
+            // Login OK: Creiamo la sessione e andiamo alla dashboard reale dell'utente
             HttpSession session = request.getSession();
             session.setAttribute("user", uAutentificato);
             session.setAttribute("userEmail", uAutentificato.getEmail());
             
-            RequestDispatcher dispatcher = request.getRequestDispatcher("view/utenteDashboard.jsp");
+            // CORRETTO: Percorso assoluto e allineato al nome reale del file (Area_Personale.jsp)
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/Area_Personale.jsp");
             dispatcher.forward(request, response);
         } else {
-            // Login Fallito: Inviamo un messaggio d'errore alla nostra pagina unificata
+            // Login Fallito: Inviamo il messaggio d'errore alla pagina di autenticazione
             request.setAttribute("messaggioErrore", "Email o password errate. Riprova.");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("registrazione.jsp");
+            
+            // CORRETTO: Percorso assoluto completo per evitare il 404 di Tomcat
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/registrazione.jsp");
             dispatcher.forward(request, response);
         }
     }

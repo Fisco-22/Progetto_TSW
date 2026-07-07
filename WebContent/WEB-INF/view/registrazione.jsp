@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Autenticazione - TravelBooking</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/style.css">
-    <script src="${pageContext.request.contextPath}/validate.js" defer></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/style.css">
+    <script src="${pageContext.request.contextPath}/scripts/validate.js" defer></script>
 </head>
 <body class="auth-body">
 
