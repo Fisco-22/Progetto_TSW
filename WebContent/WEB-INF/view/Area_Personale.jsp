@@ -1,4 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="Model.Utente_Bean" %>
+<% 
+    Utente_Bean connesso = (Utente_Bean) session.getAttribute("user");
+    if(connesso == null){
+        response.sendRedirect(request.getContextPath() + "/index.html");
+        return;
+    }
+%>
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -21,9 +29,9 @@
         <div class="profile-card">
             <h3>I tuoi dati</h3>
             <hr style="border: 0; border-top: 1px solid rgb(255, 255, 255); margin: 15px 0;">
-            <p><strong>Nome:</strong> ${utente.nome}</p>
-            <p><strong>Cognome:</strong> ${utente.cognome}</p>
-            <p><strong>Email:</strong> ${utente.email}</p>
+            <p><strong>Nome:</strong> ${user.nome}</p>
+            <p><strong>Cognome:</strong> ${user.cognome}</p>
+            <p><strong>Email:</strong> ${user.email}</p>
         </div>
 
         <div class="orders-section">
