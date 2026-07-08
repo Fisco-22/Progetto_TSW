@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="Model.Utente_Bean" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% 
     Utente_Bean connesso = (Utente_Bean) session.getAttribute("user");
     if(connesso == null){
@@ -27,12 +28,12 @@
     <div class="profile-container">
         
         <div class="profile-card">
-            <h3>I tuoi dati</h3>
-            <hr style="border: 0; border-top: 1px solid rgb(255, 255, 255); margin: 15px 0;">
-            <p><strong>Nome:</strong> ${user.nome}</p>
-            <p><strong>Cognome:</strong> ${user.cognome}</p>
-            <p><strong>Email:</strong> ${user.email}</p>
-        </div>
+    		<h3>I tuoi dati</h3>
+    		<hr style="border: 0; border-top: 1px solid rgb(255, 255, 255); margin: 15px 0;">
+    		<p><strong>Nome:</strong> <c:out value="${utente.nome}" /></p>
+    		<p><strong>Cognome:</strong> <c:out value="${utente.cognome}" /></p>
+    		<p><strong>Email:</strong> <c:out value="${utente.email}" /></p>
+		</div>
 
         <div class="orders-section">
             <h2>Bentornato, ${utente.nome}! 👋</h2>

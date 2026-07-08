@@ -8,7 +8,7 @@
               maxIdle="10" 
               maxWaitMillis="-1"
               username="root" 
-              password="TUA_PASSWORD_MYSQL" 
+              password="Masterflash_288" 
               driverClassName="com.mysql.cj.jdbc.Driver"
               url="jdbc:mysql://localhost:3306/travelbooking_db?serverTimezone=UTC"/>
 </Context>
