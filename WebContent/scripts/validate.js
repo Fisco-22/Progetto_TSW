@@ -179,7 +179,7 @@ function validateRegistrazione() {
     let spanNome = document.getElementById("errorNome");
     if(!validateFormElem(inputNome, spanNome, nameOrLastnameErrorMessage)) valid = false;
     
-    let inputCognome = document.getElementById("cognome\");
+    let inputCognome = document.getElementById("cognome");
     let spanCognome = document.getElementById("errorCognome");
     if (!validateFormElem(inputCognome, spanCognome, nameOrLastnameErrorMessage)) valid = false;
     
