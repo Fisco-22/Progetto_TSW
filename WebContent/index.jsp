@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -13,7 +14,14 @@
             <span class="nav-info">Assistenza clienti: <strong class="phone-placeholder">+39 089 1234567</strong></span>
             <a href="#">Recensioni</a>
             <a href="#" class="cart-link"> I miei viaggi <span class="cart-badge">0</span></a>
-            <a href="RegistrazioneServlet" class="btn-accedi">Accedi</a>
+         <%-- Controllo se l'oggetto 'utente' esiste nella sessione --%>
+        <% if (session.getAttribute("utente") != null) { %>
+            <a href="${pageContext.request.contextPath}/AreaPersonaleServlet" style="display: flex; align-items: center;">
+                <img src="${pageContext.request.contextPath}/images/iconaUtente.png" alt="Area Personale" style="width: 35px; height: 35px; border-radius: 50%; object-fit: cover; cursor: pointer;">
+            </a>
+        <% } else { %>
+            <a href="${pageContext.request.contextPath}/RegistrazioneServlet" class="btn-accedi">Accedi</a>
+        <% } %>
         </div>
     </nav>
 
@@ -25,7 +33,7 @@
     <section class="search-container">
         <div class="search-box">
             <label>Destinazione</label>
-            <input type="text" placeholder="Inserisci località o struttura...">
+            <input type="text" placeholder="Inserisci localitÃ  o struttura...">
         </div>
         
         <div class="search-box">
@@ -55,7 +63,7 @@
         <section class="catalog-section">
             <div class="section-header">
                 <h2>Esplora Pacchetti Completi</h2>
-                <p>Le combinazioni Volo + Hotel più scelte della settimana</p>
+                <p>Le combinazioni Volo + Hotel piÃ¹ scelte della settimana</p>
             </div>
             
             <div class="cards-grid">
@@ -67,7 +75,7 @@
                         <span class="badge-countdown">Offerta Lampo</span>
                     </div>
                     <div class="card-body">
-                        <span class="card-location">📍 Barcellona, Spagna</span>
+                        <span class="card-location">ð Barcellona, Spagna</span>
                         <h3>Hotel Moderno Bcn</h3>
                         <p class="card-tagline">Ottima posizione, a 20 metri dalla Ramblas, per chi vuole godersi al massimo il soggiorno.</p>
                         <div class="card-rating">
@@ -76,7 +84,7 @@
                         </div>
                         <div class="card-footer-price">
                             <span class="price-label">da</span>
-                            <span class="price-amount">109 €</span>
+                            <span class="price-amount">109 â¬</span>
                             <span class="price-unit">/ persona</span>
                         </div>
                     </div>
@@ -91,7 +99,7 @@
                         <span class="badge-countdown">Scade a breve</span>
                     </div>
                     <div class="card-body">
-                        <span class="card-location">📍 Parigi, Francia</span>
+                        <span class="card-location">ð Parigi, Francia</span>
                         <h3>Mercure Paris Montparnasse</h3>
                         <p class="card-tagline">Hotel in stile informale con arredi ispirati al design moderno e vicino ai musei principali.</p>
                         <div class="card-rating">
@@ -100,7 +108,7 @@
                         </div>
                         <div class="card-footer-price">
                             <span class="price-label">da</span>
-                            <span class="price-amount">164 €</span>
+                            <span class="price-amount">164 â¬</span>
                             <span class="price-unit">/ persona</span>
                         </div>
                     </div>
@@ -122,7 +130,7 @@
                         </div>
                         <div class="card-footer-price">
                             <span class="price-label">da</span>
-                            <span class="price-amount">260 €</span>
+                            <span class="price-amount">260 â¬</span>
                             <span class="price-unit">/ persona</span>
                         </div>
                     </div>
@@ -154,7 +162,7 @@
                         </div>
                         <div class="card-footer-price">
                             <span class="price-label">2 notti</span>
-                            <span class="price-amount">128 €</span>
+                            <span class="price-amount">128 â¬</span>
                         </div>
                     </div>
                 </div>
@@ -176,7 +184,7 @@
                         </div>
                         <div class="card-footer-price">
                             <span class="price-label">2 notti</span>
-                            <span class="price-amount">195 €</span>
+                            <span class="price-amount">195 â¬</span>
                         </div>
                     </div>
                 </div>

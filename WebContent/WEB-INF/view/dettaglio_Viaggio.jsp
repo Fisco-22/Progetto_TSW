@@ -6,9 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dettaglio ${viaggio.destinazione} - TravelBooking</title>
     
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/styleViaggio.css">
 </head>
 <body>
+
+<nav class="navbar">
+    <a href="${pageContext.request.contextPath}/index.html" class="logo">TravelBooking</a>
+    <div class="nav-links">
+        <span class="nav-info">Assistenza clienti: <strong class="phone-placeholder">+39 089 1234567</strong></span>
+        <a href="#">Recensioni</a>
+        <a href="#" class="cart-link"> I miei viaggi <span class="cart-badge">0</span></a>
+        
+        <%-- Controllo se l'oggetto 'utente' esiste nella sessione --%>
+        <% if (session.getAttribute("utente") != null) { %>
+            <a href="${pageContext.request.contextPath}/AreaPersonaleServlet" style="display: flex; align-items: center;">
+                <img src="${pageContext.request.contextPath}/images/iconaUtente.png" alt="Area Personale" style="width: 35px; height: 35px; border-radius: 50%; object-fit: cover; cursor: pointer;">
+            </a>
+        <% } else { %>
+            <a href="${pageContext.request.contextPath}/RegistrazioneServlet" class="btn-accedi">Accedi</a>
+        <% } %>
+        
+    </div>
+</nav>
 
 <div class="container">
 
