@@ -1,1 +1,1 @@
-SELECT Email, Nome, Ruolo FROM UTENTE;
+SELECT Email, Nome, Cognome, Ruolo FROM UTENTE;
