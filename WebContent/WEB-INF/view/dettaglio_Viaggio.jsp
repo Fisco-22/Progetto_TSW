@@ -6,14 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dettaglio ${viaggio.destinazione} - TravelBooking</title>
     
-    <link rel="stylesheet" href="style_dettaglio.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/styleViaggio.css">
 </head>
 <body>
 
 <div class="container">
 
     <div class="gallery-grid">
-        <img src="https://images.unsplash.com/photo-1573843981267-be1999ff37cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Vista Mare" class="gallery-item item-main">
+        <img src="${viaggio.immagineUrl}" alt="${viaggio.destinazione}" class="gallery-item item-main">
+        
         <img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Piscina Resort" class="gallery-item">
         <img src="https://images.unsplash.com/photo-1582719478250-c89afe4dc84b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Camera da letto" class="gallery-item">
     </div>
@@ -24,8 +25,7 @@
             <div class="title-section">
                 <h1>${viaggio.destinazione}</h1>
                 <div class="rating">5.0 / 5 Eccellente</div>
-                <p>📍 Informazioni sulla posizione nel database</p>
-            </div>
+                </div>
 
             <hr style="border: 0; border-top: 1px solid #e0e0e0; margin: 30px 0;">
 
@@ -42,7 +42,7 @@
                 <p class="price-tag">€ ${viaggio.costoTotale}</p>
                 <p class="price-subtext">Prezzo totale per il soggiorno</p>
 
-                <form action="GestioneOrdiniServlet" method="POST">
+                <form action="${pageContext.request.contextPath}/GestioneOrdiniServlet" method="POST">
                     
                     <input type="hidden" name="codiceViaggio" value="${viaggio.codiceViaggio}">
 
