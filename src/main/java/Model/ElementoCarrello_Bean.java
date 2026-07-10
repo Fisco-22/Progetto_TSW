@@ -35,5 +35,9 @@ public class ElementoCarrello_Bean {
 		this.numPosti = numPosti;
 	}
     
-    
+	public double getPrezzoTotale() {
+		if (viaggio != null)  return viaggio.getCostoTotale() * numPosti;
+        
+        return 0;
+    }
 }
