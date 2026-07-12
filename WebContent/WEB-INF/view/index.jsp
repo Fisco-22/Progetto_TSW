@@ -1,27 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
     <title>TravelBooking - Piattaforma di Prenotazione Viaggi</title>
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/style.css">
 </head>
 <body>
 
     <nav class="navbar">
-        <a href="index.html" class="logo">TravelBooking</a>
+        <a href="${pageContext.request.contextPath}/HomeServlet" class="logo">TravelBooking</a>
         <div class="nav-links">
             <span class="nav-info">Assistenza clienti: <strong class="phone-placeholder">+39 089 1234567</strong></span>
             <a href="#">Recensioni</a>
-            <a href="#" class="cart-link"> I miei viaggi <span class="cart-badge">0</span></a>
-         <%-- Controllo se l'oggetto 'utente' esiste nella sessione --%>
-        <% if (session.getAttribute("utente") != null) { %>
-            <a href="${pageContext.request.contextPath}/AreaPersonaleServlet" style="display: flex; align-items: center;">
-                <img src="${pageContext.request.contextPath}/images/iconaUtente.png" alt="Area Personale" style="width: 35px; height: 35px; border-radius: 50%; object-fit: cover; cursor: pointer;">
+            
+            <a href="${pageContext.request.contextPath}/carrello.jsp" class="cart-link"> I miei viaggi 
+                <span class="cart-badge">${sessionScope.carrello != null ? sessionScope.carrello.numeroElementi : 0}</span>
             </a>
-        <% } else { %>
-            <a href="${pageContext.request.contextPath}/RegistrazioneServlet" class="btn-accedi">Accedi</a>
-        <% } %>
+            
+            <%-- Controllo Accesso --%>
+            <% if (session.getAttribute("utente") != null) { %>
+                <a href="${pageContext.request.contextPath}/AreaPersonaleServlet" style="display: flex; align-items: center;">
+                    <img src="${pageContext.request.contextPath}/images/iconaUtente.png" alt="Area Personale" style="width: 35px; height: 35px; border-radius: 50%; object-fit: cover; cursor: pointer;">
+                </a>
+            <% } else { %>
+                <a href="${pageContext.request.contextPath}/RegistrazioneServlet" class="btn-accedi">Accedi</a>
+            <% } %>
         </div>
     </nav>
 
@@ -30,165 +35,46 @@
         <p>Trova le migliori combinazioni esclusive per Voli, Hotel e Alloggi</p>
     </header>
 
-    <section class="search-container">
-        <div class="search-box">
-            <label>Destinazione</label>
-            <input type="text" placeholder="Inserisci localitÃ  o struttura...">
-        </div>
-        
-        <div class="search-box">
-            <label>Tipologia Alloggio</label>
-            <select>
-                <option>Hotel</option>
-                <option>Appartamento</option>
-                <option>Resort</option>
-                <option>Villa</option>
-            </select>
-        </div>
-
-        <div class="search-box">
-            <label for="dataPartenza">Data di Partenza</label>
-            <input type="date" id="dataPartenza" name="dataPartenza" required>
-        </div>
-
-        <div class="search-box">
-            <label for="dataRitorno">Data di Ritorno</label>
-            <input type="date" id="dataRitorno" name="dataRitorno" required>
-        </div>
-
-        <button class="btn-cerca">Cerca</button>
-    </section>
     <main class="main-content">
-        
         <section class="catalog-section">
             <div class="section-header">
-                <h2>Esplora Pacchetti Completi</h2>
-                <p>Le combinazioni Volo + Hotel piÃ¹ scelte della settimana</p>
+                <h2>Esplora i Nostri Pacchetti</h2>
+                <p>Tutte le nostre migliori offerte disponibili</p>
             </div>
             
             <div class="cards-grid">
-            	<a href="DettaglioServlet?id=1" style= "text-decoration: none; color: inherit;"> 
-                	<div class="travel-card">
-                    <div class="card-image-wrap">
-                        <img src="https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=500&q=80" alt="Barcellona">
-                        <span class="badge-combo">Volo + Hotel</span>
-                        <span class="badge-countdown">Offerta Lampo</span>
-                    </div>
-                    <div class="card-body">
-                        <span class="card-location">ð Barcellona, Spagna</span>
-                        <h3>Hotel Moderno Bcn</h3>
-                        <p class="card-tagline">Ottima posizione, a 20 metri dalla Ramblas, per chi vuole godersi al massimo il soggiorno.</p>
-                        <div class="card-rating">
-                            <span class="rating-score">8.2</span>
-                            <span class="rating-text">Ottimo (1494 recensioni)</span>
+                
+                <%-- INIZIO CICLO DINAMICO: Crea una card per ogni viaggio nel database --%>
+                <c:forEach items="${listaViaggi}" var="viaggio">
+                
+                    <a href="${pageContext.request.contextPath}/DettaglioServlet?id=${viaggio.codiceViaggio}" style="text-decoration: none; color: inherit;"> 
+                        <div class="travel-card">
+                            <div class="card-image-wrap">
+                                <!-- L'immagine viene presa direttamente dal DB -->
+                                <img src="${viaggio.immagineUrl}" alt="${viaggio.destinazione}">
+                                <span class="badge-combo">Volo + Hotel</span>
+                            </div>
+                            <div class="card-body">
+                                <span class="card-location">📍 ${viaggio.destinazione}</span>
+                                <h3>Offerta Esclusiva</h3>
+                                <p class="card-tagline">${viaggio.descrizione}</p>
+                                
+                                <div class="card-footer-price">
+                                    <span class="price-label">da</span>
+                                    <span class="price-amount">${viaggio.costoTotale} €</span>
+                                    <span class="price-unit">/ persona</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="card-footer-price">
-                            <span class="price-label">da</span>
-                            <span class="price-amount">109 â¬</span>
-                            <span class="price-unit">/ persona</span>
-                        </div>
-                    </div>
-                </div>
-				</a>
-				
-				<a href="DettaglioServlet?id=2" style= "text-decoration: none; color: inherit;"> 
-                <div class="travel-card">
-                    <div class="card-image-wrap">
-                        <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=500&q=80" alt="Parigi">
-                        <span class="badge-combo">Volo + Hotel</span>
-                        <span class="badge-countdown">Scade a breve</span>
-                    </div>
-                    <div class="card-body">
-                        <span class="card-location">ð Parigi, Francia</span>
-                        <h3>Mercure Paris Montparnasse</h3>
-                        <p class="card-tagline">Hotel in stile informale con arredi ispirati al design moderno e vicino ai musei principali.</p>
-                        <div class="card-rating">
-                            <span class="rating-score">8.4</span>
-                            <span class="rating-text">Ottimo (1648 recensioni)</span>
-                        </div>
-                        <div class="card-footer-price">
-                            <span class="price-label">da</span>
-                            <span class="price-amount">164 â¬</span>
-                            <span class="price-unit">/ persona</span>
-                        </div>
-                    </div>
-                </div>
-				</a>
-				<a href="DettaglioServlet?id=3" style= "text-decoration: none; color: inherit;"> 
-                <div class="travel-card">
-                    <div class="card-image-wrap">
-                        <img src="https://images.unsplash.com/photo-1534351590666-13e3e96b5017?auto=format&fit=crop&w=500&q=80" alt="Amsterdam">
-                        <span class="badge-combo">Volo + Hotel</span>
-                    </div>
-                    <div class="card-body">
-                        <span class="card-location">Amsterdam, Paesi Bassi</span>
-                        <h3>BUNK Hotel Amsterdam</h3>
-                        <p class="card-tagline">Splendido alloggio ricavato in una struttura storica, con diverse tipologie di camere.</p>
-                        <div class="card-rating">
-                            <span class="rating-score">8.8</span>
-                            <span class="rating-text">Eccellente (5494 recensioni)</span>
-                        </div>
-                        <div class="card-footer-price">
-                            <span class="price-label">da</span>
-                            <span class="price-amount">260 â¬</span>
-                            <span class="price-unit">/ persona</span>
-                        </div>
-                    </div>
-                </div>
-                </a>
-            </div>
-        </section>
+                    </a>
+                    
+                </c:forEach>
+                <%-- FINE CICLO --%>
+                
+                <c:if test="${empty listaViaggi}">
+                    <p style="text-align: center; grid-column: 1 / -1;">Nessun viaggio disponibile al momento.</p>
+                </c:if>
 
-        <section class="catalog-section">
-            <div class="section-header">
-                <h2>Offerte Flash del Weekend</h2>
-                <p>Soggiorni brevi a tariffe agevolate per staccare la spina nel fine settimana</p>
-            </div>
-
-            <div class="cards-grid">
-            <a href="DettaglioServlet?id=4" style= "text-decoration: none; color: inherit;"> 
-                <div class="travel-card">
-                    <div class="card-image-wrap">
-                        <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=500&q=80" alt="Roma">
-                        <span class="badge-combo">Solo Hotel</span>
-                    </div>
-                    <div class="card-body">
-                        <span class="card-location"> Roma, Italia</span>
-                        <h3>Occidental Aran Park</h3>
-                        <p class="card-tagline">Camere spaziose immerse nel verde del quartiere EUR, ottimi collegamenti con il centro storico.</p>
-                        <div class="card-rating">
-                            <span class="rating-score">8.0</span>
-                            <span class="rating-text">Buono (2100 recensioni)</span>
-                        </div>
-                        <div class="card-footer-price">
-                            <span class="price-label">2 notti</span>
-                            <span class="price-amount">128 â¬</span>
-                        </div>
-                    </div>
-                </div>
-				</a>
-				<a href="DettaglioServlet?id=5" style= "text-decoration: none; color: inherit;"> 
-                <div class="travel-card">
-                    <div class="card-image-wrap">
-                        <img src="https://images.unsplash.com/photo-1520175480921-4edfa2983e0f?auto=format&fit=crop&w=500&q=80" alt="Venezia">
-                        <span class="badge-combo">Solo Hotel</span>
-                        <span class="badge-countdown">Super Sconto</span>
-                    </div>
-                    <div class="card-body">
-                        <span class="card-location">Venezia, Italia</span>
-                        <h3>Hotel Canal Grande</h3>
-                        <p class="card-tagline">Affacciato direttamente sulle acque del canale principale, interni eleganti in stile veneziano.</p>
-                        <div class="card-rating">
-                            <span class="rating-score">9.1</span>
-                            <span class="rating-text">Superbo (920 recensioni)</span>
-                        </div>
-                        <div class="card-footer-price">
-                            <span class="price-label">2 notti</span>
-                            <span class="price-amount">195 â¬</span>
-                        </div>
-                    </div>
-                </div>
-                </a>
             </div>
         </section>
     </main>

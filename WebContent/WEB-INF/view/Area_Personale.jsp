@@ -2,9 +2,9 @@
 <%@ page import="Model.Utente_Bean" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% 
-    Utente_Bean connesso = (Utente_Bean) session.getAttribute("user");
+    Utente_Bean connesso = (Utente_Bean) session.getAttribute("utente");
     if(connesso == null){
-        response.sendRedirect(request.getContextPath() + "/view/index.jsp");
+        response.sendRedirect(request.getContextPath() + "/HomeServlet");
         return;
     }
 %>
