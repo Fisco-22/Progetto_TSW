@@ -12,7 +12,7 @@
 <body>
 
 <nav class="navbar">
-    <a href="${pageContext.request.contextPath}/index.html" class="logo">TravelBooking</a>
+    <a href="${pageContext.request.contextPath}/view/index.html" class="logo">TravelBooking</a>
     <div class="nav-links">
         <span class="nav-info">Assistenza clienti: <strong class="phone-placeholder">+39 089 1234567</strong></span>
         <a href="#">Recensioni</a>

@@ -4,7 +4,7 @@
     Utente_Bean utente = (Utente_Bean) request.getAttribute("registeredUser");
     if (utente == null) {
         // Usa il ContextPath per sicurezza: rimanda alla radice reale dell'applicazione
-        response.sendRedirect(request.getContextPath() + "/index.html");
+        response.sendRedirect(request.getContextPath() + "/view/index.jsp");
         return;
     }
 %>
