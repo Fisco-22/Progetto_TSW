@@ -50,11 +50,11 @@ public int salvaOrdine(Ordine_Bean ordine) {
 					con.rollback();
 					return -1;
 				}
-				codiceOrdine = rs.getInt();
+				codiceOrdine = rs.getInt(1);
 			}
 		}
 		
-		try(PrepareStatement ps = con.prepareStatement(insertDettaglio)){
+		try(PreparedStatement ps = con.prepareStatement(insertDettaglio)){
 			for(DettaglioOrdine_Bean d:ordine.getDettagli()) {
 				ps.setInt(1, codiceOrdine);
 				if(d.getCodiceViaggio() != null) {
@@ -125,7 +125,7 @@ public List<Ordine_Bean> getOrdiniByPeriodo(String dataInizio, String dataFine){
 		try (ResultSet rs = ps.executeQuery()) {
 			while (rs.next()) {
 				Ordine_Bean o = mappaOrdine(rs);
-				caricaDettagli(con, o);
+				caricaDettaglio(con, o);
 				ordini.add(o);
 			}
 		}
