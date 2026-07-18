@@ -16,13 +16,13 @@ function validateFormElem(formElem, span, errorMessage) {
     if (!formElem || !span) return true;
     
     if(formElem.checkValidity()){
-        formElem.style.borderColor = "#ccc"; 
+        formElem.style.borderColor = "LightGray"; 
         span.innerHTML = "";
         return true;
     }
     
-    formElem.style.borderColor = "#ef4444"; 
-    span.style.color = "#ef4444";
+    formElem.style.borderColor = "Tomato"; 
+    span.style.color = "Tomato";
     span.style.fontSize = "13px";
     span.style.fontWeight = "500";
     span.style.display = "block";
@@ -137,7 +137,7 @@ function addPhone() {
     btnRemove.type = "button";
     btnRemove.textContent = "✖";
     btnRemove.style.padding = "0 15px";
-    btnRemove.style.background = "#ef4444"; 
+    btnRemove.style.background = "Tomato"; 
     btnRemove.style.color = "white";
     btnRemove.style.border = "none";
     btnRemove.style.borderRadius = "6px";
