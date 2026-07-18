@@ -30,7 +30,7 @@
         
         <div class="profile-card">
     		<h3>I tuoi dati</h3>
-    		<hr style="border: 0; border-top: 1px solid rgb(255, 255, 255); margin: 15px 0;">
+    		<hr style="border: 0; border-top: 1px solid White; margin: 15px 0;">
     		<p><strong>Nome:</strong> <c:out value="${utente.nome}" /></p>
     		<p><strong>Cognome:</strong> <c:out value="${utente.cognome}" /></p>
     		<p><strong>Email:</strong> <c:out value="${utente.email}" /></p>

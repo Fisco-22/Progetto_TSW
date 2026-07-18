@@ -33,10 +33,7 @@ VALUES(
 -- PASSO 2: ORGANIZZAZIONE DI UN VIAGGIO (Operazione eseguita dall'Admin)
 -- =========================================================================
 
--- Svuota la tabella prima di inserire i nuovi dati (facoltativo, evita duplicati)
-SET FOREIGN_KEY_CHECKS = 0;
-TRUNCATE TABLE VIAGGIO;
-SET FOREIGN_KEY_CHECKS = 1;
+
 
 -- INSERIMENTO DEI 5 VIAGGI DI INDEX.HTML
 INSERT INTO VIAGGIO(Codice_Viaggio, Destinazione, Descrizione, Immagine_URL, Costo_Totale, n_posti, Email_Admin)
@@ -51,23 +48,8 @@ VALUES
 
 (5, 'Venezia, Italia', 'Affacciato direttamente sulle acque del canale principale, interni eleganti in stile classico veneziano. Un\'esperienza magica e senza tempo nel cuore della città galleggiante più bella del mondo.', 'https://images.unsplash.com/photo-1520175480921-4edfa2983e0f?auto=format&fit=crop&w=500&q=80', 195.00, 95, 'francescopagliuchi@admin.com');
 
-
 -- =========================================================================
--- PASSO 3: PRENOTAZIONE DEL VIAGGIO (Operazione eseguita dall'Utente)
--- =========================================================================
-
--- L'utente 'f.verdi@gmail.com' prenota il viaggio con Codice_Viaggio = 1
-INSERT INTO PRENOTARE(Email_Utente, Codice_Viaggio, Stato_Pagamento, Data_Prenotazione)
-VALUES(
-    'f.verdi@gmail.com', 
-    1, 
-    'In sospeso', 
-    CURDATE() -- CURDATE() inserisce in automatico la data di oggi
-);
-
-
--- =========================================================================
--- PASSO 4: INSERIMENTO DI UNA RECENSIONE (Operazione eseguita dall'Utente)
+-- PASSO 3: INSERIMENTO DI UNA RECENSIONE (Operazione eseguita dall'Utente)
 -- =========================================================================
 
 -- Ora che l'utente esiste e il viaggio 1 esiste, la recensione funzionerà alla perfezione!
@@ -79,3 +61,10 @@ VALUES(
     'f.verdi@gmail.com', 
     1
 );
+
+-- PASSO 4: ORDINE DI PROVA (l'utente compra il viaggio 1 a prezzo storico)
+INSERT INTO ORDINE(Email_Utente, Totale_Ordine, Indirizzo_Spedizione, Metodo_Pagamento, Ultime4Cifre)
+VALUES('f.verdi@gmail.com', 218.00, 'Via delle Puglie 21, Benevento', 'Carta di credito', '4242');
+
+INSERT INTO DETTAGLIO_ORDINE(Codice_Ordine, Codice_Viaggio, Destinazione, Prezzo_Acquisto, Data_Partenza, Num_Posti)
+VALUES(LAST_INSERT_ID(), 1, 'Barcellona, Spagna', 109.00, '2026-10-15', 2);

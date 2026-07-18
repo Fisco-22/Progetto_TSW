@@ -47,7 +47,7 @@
                 <div class="rating">5.0 / 5 Eccellente</div>
                 </div>
 
-            <hr style="border: 0; border-top: 1px solid #e0e0e0; margin: 30px 0;">
+            <hr style="border: 0; border-top: 1px solid Gainsboro; margin: 30px 0;">
 
             <div class="description-section">
                 <h2>Informazioni su questa struttura</h2>

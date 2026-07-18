@@ -3,8 +3,8 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f8f9fa;
-    color: #1f1f1f;
+    background-color: GhostWhite;
+    color: Black;
 }
 
 .container {
@@ -57,7 +57,7 @@ body {
 
 .rating {
     display: inline-block;
-    background-color: #0b5cff;
+    background-color: DodgerBlue;
     color: white;
     padding: 4px 8px;
     border-radius: 4px;
@@ -67,13 +67,13 @@ body {
 
 .description {
     line-height: 1.6;
-    color: #4a4a4a;
+    color: DarkSlateGray;
 }
 
 /* 3. Booking Card (Il box per acquistare/carrello) */
 .booking-box {
     background: white;
-    border: 1px solid #e0e0e0;
+    border: 1px solid Gainsboro;
     border-radius: 12px;
     padding: 24px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
@@ -88,7 +88,7 @@ body {
 }
 
 .price-subtext {
-    color: #717171;
+    color: DimGray;
     font-size: 14px;
     margin-bottom: 20px;
 }
@@ -108,7 +108,7 @@ body {
 .form-group input, .form-group select {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid LightGray;
     border-radius: 6px;
     box-sizing: border-box;
 }
@@ -127,20 +127,20 @@ body {
 }
 
 .btn-primary {
-    background-color: #0b5cff;
+    background-color: DodgerBlue;
     color: white;
 }
 
 .btn-primary:hover {
-    background-color: #0046d1;
+    background-color: MediumBlue;
 }
 
 .btn-secondary {
     background-color: white;
-    color: #0b5cff;
-    border: 2px solid #0b5cff;
+    color: DodgerBlue;
+    border: 2px solid DodgerBlue;
 }
 
 .btn-secondary:hover {
-    background-color: #f0f5ff;
+    background-color: AliceBlue;
 }

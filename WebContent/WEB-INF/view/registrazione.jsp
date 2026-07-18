@@ -28,7 +28,7 @@
 
             <form id="formLogin" action="LoginServlet" method="POST" novalidate>
     
-    		<div id="loginGeneralError" style="display: none; background-color: #ef4444; color: white; padding: 10px; border-radius: 6px; margin-bottom: 15px; text-align: center; font-weight: bold; font-size: 14px;">
+    		<div id="loginGeneralError" style="display: none; background-color: Tomato; color: white; padding: 10px; border-radius: 6px; margin-bottom: 15px; text-align: center; font-weight: bold; font-size: 14px;">
        			 Hai inserito dati non validi.
 			</div>
 

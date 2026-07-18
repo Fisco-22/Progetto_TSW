@@ -36,7 +36,7 @@
             <c:otherwise>
                 <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
                     <thead>
-                        <tr style="text-align: left; border-bottom: 2px solid #e0e0e0;">
+                        <tr style="text-align: left; border-bottom: 2px solid Gainsboro;">
                             <th style="padding: 10px;">Destinazione</th>
                             <th style="padding: 10px;">Data partenza</th>
                             <th style="padding: 10px;">Posti</th>
@@ -46,7 +46,7 @@
                     </thead>
                     <tbody>
                         <c:forEach items="${sessionScope.carrello.elementi}" var="elemento">
-                            <tr style="border-bottom: 1px solid #eee;">
+                            <tr style="border-bottom: 1px solid WhiteSmoke;">
                                 <td style="padding: 10px;"><c:out value="${elemento.viaggio.destinazione}"/></td>
                                 <td style="padding: 10px;"><c:out value="${elemento.dataPartenza}"/></td>
                                 <td style="padding: 10px;">${elemento.numPosti}</td>

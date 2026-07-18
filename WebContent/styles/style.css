@@ -8,15 +8,15 @@
 }
 
 :root {
-    --brand-dark: #004731;       
-    --brand-primary: #00aa6c;    
-    --brand-gradient: linear-gradient(135deg, #004731 0%, #00aa6c 100%);
+    --brand-dark: DarkSlateGray;       
+    --brand-primary: DarkCyan;    
+    --brand-gradient: linear-gradient(135deg, DarkSlateGray 0%, DarkCyan 100%);
     
-    --bg-main: #f4f6f9;
-    --bg-card: #ffffff;
-    --text-main: #1e293b;
-    --text-muted: #64748b;
-    --border-color: #cbd5e1;
+    --bg-main: WhiteSmoke;
+    --bg-card: White;
+    --text-main: DarkSlateGray;
+    --text-muted: SlateGray;
+    --border-color: LightGray;
     
     --radius-sm: 6px;
     --radius-md: 8px;
@@ -42,7 +42,7 @@ body {
     align-items: center;
     padding: 15px 50px;
     background-color: var(--bg-card);
-    border-bottom: 1px solid #e2e8f0;
+    border-bottom: 1px solid Lavender;
 }
 
 .logo {
@@ -60,7 +60,7 @@ body {
 
 .nav-links a, .nav-links .nav-info {
     text-decoration: none;
-    color: #334155;
+    color: DarkSlateGray;
     margin-left: 25px;
     font-weight: 600;
     font-size: 14px;
@@ -82,7 +82,7 @@ body {
 }
 
 .cart-badge {
-    background-color: #0284c7;
+    background-color: DarkCyan;
     color: white;
     font-size: 11px;
     font-weight: 700;
@@ -92,14 +92,14 @@ body {
 
 .nav-links .btn-accedi {
     background-color: var(--brand-dark);
-    color: #ffffff !important;
+    color: White !important;
     padding: 9px 22px;
     border-radius: var(--radius-pill);
     transition: background-color var(--transition-fast);
 }
 
 .nav-links .btn-accedi:hover {
-    background-color: #002f20;
+    background-color: Black;
 }
 
 /* Link specifico per tornare alla home nella navbar delle pagine di errore/auth */
@@ -117,7 +117,7 @@ body {
     text-align: center;
     padding: 60px 20px 80px 20px;
     background: var(--brand-gradient);
-    color: #ffffff;
+    color: White;
 }
 
 .hero h1 {
@@ -165,7 +165,7 @@ body {
 
 .btn-cerca {
     background-color: var(--brand-primary);
-    color: #ffffff;
+    color: White;
     border: none;
     padding: 13px 30px;
     border-radius: var(--radius-sm);
@@ -176,7 +176,7 @@ body {
 }
 
 .btn-cerca:hover {
-    background-color: #008a57;
+    background-color: Teal;
 }
 
 /* ==========================================================================
@@ -218,7 +218,7 @@ body {
     border-radius: var(--radius-md);
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    border: 1px solid #e2e8f0;
+    border: 1px solid Lavender;
     display: flex;
     flex-direction: column;
     transition: transform var(--transition-fast), box-shadow var(--transition-fast);
@@ -233,7 +233,7 @@ body {
     position: relative;
     height: 200px;
     width: 100%;
-    background-color: #e2e8f0;
+    background-color: Lavender;
 }
 
 .card-image-wrap img {
@@ -259,7 +259,7 @@ body {
     position: absolute;
     bottom: 12px;
     right: 12px;
-    background: #ea580c;
+    background: OrangeRed;
     color: white;
     font-size: 11px;
     font-weight: 700;
@@ -290,7 +290,7 @@ body {
 
 .card-tagline {
     font-size: 13px;
-    color: #475569;
+    color: DarkSlateGray;
     margin-bottom: 15px;
     flex: 1;
 }
@@ -318,7 +318,7 @@ body {
 }
 
 .card-footer-price {
-    border-top: 1px solid #f1f5f9;
+    border-top: 1px solid WhiteSmoke;
     padding-top: 12px;
     text-align: left;
 }
@@ -372,7 +372,7 @@ body {
 }
 
 .modal-tabs {
-    display: flex; border-bottom: 2px solid #e2e8f0; margin-bottom: 30px;
+    display: flex; border-bottom: 2px solid Lavender; margin-bottom: 30px;
 }
 
 .tab {
@@ -415,7 +415,7 @@ body {
 }
 
 .checkbox-group label { 
-    font-size: 13px; color: #475569; 
+    font-size: 13px; color: DarkSlateGray; 
 }
 
 .btn-submit {
@@ -426,7 +426,7 @@ body {
 }
 
 .btn-submit:hover {
-    background-color: #002f20;
+    background-color: Black;
 }
 
 .toggle-text { 
@@ -449,7 +449,7 @@ body {
 }
 
 .card-successo {
-    background-color: #ffffff;
+    background-color: White;
     max-width: 550px;
     width: 100%;
     padding: 40px;
@@ -467,13 +467,13 @@ body {
 }
 
 .card-successo .p-intro {
-    color: #4a5568;
+    color: DimGray;
     font-size: 16px;
     margin-bottom: 25px;
 }
 
 .info-riepilogo {
-    background-color: #f4f7f5;
+    background-color: WhiteSmoke;
     border-left: 4px solid var(--brand-primary); 
     padding: 20px;
     border-radius: var(--radius-md);
@@ -483,7 +483,7 @@ body {
 
 .info-riepilogo p {
     margin: 8px 0;
-    color: #2d3748;
+    color: DarkSlateGray;
     font-size: 15px;
     line-height: 1.5;
 }
@@ -494,8 +494,8 @@ body {
 
 .btn-home {
     display: inline-block;
-    background-color: #000000; 
-    color: #ffffff;
+    background-color: Black; 
+    color: White;
     padding: 14px 30px;
     border-radius: var(--radius-pill); 
     text-decoration: none;
@@ -589,7 +589,7 @@ body {
     background-color: var(--brand-dark);
 }
 .btn-submit-login:hover {
-    background-color: #002f20;
+    background-color: Black;
 }
 
 .btn-submit-signup {
@@ -597,22 +597,22 @@ body {
     margin-top: 25px; 
 }
 .btn-submit-signup:hover {
-    background-color: #008a57;
+    background-color: Teal;
 }
 
 .btn-add-phone {
     margin-top: 5px;
-    background: #e2e8f0;
+    background: Lavender;
     border: none;
     padding: 8px 15px;
     border-radius: var(--radius-sm);
     cursor: pointer;
     font-weight: bold;
-    color: #333;
+    color: DarkSlateGray;
     transition: background var(--transition-fast);
 }
 .btn-add-phone:hover {
-    background: #cbd5e1;
+    background: LightGray;
 }
 
 .auth-switch-text {
@@ -632,7 +632,7 @@ body {
 }
 
 .error-span {
-    color: #ef4444;
+    color: Tomato;
     font-size: 13px;
     font-weight: 500;
     margin-top: 4px;
@@ -662,7 +662,7 @@ body {
     padding: 25px;
     border-radius: var(--radius-lg);
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    border: 1px solid #e2e8f0;
+    border: 1px solid Lavender;
     height: fit-content;
 }
 
@@ -702,9 +702,9 @@ body {
     border-left: 5px solid var(--brand-primary);
     margin-bottom: 15px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    border-top: 1px solid #e2e8f0;
-    border-right: 1px solid #e2e8f0;
-    border-bottom: 1px solid #e2e8f0;
+    border-top: 1px solid Lavender;
+    border-right: 1px solid Lavender;
+    border-bottom: 1px solid Lavender;
 }
 
 .order-card h4 {
