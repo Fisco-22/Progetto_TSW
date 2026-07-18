@@ -19,6 +19,7 @@
                 <span class="cart-badge">${sessionScope.carrello != null ? sessionScope.carrello.numeroElementi : 0}</span>
             </a>
             
+
             <%-- Controllo Accesso --%>
             <% if (session.getAttribute("utente") != null) { %>
                 <a href="${pageContext.request.contextPath}/AreaPersonaleServlet" style="display: flex; align-items: center;">
