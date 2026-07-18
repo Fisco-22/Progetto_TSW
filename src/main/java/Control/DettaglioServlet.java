@@ -47,7 +47,7 @@ public class DettaglioServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		response.sendRedirect(request.getContextPath()+ "/view/index.jsp");
+		response.sendRedirect(request.getContextPath() + "/HomeServlet");
 	}
 
 	/**

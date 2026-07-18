@@ -6,12 +6,6 @@
 	<display-name>Progetto_TSW_TravelBooking</display-name>
 	<welcome-file-list>
 		<welcome-file>HomeServlet</welcome-file>
-		<welcome-file>view/index.jsp</welcome-file>
-		<welcome-file>index.xhtml</welcome-file>
-		<welcome-file>default.html</welcome-file>
-		<welcome-file>default.htm</welcome-file>
-		<welcome-file>default.jsp</welcome-file>
-		<welcome-file>default.xhtml</welcome-file>
 	</welcome-file-list>
 	
 	<resource-ref>
@@ -24,9 +18,11 @@
 	<session-config>
     <cookie-config>
         <http-only>true</http-only>
-        <secure>true</secure>
+        <!-- secure=true rimosso: su http://localhost il cookie di sessione non verrebbe
+             mai inviato e login/carrello smetterebbero di funzionare.
+             Da riattivare solo se Tomcat viene configurato con HTTPS. -->
     </cookie-config>
-    <tracking-mode>COOKIE</tracking-mode> 
+    <tracking-mode>COOKIE</tracking-mode>
 	</session-config>
 	
 	<filter>

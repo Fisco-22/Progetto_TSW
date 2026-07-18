@@ -28,14 +28,13 @@ public class LoginServlet extends HttpServlet {
         Utente_Bean uAutentificato = dao.checkLogin(email, password);
         
         if (uAutentificato != null) {
-            // Login OK: Creiamo la sessione e andiamo alla dashboard reale dell'utente
+            // Login OK: creiamo la sessione ("utente" è il nome usato da tutte le JSP)
             HttpSession session = request.getSession();
-            session.setAttribute("user", uAutentificato);
+            session.setAttribute("utente", uAutentificato);
             session.setAttribute("userEmail", uAutentificato.getEmail());
-            
-            // CORRETTO: Percorso assoluto e allineato al nome reale del file (Area_Personale.jsp)
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/Area_Personale.jsp");
-            dispatcher.forward(request, response);
+
+            // Redirect (Post-Redirect-Get): evita il reinvio del form al refresh
+            response.sendRedirect(request.getContextPath() + "/AreaPersonaleServlet");
         } else {
             // Login Fallito: Inviamo il messaggio d'errore alla pagina di autenticazione
             request.setAttribute("messaggioErrore", "Email o password errate. Riprova.");
@@ -47,7 +46,7 @@ public class LoginServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Se qualcuno prova ad accedere alla servlet tramite URL (GET), lo rimandiamo al POST
-        doPost(request, response);
+        // Il login via GET (credenziali nell'URL) non è ammesso: si torna alla pagina di autenticazione
+        response.sendRedirect(request.getContextPath() + "/RegistrazioneServlet");
     }
 }

@@ -30,8 +30,8 @@ public class GestioneOrdiniServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		response.sendRedirect(request.getContextPath() + "/carrello.jsp");
+
+		response.sendRedirect(request.getContextPath() + "/CarrelloServlet");
 	}
 
 	/**
@@ -61,7 +61,7 @@ public class GestioneOrdiniServlet extends HttpServlet {
 		carrello.aggiungiElemento(elemento);
 		
 		session.setAttribute("carrello", carrello);
-		response.sendRedirect(request.getContextPath() + "/carrello.jsp");
+		response.sendRedirect(request.getContextPath() + "/CarrelloServlet");
 	} else if("checkout".equals(azione)){
 		//futuro codice per il database
 		}

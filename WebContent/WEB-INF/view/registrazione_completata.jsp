@@ -4,7 +4,7 @@
     Utente_Bean utente = (Utente_Bean) request.getAttribute("registeredUser");
     if (utente == null) {
         // Usa il ContextPath per sicurezza: rimanda alla radice reale dell'applicazione
-        response.sendRedirect(request.getContextPath() + "/view/index.jsp");
+        response.sendRedirect(request.getContextPath() + "/HomeServlet");
         return;
     }
 %>
@@ -28,7 +28,7 @@
                 <p style="margin: 15px 0 0 0; font-size: 13px; color: rgb(0, 128, 128);">Profilo abilitato per la gestione dello storico viaggi ed il rilascio di feedback social.</p>
             </div>
             
-            <a href="index.html" class="btn-home" style="display: inline-block; background: rgb(0, 64, 0); color: white; padding: 12px 30px; text-decoration: none; border-radius: 50px; font-weight: bold;">Torna alla Home ed Effettua il Login</a>
+            <a href="${pageContext.request.contextPath}/RegistrazioneServlet" class="btn-home" style="display: inline-block; background: rgb(0, 64, 0); color: white; padding: 12px 30px; text-decoration: none; border-radius: 50px; font-weight: bold;">Torna alla Home ed Effettua il Login</a>
         </div>
     </div>
 </body>

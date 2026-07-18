@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -15,7 +15,7 @@
             <span class="nav-info">Assistenza clienti: <strong class="phone-placeholder">+39 089 1234567</strong></span>
             <a href="#">Recensioni</a>
             
-            <a href="${pageContext.request.contextPath}/carrello.jsp" class="cart-link"> I miei viaggi 
+            <a href="${pageContext.request.contextPath}/CarrelloServlet" class="cart-link"> I miei viaggi
                 <span class="cart-badge">${sessionScope.carrello != null ? sessionScope.carrello.numeroElementi : 0}</span>
             </a>
             

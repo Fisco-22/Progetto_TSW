@@ -31,11 +31,12 @@ public class HomeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ViaggioDAO dao = new ViaggioDAO();
-		List<Viaggio_Bean> lista_viaggi = dao.getAllViaggi();
-		
-		request.setAttribute("lista_viaggi", lista_viaggi);
-		
-		request.getRequestDispatcher("/view/index.jsp").forward(request, response);
+		List<Viaggio_Bean> listaViaggi = dao.getAllViaggi();
+
+		// Stesso nome usato in index.jsp: ${listaViaggi}
+		request.setAttribute("listaViaggi", listaViaggi);
+
+		request.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(request, response);
 	}
 
 	/**

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="Model.Utente_Bean" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <% 
     Utente_Bean connesso = (Utente_Bean) session.getAttribute("utente");
     if(connesso == null){
@@ -19,10 +19,10 @@
 <body>
 
     <nav class="navbar">
-        <a href="${pageContext.request.contextPath}/view/index.jsp" class="logo">TravelBooking</a>
+        <a href="${pageContext.request.contextPath}/HomeServlet" class="logo">TravelBooking</a>
         <div class="nav-links">
         <span class="nav-info">Assistenza clienti: <strong class="phone-placeholder">+39 089 1234567</strong></span>
-            <a href="LogoutServlet" style="color: red; font-weight: bold;">Esci (Logout)</a>
+            <a href="${pageContext.request.contextPath}/LogoutServlet" style="color: red; font-weight: bold;">Esci (Logout)</a>
         </div>
     </nav>
 

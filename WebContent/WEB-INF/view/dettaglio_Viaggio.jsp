@@ -12,11 +12,11 @@
 <body>
 
 <nav class="navbar">
-    <a href="${pageContext.request.contextPath}/view/index.jsp" class="logo">TravelBooking</a>
+    <a href="${pageContext.request.contextPath}/HomeServlet" class="logo">TravelBooking</a>
     <div class="nav-links">
         <span class="nav-info">Assistenza clienti: <strong class="phone-placeholder">+39 089 1234567</strong></span>
         <a href="#">Recensioni</a>
-        <a href="#" class="cart-link"> I miei viaggi <span class="cart-badge">0</span></a>
+        <a href="${pageContext.request.contextPath}/CarrelloServlet" class="cart-link"> I miei viaggi <span class="cart-badge">${sessionScope.carrello != null ? sessionScope.carrello.numeroElementi : 0}</span></a>
         
         <%-- Controllo se l'oggetto 'utente' esiste nella sessione --%>
         <% if (session.getAttribute("utente") != null) { %>
@@ -81,11 +81,8 @@
                         </select>
                     </div>
 
-                    <button type="submit" name="azione" value="prenota" class="btn btn-primary">
-                        Prenota ora
-                    </button>
-                    
-                    <button type="submit" name="azione" value="carrello" class="btn btn-secondary">
+                    <%-- L'ordine si conclude dal carrello (checkout): qui si aggiunge soltanto --%>
+                    <button type="submit" name="azione" value="carrello" class="btn btn-primary">
                         Aggiungi al carrello
                     </button>
                     
