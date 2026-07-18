@@ -12,7 +12,7 @@ public class CarrelloServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// Il carrello è già in sessione ("carrello"): la JSP lo legge da lì
+		
 		request.getRequestDispatcher("/WEB-INF/view/carrello.jsp").forward(request, response);
 	}
 

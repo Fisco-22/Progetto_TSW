@@ -13,7 +13,7 @@ public class AreaPersonaleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// Controllo accessi nella servlet (non nella JSP)
+		
 		HttpSession session = request.getSession(false);
 		if (session == null || session.getAttribute("utente") == null) {
 			response.sendRedirect(request.getContextPath() + "/RegistrazioneServlet");
