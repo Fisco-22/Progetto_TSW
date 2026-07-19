@@ -10,7 +10,7 @@ VALUES(
     'francescopagliuchi@admin.com', 
     'Francesco', 
     'Pagliuchi', 
-    '7f9ed89c7297f99669b6e79d9d8d404d19f160ca40b40f42896506fa7942786b', 
+    '4d0b24ccade22df6d154778cd66baf04288aae26df97a961f3ea3dd616fbe06dcebecc9bbe4ce93c8e12dca21e5935c08b0954534892c568b8c12b92f26a2448', -- SHA-512 di: Admin123
     'admin', 
     '1995-01-01', 
     'Via Roma 1, Milano'
@@ -22,7 +22,7 @@ VALUES(
     'f.verdi@gmail.com', 
     'Francesco', 
     'Verdi', 
-    'd730ead8ecca48ae5563ad20c6b048305394b7934fba47cf68dce9f61002a9cb', 
+    '718415384172b85cd17aaa51f9ee557b5981751ec517b9af79a051dad0048382984c3cf3757d5822151dde056d9e84a576526036ee1dc24b522f6d2ffadcc5a9', -- SHA-512 di: Verdi123
     'utente', 
     '1998-09-07', 
     'Via delle Puglie 21, Benevento'

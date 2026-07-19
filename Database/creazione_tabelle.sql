@@ -11,7 +11,7 @@ CREATE TABLE UTENTE (
     Email VARCHAR(128) PRIMARY KEY,
     Nome VARCHAR(32) NOT NULL,
     Cognome VARCHAR(32) NOT NULL,
-    Password CHAR(64) NOT NULL,
+    Password CHAR(128) NOT NULL, -- hash SHA-512 in esadecimale (128 caratteri)
     Ruolo ENUM('utente', 'admin') DEFAULT 'utente',
     Data_Nascita DATE,
     Indirizzo VARCHAR(128)

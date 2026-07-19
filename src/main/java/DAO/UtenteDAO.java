@@ -22,7 +22,7 @@ public class UtenteDAO {
 
 	private String hashPassword(String base) {
         try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            MessageDigest digest = MessageDigest.getInstance("SHA-512");
             byte[] hash = digest.digest(base.getBytes(StandardCharsets.UTF_8));
             
             StringBuilder hexString = new StringBuilder(2 * hash.length);
