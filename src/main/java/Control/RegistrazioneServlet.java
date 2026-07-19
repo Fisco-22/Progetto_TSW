@@ -1,10 +1,12 @@
 package Control;
 
+import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 import java.io.IOException;
 
 import DAO.UtenteDAO;
@@ -15,14 +17,16 @@ import Model.Utente_Bean;
 @WebServlet("/RegistrazioneServlet")
 public class RegistrazioneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public RegistrazioneServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	private UtenteDAO dao;
+
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
+		DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
+		if (ds == null) throw new ServletException("DataSource non disponibile nel ServletContext");
+		dao = new UtenteDAO(ds);
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -63,9 +67,8 @@ public class RegistrazioneServlet extends HttpServlet {
 		utenteTemp.setDataNascita(dataNascita);
 		utenteTemp.setTelefoni(telefoni);
 
-		// 5. CHIAMATA AL DAO (Ora passiamo l'oggetto intero)
-		UtenteDAO dao = new UtenteDAO();
-		boolean successo = dao.salvaUtente(utenteTemp); // <-- NOTA: il metodo si chiama salvaUtente
+		// 5. CHIAMATA AL DAO (istanza creata in init() col DataSource iniettato)
+		boolean successo = dao.salvaUtente(utenteTemp);
 		
 		// 6. GESTIONE DEL RISULTATO
 		if (successo) {

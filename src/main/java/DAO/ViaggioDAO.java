@@ -8,21 +8,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 public class ViaggioDAO {
-	
+
+	private DataSource ds;
+
+	// Il DataSource viene iniettato dalla servlet (recuperato dal ServletContext)
+	public ViaggioDAO(DataSource ds) {
+		this.ds = ds;
+	}
+
 	private Connection getConnection() throws SQLException {
-		try {
-			Context initCtx = new InitialContext();
-            Context envCtx = (Context) initCtx.lookup("java:comp/env");
-            DataSource ds = (DataSource) envCtx.lookup("jdbc/travelbooking");
-            return ds.getConnection();
-		} catch(Exception e) {
-			throw new SQLException("Errore DataSource", e);
-		}
+		return ds.getConnection();
 	}
 	public Viaggio_Bean getViaggioById (int codiceViaggio) {
 		Viaggio_Bean viaggio = null;

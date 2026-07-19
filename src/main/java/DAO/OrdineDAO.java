@@ -9,22 +9,19 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 public class OrdineDAO {
-private Connection getConnection() throws SQLException{
 
-	try {
-		Context initCtx = new InitialContext();
-		Context envCtx = (Context) initCtx.lookup("java:comp/env");
-		DataSource ds = (DataSource) envCtx.lookup("jdbc/travelbooking");
-		return ds.getConnection();
-	} catch (NamingException e){
-		throw new SQLException("Errore nel recupero del DataSource", e);
-	}
+private DataSource ds;
+
+// Il DataSource viene iniettato dalla servlet (recuperato dal ServletContext)
+public OrdineDAO(DataSource ds) {
+	this.ds = ds;
+}
+
+private Connection getConnection() throws SQLException{
+	return ds.getConnection();
 }
 
 public int salvaOrdine(Ordine_Bean ordine) {

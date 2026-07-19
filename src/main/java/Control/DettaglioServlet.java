@@ -1,10 +1,12 @@
 package Control;
 
+import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 import java.io.IOException;
 
 import Model.Viaggio_Bean;
@@ -15,14 +17,16 @@ import DAO.ViaggioDAO;
 @WebServlet("/DettaglioServlet")
 public class DettaglioServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public DettaglioServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	private ViaggioDAO dao;
+
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
+		DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
+		if (ds == null) throw new ServletException("DataSource non disponibile nel ServletContext");
+		dao = new ViaggioDAO(ds);
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -34,8 +38,7 @@ public class DettaglioServlet extends HttpServlet {
 		if(idParam != null && !idParam.isEmpty()) {
 			try {
 				int codiceViaggio = Integer.parseInt(idParam);
-				
-				ViaggioDAO dao = new ViaggioDAO();
+
 				Viaggio_Bean viaggio = dao.getViaggioById(codiceViaggio);
 				
 				if(viaggio != null) {

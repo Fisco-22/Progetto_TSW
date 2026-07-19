@@ -1,7 +1,9 @@
 package Control;
 
 import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
+import javax.sql.DataSource;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,7 +19,15 @@ import DAO.*;
 public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     
-    private UtenteDAO dao = new UtenteDAO();
+    private UtenteDAO dao;
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
+        if (ds == null) throw new ServletException("DataSource non disponibile nel ServletContext");
+        dao = new UtenteDAO(ds);
+    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");

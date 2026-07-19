@@ -7,15 +7,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.security.MessageDigest;
 import java.nio.charset.StandardCharsets;
 
 public class UtenteDAO {
-	
+
+	private DataSource ds;
+
+	// Il DataSource viene iniettato dalla servlet (recuperato dal ServletContext)
+	public UtenteDAO(DataSource ds) {
+		this.ds = ds;
+	}
+
 	private String hashPassword(String base) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -35,17 +39,9 @@ public class UtenteDAO {
         }
     }
 
-    // 1. METODO PER OTTENERE LA CONNESSIONE DAL DATASOURCE
+    // Connessione presa dal pool tramite il DataSource iniettato
     private Connection getConnection() throws SQLException {
-        try {
-            Context initCtx = new InitialContext();
-            Context envCtx = (Context) initCtx.lookup("java:comp/env");
-            // Deve coincidere con il res-ref-name del tuo web.xml e name del context.xml
-            DataSource ds = (DataSource) envCtx.lookup("jdbc/travelbooking");
-            return ds.getConnection();
-        } catch (NamingException e) {
-            throw new SQLException("Errore nel recupero del DataSource", e);
-        }
+        return ds.getConnection();
     }
 
     /**

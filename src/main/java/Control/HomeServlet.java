@@ -3,11 +3,13 @@ package Control;
 import DAO.*;
 import Model.*;
 
+import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.List;
 
@@ -17,20 +19,21 @@ import java.util.List;
 @WebServlet("/HomeServlet")
 public class HomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public HomeServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	private ViaggioDAO dao;
+
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
+		DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
+		if (ds == null) throw new ServletException("DataSource non disponibile nel ServletContext");
+		dao = new ViaggioDAO(ds);
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ViaggioDAO dao = new ViaggioDAO();
 		List<Viaggio_Bean> listaViaggi = dao.getAllViaggi();
 
 		// Stesso nome usato in index.jsp: ${listaViaggi}

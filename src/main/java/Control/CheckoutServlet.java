@@ -7,17 +7,29 @@ import Model.ElementoCarrello_Bean;
 import Model.Ordine_Bean;
 import Model.Utente_Bean;
 
+import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import javax.sql.DataSource;
 import java.io.IOException;
 
 @WebServlet("/CheckoutServlet")
 public class CheckoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
+	private OrdineDAO dao;
+
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
+		DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
+		if (ds == null) throw new ServletException("DataSource non disponibile nel ServletContext");
+		dao = new OrdineDAO(ds);
+	}
 
 	// GET: mostra il form di checkout (solo utenti loggati con carrello non vuoto)
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -82,7 +94,6 @@ public class CheckoutServlet extends HttpServlet {
 		}
 		ordine.setTotaleOrdine(totale);
 
-		OrdineDAO dao = new OrdineDAO();
 		int codiceOrdine = dao.salvaOrdine(ordine);
 
 		if (codiceOrdine > 0) {
