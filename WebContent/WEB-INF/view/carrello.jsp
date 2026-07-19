@@ -42,6 +42,7 @@
                             <th style="padding: 10px;">Posti</th>
                             <th style="padding: 10px;">Prezzo unitario</th>
                             <th style="padding: 10px;">Totale</th>
+                            <th style="padding: 10px;">Azioni</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -52,6 +53,15 @@
                                 <td style="padding: 10px;">${elemento.numPosti}</td>
                                 <td style="padding: 10px;">&euro; ${elemento.viaggio.costoTotale}</td>
                                 <td style="padding: 10px;">&euro; ${elemento.prezzoTotale}</td>
+                                <td style="padding: 10px;">
+                                    <form action="${pageContext.request.contextPath}/GestioneOrdiniServlet" method="POST" style="display: flex; gap: 6px; align-items: center;">
+                                        <input type="hidden" name="codiceViaggio" value="${elemento.viaggio.codiceViaggio}">
+                                        <input type="hidden" name="dataPartenza" value="${elemento.dataPartenza}">
+                                        <input type="number" name="numPosti" value="${elemento.numPosti}" min="1" max="10" style="width: 60px;">
+                                        <button type="submit" name="azione" value="aggiorna" class="btn btn-secondary">Aggiorna</button>
+                                        <button type="submit" name="azione" value="rimuovi" class="btn" style="background: Tomato; color: White;">Rimuovi</button>
+                                    </form>
+                                </td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -61,8 +71,11 @@
                     <strong>Totale carrello: &euro; ${sessionScope.carrello.costoTotale}</strong>
                 </p>
 
-                <div style="display: flex; justify-content: space-between; margin-top: 25px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 25px;">
                     <a href="${pageContext.request.contextPath}/HomeServlet" class="btn btn-secondary">Continua a esplorare</a>
+                    <form action="${pageContext.request.contextPath}/GestioneOrdiniServlet" method="POST" style="display: inline;">
+                        <button type="submit" name="azione" value="svuota" class="btn" style="background: Tomato; color: White;">Svuota carrello</button>
+                    </form>
                     <a href="${pageContext.request.contextPath}/CheckoutServlet" class="btn btn-primary">Procedi al checkout</a>
                 </div>
             </c:otherwise>

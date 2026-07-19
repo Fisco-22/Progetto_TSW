@@ -44,29 +44,47 @@ public class GestioneOrdiniServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String azione = request.getParameter("azione");
-		
-		if ("carrello".equals(azione)) {
-			
-		
-		int codiceViaggio= Integer.parseInt(request.getParameter("codiceViaggio"));
-		int numPosti= Integer.parseInt(request.getParameter("numPosti"));
-		String dataPartenza= request.getParameter("dataPartenza");
-		
-		Viaggio_Bean viaggio = dao.getViaggioById(codiceViaggio);
-		
+
 		HttpSession session = request.getSession();
-		
 		Carrello_Bean carrello = (Carrello_Bean) session.getAttribute("carrello");
-		
-		if(carrello == null) carrello = new Carrello_Bean();
-		
-		ElementoCarrello_Bean elemento= new ElementoCarrello_Bean(viaggio, dataPartenza, numPosti);
-		carrello.aggiungiElemento(elemento);
-		
-		session.setAttribute("carrello", carrello);
-		response.sendRedirect(request.getContextPath() + "/CarrelloServlet");
-	} else if("checkout".equals(azione)){
-		//futuro codice per il database
+		if (carrello == null) {
+			carrello = new Carrello_Bean();
+			session.setAttribute("carrello", carrello);
 		}
+
+		try {
+			if ("carrello".equals(azione)) {
+				// Aggiunta di un viaggio al carrello
+				int codiceViaggio = Integer.parseInt(request.getParameter("codiceViaggio"));
+				int numPosti = Integer.parseInt(request.getParameter("numPosti"));
+				String dataPartenza = request.getParameter("dataPartenza");
+
+				Viaggio_Bean viaggio = dao.getViaggioById(codiceViaggio);
+				if (viaggio != null && dataPartenza != null && !dataPartenza.isEmpty() && numPosti > 0) {
+					carrello.aggiungiElemento(new ElementoCarrello_Bean(viaggio, dataPartenza, numPosti));
+				}
+
+			} else if ("aggiorna".equals(azione)) {
+				// Variazione della quantità (numero posti) di un elemento
+				int codiceViaggio = Integer.parseInt(request.getParameter("codiceViaggio"));
+				int numPosti = Integer.parseInt(request.getParameter("numPosti"));
+				String dataPartenza = request.getParameter("dataPartenza");
+				carrello.aggiornaQuantita(codiceViaggio, dataPartenza, numPosti);
+
+			} else if ("rimuovi".equals(azione)) {
+				// Rimozione di un singolo elemento
+				int codiceViaggio = Integer.parseInt(request.getParameter("codiceViaggio"));
+				String dataPartenza = request.getParameter("dataPartenza");
+				carrello.rimuoviElemento(codiceViaggio, dataPartenza);
+
+			} else if ("svuota".equals(azione)) {
+				// Svuotamento completo del carrello
+				carrello.svuota();
+			}
+		} catch (NumberFormatException e) {
+			// Parametri malformati: nessuna modifica al carrello, si torna alla pagina
+		}
+
+		response.sendRedirect(request.getContextPath() + "/CarrelloServlet");
 	}
 }
