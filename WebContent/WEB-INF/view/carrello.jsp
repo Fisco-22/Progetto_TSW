@@ -63,7 +63,7 @@
 
                 <div style="display: flex; justify-content: space-between; margin-top: 25px;">
                     <a href="${pageContext.request.contextPath}/HomeServlet" class="btn btn-secondary">Continua a esplorare</a>
-                    <%-- Il checkout verrà implementato con la gestione ordini --%>
+                    <a href="${pageContext.request.contextPath}/CheckoutServlet" class="btn btn-primary">Procedi al checkout</a>
                 </div>
             </c:otherwise>
         </c:choose>

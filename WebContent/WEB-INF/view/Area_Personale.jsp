@@ -38,15 +38,29 @@
 
         <div class="orders-section">
             <h2>Bentornato, ${utente.nome}! 👋</h2>
-            <p>Ecco il riepilogo delle tue prenotazioni e dei viaggi nel carrello.</p>
+            <p>Ecco l'elenco degli ordini che hai effettuato.</p>
 
-            <div class="order-card">
-                <h4>Prenotazione #10024</h4>
-                <p><strong>Destinazione:</strong> Parigi, Francia</p>
-                <p><strong>Data Partenza:</strong> 15 Ottobre 2026</p>
-                <p><strong>Status:</strong> <span style="color: green; font-weight: bold;">Confermato</span></p>
-            </div>
-            
+            <c:choose>
+                <c:when test="${empty ordini}">
+                    <p>Non hai ancora effettuato ordini.</p>
+                </c:when>
+                <c:otherwise>
+                    <c:forEach items="${ordini}" var="ordine">
+                        <div class="order-card">
+                            <h4>Ordine #${ordine.codiceOrdine} &mdash; ${ordine.dataOrdine}</h4>
+                            <c:forEach items="${ordine.dettagli}" var="d">
+                                <p><c:out value="${d.destinazione}"/> &mdash; partenza <c:out value="${d.dataPartenza}"/>,
+                                   ${d.numPosti} posti &times; &euro; ${d.prezzoAcquisto}</p>
+                            </c:forEach>
+                            <p><strong>Totale: &euro; ${ordine.totaleOrdine}</strong> &mdash;
+                               <c:out value="${ordine.metodoPagamento}"/>
+                               <c:if test="${not empty ordine.ultime4Cifre}"> (**** ${ordine.ultime4Cifre})</c:if></p>
+                            <p><strong>Stato:</strong> <span style="color: green; font-weight: bold;"><c:out value="${ordine.stato}"/></span></p>
+                        </div>
+                    </c:forEach>
+                </c:otherwise>
+            </c:choose>
+
         </div>
     </div>
 
