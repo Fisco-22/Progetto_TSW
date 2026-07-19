@@ -7,6 +7,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
+
+import DAO.OrdineDAO;
+import Model.Ordine_Bean;
+import Model.Utente_Bean;
 
 @WebServlet("/AreaPersonaleServlet")
 public class AreaPersonaleServlet extends HttpServlet {
@@ -19,6 +24,13 @@ public class AreaPersonaleServlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/RegistrazioneServlet");
 			return;
 		}
+
+		// Carica lo storico ordini dell'utente per la JSP
+		Utente_Bean utente = (Utente_Bean) session.getAttribute("utente");
+		OrdineDAO ordineDAO = new OrdineDAO();
+		List<Ordine_Bean> ordini = ordineDAO.getOrdiniByUtente(utente.getEmail());
+		request.setAttribute("ordini", ordini);
+
 		request.getRequestDispatcher("/WEB-INF/view/Area_Personale.jsp").forward(request, response);
 	}
 
