@@ -3,6 +3,9 @@
 // ==========================================================================
 let phoneCount = 1;
 
+const regexNome = /^[A-Za-zÀ-ÖØ-öø-ÿ\s']+$/;
+const regexcarta = /^\d{4}\s?\d{4}\s?\d{4}\s?\d{4}$/;
+ 
 const nameOrLastnameErrorMessage = "Questo campo deve contenere solo lettere.";
 const emailErrorMessage = "Inserisci un'email valida (es. utente@dominio.it).";
 const phoneErrorMessage = "Il formato deve essere ###-#######.";
@@ -36,6 +39,22 @@ function validateFormElem(formElem, span, errorMessage) {
     return false;
 }
 
+function mostraErrore(formElem, span, messaggio) {
+    formElem.style.borderColor = "Tomato";
+    span.style.color = "Tomato";
+    span.style.fontSize = "13px";
+    span.style.display = "block";
+    span.style.marginTop = "4px";
+    span.innerHTML = messaggio;
+}
+
+function attachValidation(inputId, spanId, errorMessage) {
+    const input = document.getElementById(inputId);
+    const span = document.getElementById(spanId);
+    if (!input || !span) return;
+    input.addEventListener("change", () => validateFormElem(input, span, errorMessage));
+    input.addEventListener("input", () => validateFormElem(input, span, errorMessage));
+}
 // ==========================================================================
 // 3. EVENTI IN TEMPO REALE (LOGIN)
 // ==========================================================================
