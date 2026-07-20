@@ -50,13 +50,13 @@
             <form id="formSignup" action="RegistrazioneServlet" method="POST" style="display: none;" novalidate onsubmit="return validateRegistrazione();">
                 <div class="form-group">
                     <label for="nome">Nome</label>
-                    <input type="text" id="nome" name="nome" pattern="^[a-zA-Z\s]+$" required>
+                    <input type="text" id="nome" name="nome" pattern="^[A-Za-zÀ-ÖØ-öø-ÿ\s']+$" required>
                     <span id="errorNome"></span>
                 </div>
                 
                 <div class="form-group">
                     <label for="cognome">Cognome</label>
-                    <input type="text" id="cognome" name="cognome" pattern="^[a-zA-Z\s]+$" required>
+                    <input type="text" id="cognome" name="cognome" pattern="^[A-Za-zÀ-ÖØ-öø-ÿ\s']+$" required>
                     <span id="errorCognome"></span>
                 </div>
 				
@@ -80,7 +80,7 @@
 
                 <div class="form-group">
                     <label for="signup-password">Password</label>
-                    <input type="password" id="signup-password" name="password" required>
+                    <input type="password" id="signup-password" name="password" pattern="^(?=.*[A-Za-z])(?=.*\d).{8,}$" required>
                     <span id="errorPasswordSignup"></span>
                 </div>
 

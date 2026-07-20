@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout - TravelBooking</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/style.css">
+    <script src="${pageContext.request.contextPath}/scripts/validate.js" defer></script>
 </head>
 <body>
 
@@ -68,7 +69,8 @@
             <div class="form-group">
                 <label for="numeroCarta">Numero carta</label>
                 <input type="text" id="numeroCarta" name="numeroCarta" maxlength="19"
-                       placeholder="1234 5678 9012 3456" required>
+       pattern="^\d{4}\s?\d{4}\s?\d{4}\s?\d{4}$"
+       placeholder="1234 5678 9012 3456" required>
                 <span id="errorNumeroCarta"></span>
             </div>
 
