@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.UUID;
 
 import Model.*;
 import DAO.*;
@@ -42,6 +43,8 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("utente", uAutentificato);
             session.setAttribute("userEmail", uAutentificato.getEmail());
+            // Token di sessione per il controllo degli accessi alle servlet protette
+            session.setAttribute("token", UUID.randomUUID().toString());
 
             // Redirect (Post-Redirect-Get): evita il reinvio del form al refresh
             response.sendRedirect(request.getContextPath() + "/AreaPersonaleServlet");

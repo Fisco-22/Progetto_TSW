@@ -47,6 +47,52 @@ public class ViaggioDAO {
 		return viaggio; 
 	}
 	
+	// ===== CRUD per l'area amministratore =====
+
+	public boolean salvaViaggio(Viaggio_Bean v) {
+		String query = "INSERT INTO VIAGGIO (Destinazione, Descrizione, Immagine_URL, Costo_Totale, n_posti, Email_Admin) VALUES (?, ?, ?, ?, ?, ?)";
+		try (Connection con = getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
+			ps.setString(1, v.getDestinazione());
+			ps.setString(2, v.getDescrizione());
+			ps.setString(3, v.getImmagineUrl());
+			ps.setFloat(4, v.getCostoTotale());
+			ps.setInt(5, v.getnPosti());
+			ps.setString(6, v.getEmailAdmin());
+			return ps.executeUpdate() > 0;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public boolean aggiornaViaggio(Viaggio_Bean v) {
+		String query = "UPDATE VIAGGIO SET Destinazione = ?, Descrizione = ?, Immagine_URL = ?, Costo_Totale = ?, n_posti = ? WHERE Codice_Viaggio = ?";
+		try (Connection con = getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
+			ps.setString(1, v.getDestinazione());
+			ps.setString(2, v.getDescrizione());
+			ps.setString(3, v.getImmagineUrl());
+			ps.setFloat(4, v.getCostoTotale());
+			ps.setInt(5, v.getnPosti());
+			ps.setInt(6, v.getCodiceViaggio());
+			return ps.executeUpdate() > 0;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public boolean cancellaViaggio(int codiceViaggio) {
+		// Grazie a ON DELETE SET NULL su DETTAGLIO_ORDINE, gli ordini passati NON vengono toccati
+		String query = "DELETE FROM VIAGGIO WHERE Codice_Viaggio = ?";
+		try (Connection con = getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
+			ps.setInt(1, codiceViaggio);
+			return ps.executeUpdate() > 0;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
 	public List<Viaggio_Bean> getAllViaggi(){
 		List<Viaggio_Bean> viaggi= new ArrayList<>();
 		String query= "SELECT * FROM VIAGGIO";

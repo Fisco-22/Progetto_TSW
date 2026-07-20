@@ -22,6 +22,9 @@
         <a href="${pageContext.request.contextPath}/HomeServlet" class="logo">TravelBooking</a>
         <div class="nav-links">
         <span class="nav-info">Assistenza clienti: <strong class="phone-placeholder">+39 089 1234567</strong></span>
+            <c:if test="${utente.ruolo == 'admin'}">
+                <a href="${pageContext.request.contextPath}/AdminServlet" style="font-weight: bold;">Gestione Admin</a>
+            </c:if>
             <a href="${pageContext.request.contextPath}/LogoutServlet" style="color: red; font-weight: bold;">Esci (Logout)</a>
         </div>
     </nav>
