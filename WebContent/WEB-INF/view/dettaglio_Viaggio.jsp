@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -32,11 +34,16 @@
 
 <div class="container">
 
+    <%-- Citta' = parte prima della virgola (es. "Barcellona, Spagna" -> "Barcellona").
+         Serve per costruire i nomi dei file camera_/piscina_. --%>
+    <c:set var="citta" value="${fn:substringBefore(viaggio.destinazione, ',')}" />
+    <c:if test="${empty citta}"><c:set var="citta" value="${viaggio.destinazione}" /></c:if>
+
     <div class="gallery-grid">
         <img src="${pageContext.request.contextPath}/${viaggio.immagineUrl}" alt="${viaggio.destinazione}" class="gallery-item item-main">
 
-        <img src="${pageContext.request.contextPath}/images/gallery-piscina.jpg" alt="Piscina Resort" class="gallery-item">
-        <img src="${pageContext.request.contextPath}/images/gallery-camera.jpg" alt="Camera da letto" class="gallery-item">
+        <img src="${pageContext.request.contextPath}/images/piscina_${citta}.jpg" alt="Piscina - ${viaggio.destinazione}" class="gallery-item">
+        <img src="${pageContext.request.contextPath}/images/camera_${citta}.jpg" alt="Camera - ${viaggio.destinazione}" class="gallery-item">
     </div>
 
     <div class="content-wrapper">

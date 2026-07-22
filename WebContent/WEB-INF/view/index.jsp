@@ -55,7 +55,7 @@
                                 <span class="badge-combo">Volo + Hotel</span>
                             </div>
                             <div class="card-body">
-                                <span class="card-location">📍 ${viaggio.destinazione}</span>
+                                <span class="card-location"><img src="${pageContext.request.contextPath}/images/punto_rosso.png" alt="" style="height:1.1em; width:auto; vertical-align:-0.15em;"> ${viaggio.destinazione}</span>
                                 <h3>Offerta Esclusiva</h3>
                                 <p class="card-tagline">${viaggio.descrizione}</p>
                                 

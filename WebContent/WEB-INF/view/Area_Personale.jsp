@@ -40,7 +40,7 @@
 		</div>
 
         <div class="orders-section">
-            <h2>Bentornato, ${utente.nome}! 👋</h2>
+            <h2>Bentornato, ${utente.nome}! <img src="${pageContext.request.contextPath}/images/benvenuto.png" alt="" style="height:1.1em; width:auto; vertical-align:-0.15em;"></h2>
             <p>Ecco l'elenco degli ordini che hai effettuato.</p>
 
             <c:choose>
