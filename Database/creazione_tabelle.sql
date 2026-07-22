@@ -1,17 +1,16 @@
--- 1. Crea ed entra nel database
+
 CREATE DATABASE IF NOT EXISTS travelbooking_db;
 USE travelbooking_db;
 
--- 2. Ripulitura (prima i figli, poi i padri)
+
 DROP TABLE IF EXISTS DETTAGLIO_ORDINE, ORDINE, PRENOTARE, PERNOTTAMENTO,
                      RITORNO, ANDATA, HOTEL, VOLO, TELEFONO_UTENTE, VIAGGIO, UTENTE;
 
--- 3. Creazione tabelle
 CREATE TABLE UTENTE (
     Email VARCHAR(128) PRIMARY KEY,
     Nome VARCHAR(32) NOT NULL,
     Cognome VARCHAR(32) NOT NULL,
-    Password CHAR(128) NOT NULL, -- hash SHA-512 in esadecimale (128 caratteri)
+    Password CHAR(128) NOT NULL, 
     Ruolo ENUM('utente', 'admin') DEFAULT 'utente',
     Data_Nascita DATE,
     Indirizzo VARCHAR(128)
@@ -78,32 +77,23 @@ CREATE TABLE PERNOTTAMENTO (
     FOREIGN KEY(Codice_Hotel) REFERENCES HOTEL(Codice_Hotel) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
--- ============================================================
--- NUOVO: gestione ordini (sostituisce PRENOTARE)
--- ============================================================
 
 CREATE TABLE ORDINE (
     Codice_Ordine INT PRIMARY KEY AUTO_INCREMENT,
     Email_Utente VARCHAR(128) NOT NULL,
     Data_Ordine DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     Totale_Ordine DECIMAL(10,2) NOT NULL CHECK(Totale_Ordine >= 0),
-    -- Dati di spedizione/fatturazione richiesti al checkout
     Indirizzo_Spedizione VARCHAR(128) NOT NULL,
-    -- Pagamento: MAI la carta completa! Solo metodo e ultime 4 cifre
     Metodo_Pagamento VARCHAR(32) NOT NULL,
     Ultime4Cifre CHAR(4),
     Stato VARCHAR(32) NOT NULL DEFAULT 'Confermato',
-    -- RESTRICT: un utente con ordini non può essere cancellato (lo storico resta)
     FOREIGN KEY(Email_Utente) REFERENCES UTENTE(Email) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
 CREATE TABLE DETTAGLIO_ORDINE (
     ID_Dettaglio INT PRIMARY KEY AUTO_INCREMENT,
     Codice_Ordine INT NOT NULL,
-    -- FK "debole": se l'admin cancella il viaggio, qui diventa NULL
-    -- ma la riga d'ordine resta con i dati copiati sotto
     Codice_Viaggio INT NULL,
-    -- SNAPSHOT al momento dell'acquisto:
     Destinazione VARCHAR(32) NOT NULL,
     Prezzo_Acquisto DECIMAL(10,2) NOT NULL CHECK(Prezzo_Acquisto >= 0),
     Data_Partenza DATE NOT NULL,

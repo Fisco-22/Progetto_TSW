@@ -1,11 +1,7 @@
-// ==========================================================================
-// 1. VARIABILI GLOBALI, REGEX E MESSAGGI DI ERRORE
-// ==========================================================================
 let phoneCount = 1;
 
-// Regex riutilizzabili (requisito: usare le espressioni regolari)
-const nomeRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s']+$/;          // lettere, anche accentate, spazi, apostrofo
-const cartaRegex = /^\d{4}\s?\d{4}\s?\d{4}\s?\d{4}$/;  // 16 cifre, spazi opzionali ogni 4
+const nomeRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s']+$/;          
+const cartaRegex = /^\d{4}\s?\d{4}\s?\d{4}\s?\d{4}$/;  
 
 const nameOrLastnameErrorMessage = "Questo campo deve contenere solo lettere.";
 const emailErrorMessage = "Inserisci un'email valida (es. utente@dominio.it).";
@@ -15,9 +11,6 @@ const passwordErrorMessage = "La password deve avere almeno 8 caratteri, con let
 const cartaErrorMessage = "Inserisci un numero di carta valido (16 cifre).";
 const dataFuturaErrorMessage = "La data di nascita non può essere nel futuro.";
 
-// ==========================================================================
-// 2. FUNZIONE DI VALIDAZIONE VISIVA (modifica il DOM, niente alert)
-// ==========================================================================
 function validateFormElem(formElem, span, errorMessage) {
     if (!formElem || !span) return true;
 
@@ -42,7 +35,6 @@ function validateFormElem(formElem, span, errorMessage) {
     return false;
 }
 
-// Variante per controlli custom (es. data nel futuro) non coperti da checkValidity
 function mostraErrore(formElem, span, messaggio) {
     formElem.style.borderColor = "Tomato";
     span.style.color = "Tomato";
@@ -52,23 +44,17 @@ function mostraErrore(formElem, span, messaggio) {
     span.innerHTML = messaggio;
 }
 
-// Collega la validazione di un campo sia all'evento change che a input
 function attachValidation(inputId, spanId, errorMessage) {
     const input = document.getElementById(inputId);
     const span = document.getElementById(spanId);
     if (!input || !span) return;
-    // Requisito della traccia: errore quando l'utente termina l'inserimento (change)
+
     input.addEventListener("change", () => validateFormElem(input, span, errorMessage));
-    // In più: feedback anche mentre scrive
     input.addEventListener("input", () => validateFormElem(input, span, errorMessage));
 }
 
-// ==========================================================================
-// 3. COLLEGAMENTO EVENTI AL CARICAMENTO DELLA PAGINA
-// ==========================================================================
 document.addEventListener("DOMContentLoaded", () => {
 
-    // ---------- LOGIN ----------
     const formLogin = document.getElementById("formLogin");
     const loginGeneralError = document.getElementById("loginGeneralError");
     const inputEmail = document.getElementById("login-email");
@@ -89,22 +75,18 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
-
-    // ---------- REGISTRAZIONE: validazione su change per ogni campo ----------
     attachValidation("nome", "errorNome", nameOrLastnameErrorMessage);
     attachValidation("cognome", "errorCognome", nameOrLastnameErrorMessage);
     attachValidation("indirizzo", "errorIndirizzo", emptyFieldErrorMessage);
     attachValidation("signup-email", "errorEmailSignup", emailErrorMessage);
     attachValidation("signup-password", "errorPasswordSignup", passwordErrorMessage);
 
-    // Data di nascita: campo richiesto + non nel futuro
     const inputData = document.getElementById("dataNascita");
     const spanData = document.getElementById("errorDataNascita");
     if (inputData && spanData) {
         inputData.addEventListener("change", () => validaDataNascita(inputData, spanData));
     }
 
-    // ---------- CHECKOUT ----------
     const formCheckout = document.getElementById("formCheckout");
     if (formCheckout) {
         attachValidation("indirizzoSpedizione", "errorIndirizzoSpedizione", emptyFieldErrorMessage);
@@ -112,7 +94,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const inputCarta = document.getElementById("numeroCarta");
         const spanCarta = document.getElementById("errorNumeroCarta");
         if (inputCarta && spanCarta) {
-            // Formattazione automatica: solo cifre, spazio ogni 4
             inputCarta.addEventListener("input", function(e) {
                 let raw = e.target.value.replace(/\D/g, "").substring(0, 16);
                 e.target.value = raw.replace(/(\d{4})(?=\d)/g, "$1 ");
@@ -132,10 +113,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// Controllo custom della data di nascita (usato su change e al submit)
 function validaDataNascita(input, span) {
     if (!validateFormElem(input, span, emptyFieldErrorMessage)) return false;
-    const oggi = new Date().toISOString().split("T")[0]; // yyyy-mm-dd
+    const oggi = new Date().toISOString().split("T")[0];
     if (input.value > oggi) {
         mostraErrore(input, span, dataFuturaErrorMessage);
         return false;
@@ -143,9 +123,6 @@ function validaDataNascita(input, span) {
     return true;
 }
 
-// ==========================================================================
-// 4. CAMBIO SCHEDA
-// ==========================================================================
 function cambiaScheda(scheda) {
     const formLogin = document.getElementById('formLogin');
     const formSignup = document.getElementById('formSignup');
@@ -200,10 +177,11 @@ function addPhone() {
 
     let btnRemove = document.createElement("button");
     btnRemove.type = "button";
-    btnRemove.textContent = "✖";
-    btnRemove.style.padding = "0 15px";
-    btnRemove.style.background = "Tomato";
-    btnRemove.style.color = "white";
+    const ctxPath = "/" + window.location.pathname.split("/")[1];
+    btnRemove.innerHTML = '<img src="' + ctxPath + '/images/Elimina.png" alt="Rimuovi" style="height:16px; width:16px; display:block;">';
+    btnRemove.title = "Rimuovi";
+    btnRemove.style.padding = "0 12px";
+    btnRemove.style.background = "transparent";
     btnRemove.style.border = "none";
     btnRemove.style.borderRadius = "6px";
     btnRemove.style.cursor = "pointer";

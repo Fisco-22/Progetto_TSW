@@ -34,8 +34,6 @@
 
 <div class="container">
 
-    <%-- Citta' = parte prima della virgola (es. "Barcellona, Spagna" -> "Barcellona").
-         Serve per costruire i nomi dei file camera_/piscina_. --%>
     <c:set var="citta" value="${fn:substringBefore(viaggio.destinazione, ',')}" />
     <c:if test="${empty citta}"><c:set var="citta" value="${viaggio.destinazione}" /></c:if>
 
@@ -51,7 +49,6 @@
         <div class="left-info">
             <div class="title-section">
                 <h1>${viaggio.destinazione}</h1>
-                <div class="rating">5.0 / 5 Eccellente</div>
                 </div>
 
             <hr style="border: 0; border-top: 1px solid Gainsboro; margin: 30px 0;">
@@ -88,15 +85,12 @@
                         </select>
                     </div>
 
-                    <%-- Aggiunge al carrello via AJAX: il badge si aggiorna senza reload
-                         (se JS e' disattivato, il submit normale funziona comunque) --%>
                     <button type="submit" id="btnCarrello" name="azione" value="carrello" class="btn btn-primary">
                         Aggiungi al carrello
                     </button>
 
                     <span id="ajaxMsg" style="display:none; margin-top:10px; font-weight:600;"></span>
 
-                    <%-- Acquisto diretto: aggiunge al carrello e va subito al checkout --%>
                     <button type="submit" name="azione" value="acquista" class="btn btn-secondary" style="margin-top: 10px;">
                         Acquista ora
                     </button>

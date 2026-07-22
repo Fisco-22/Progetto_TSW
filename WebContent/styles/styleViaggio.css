@@ -145,17 +145,12 @@ body {
     background-color: AliceBlue;
 }
 
-/* ==========================================================================
-   4. RESPONSIVE (la pagina dettaglio si adatta a tablet e smartphone)
-   ========================================================================== */
 
-/* Tablet e smartphone in orizzontale */
 @media (max-width: 768px) {
     .container {
         padding: 15px;
     }
 
-    /* Galleria: da 2 colonne a colonna singola, immagini impilate */
     .gallery-grid {
         grid-template-columns: 1fr;
         grid-template-rows: auto;
@@ -167,7 +162,6 @@ body {
         height: 220px;
     }
 
-    /* Le due colonne (info a sinistra, card acquisto a destra) si impilano */
     .content-wrapper {
         flex-direction: column;
         gap: 25px;
@@ -178,7 +172,6 @@ body {
         width: 100%;
     }
 
-    /* Su mobile la card di acquisto non resta più agganciata durante lo scroll */
     .booking-box {
         position: static;
     }
@@ -188,7 +181,6 @@ body {
     }
 }
 
-/* Smartphone in verticale */
 @media (max-width: 480px) {
     .gallery-item {
         height: 180px;

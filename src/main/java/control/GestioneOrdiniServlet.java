@@ -52,7 +52,6 @@ public class GestioneOrdiniServlet extends HttpServlet {
 			session.setAttribute("carrello", carrello);
 		}
 
-		// Richiesta AJAX? (inviata dal fetch con header X-Requested-With)
 		boolean isAjax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
 
 		try {
@@ -67,7 +66,6 @@ public class GestioneOrdiniServlet extends HttpServlet {
 					carrello.aggiungiElemento(new ElementoCarrello_Bean(viaggio, dataPartenza, numPosti));
 				}
 
-				// Acquisto diretto: si va subito al checkout invece che al carrello
 				if ("acquista".equals(azione)) {
 					response.sendRedirect(request.getContextPath() + "/CheckoutServlet");
 					return;
@@ -94,8 +92,6 @@ public class GestioneOrdiniServlet extends HttpServlet {
 			// Parametri malformati: nessuna modifica al carrello, si torna alla pagina
 		}
 
-		// Se la richiesta e' AJAX rispondiamo con il nuovo conteggio in JSON,
-		// cosi' il badge del carrello si aggiorna senza ricaricare la pagina.
 		if (isAjax) {
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
