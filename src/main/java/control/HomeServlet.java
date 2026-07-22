@@ -36,7 +36,6 @@ public class HomeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Viaggio_Bean> listaViaggi = dao.getAllViaggi();
 
-		// Stesso nome usato in index.jsp: ${listaViaggi}
 		request.setAttribute("listaViaggi", listaViaggi);
 
 		request.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(request, response);

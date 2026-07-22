@@ -15,7 +15,6 @@ public class UtenteDAO {
 
 	private DataSource ds;
 
-	// Il DataSource viene iniettato dalla servlet (recuperato dal ServletContext)
 	public UtenteDAO(DataSource ds) {
 		this.ds = ds;
 	}
@@ -39,20 +38,14 @@ public class UtenteDAO {
         }
     }
 
-    // Connessione presa dal pool tramite il DataSource iniettato
     private Connection getConnection() throws SQLException {
         return ds.getConnection();
     }
 
-    /**
-     * 2. METODO PER IL LOGIN REALE
-     * Controlla le credenziali e recupera i dati dell'utente, inclusi i telefoni.
-     */
     public Utente_Bean checkLogin(String email, String passwordInChiaro) {
         Utente_Bean user = null;
         
         String passwordCriptata = hashPassword(passwordInChiaro);
-        // Query scritte con i nomi esatti delle tue colonne SQL
         String queryUtente = "SELECT * FROM UTENTE WHERE Email = ? AND Password = ?";
         String queryTelefoni = "SELECT Numero_Telefono FROM TELEFONO_UTENTE WHERE Email_Utente = ?";
         
@@ -64,16 +57,14 @@ public class UtenteDAO {
             
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    // Se l'utente esiste, creiamo il Bean e lo riempiamo coi dati del DB
                     user = new Utente_Bean();
                     user.setEmail(rs.getString("Email"));
                     user.setNome(rs.getString("Nome"));
                     user.setCognome(rs.getString("Cognome"));
                     user.setIndirizzo(rs.getString("Indirizzo"));
                     user.setDataNascita(rs.getString("Data_Nascita"));
-                    user.setRuolo(rs.getString("Ruolo")); // Recupera se è 'utente' o 'admin'
+                    user.setRuolo(rs.getString("Ruolo"));
                     
-                    // SUB-QUERY: Recuperiamo anche tutti i suoi numeri di telefono
                     try (PreparedStatement psTel = con.prepareStatement(queryTelefoni)) {
                         psTel.setString(1, email);
                         try (ResultSet rsTel = psTel.executeQuery()) {
@@ -81,7 +72,6 @@ public class UtenteDAO {
                             while (rsTel.next()) {
                                 listatelefoni.add(rsTel.getString("Numero_Telefono"));
                             }
-                            // Convertiamo la lista dinamica nell'array richiesto dal Bean
                             user.setTelefoni(listatelefoni.toArray(new String[0]));
                         }
                     }
@@ -91,13 +81,9 @@ public class UtenteDAO {
             e.printStackTrace();
         }
         
-        return user; // Ritorna null se email/password sono errate
+        return user; 
     }
 
-    /**
-     * 3. METODO PER LA REGISTRAZIONE REALE
-     * Salva l'utente e i suoi telefoni usando una Transazione (sicurezza ACID)
-     */
     public boolean salvaUtente(Utente_Bean user) {
         String insertUtente = "INSERT INTO UTENTE (Email, Nome, Cognome, Password, Ruolo, Data_Nascita, Indirizzo) VALUES (?, ?, ?, ?, ?, ?, ?)";
         String insertTelefono = "INSERT INTO TELEFONO_UTENTE (Email_Utente, Numero_Telefono) VALUES (?, ?)";
@@ -106,23 +92,21 @@ public class UtenteDAO {
         
         try {
             con = getConnection();
-            // Disabilitiamo l'autocommit per gestire la transazione manualmente
             con.setAutoCommit(false); 
-            
-            // FASE 1: Inserimento nella tabella UTENTE
+
             try (PreparedStatement psUtente = con.prepareStatement(insertUtente)) {
                 psUtente.setString(1, user.getEmail());
                 psUtente.setString(2, user.getNome());
                 psUtente.setString(3, user.getCognome());
                 String passwordCriptata = hashPassword(user.getPassword());
                 psUtente.setString(4, passwordCriptata);
-                psUtente.setString(5, "utente"); // Di default chi si registra dal sito è un utente standard
+                psUtente.setString(5, "utente");
                 psUtente.setString(6, user.getDataNascita());
                 psUtente.setString(7, user.getIndirizzo());
                 
                 int righeColpite = psUtente.executeUpdate();
                 if (righeColpite == 0) {
-                    con.rollback(); // Qualcosa è andato storto, annulla
+                    con.rollback();
                     return false;
                 }
             }
@@ -131,7 +115,6 @@ public class UtenteDAO {
             if (user.getTelefoni() != null && user.getTelefoni().length > 0) {
                 try (PreparedStatement psTelefoni = con.prepareStatement(insertTelefono)) {
                     for (String tel : user.getTelefoni()) {
-                        // Evitiamo di salvare spazi vuoti se l'utente ha cliccato "aggiungi" senza scrivere nulla
                         if (tel != null && !tel.trim().isEmpty()) { 
                             psTelefoni.setString(1, user.getEmail());
                             psTelefoni.setString(2, tel);
@@ -141,19 +124,16 @@ public class UtenteDAO {
                 }
             }
             
-            // Se le due fasi si completano senza errori, salviamo definitivamente sul DB!
             con.commit();
             return true;
             
         } catch (SQLException e) {
             e.printStackTrace();
-            // Se c'è un errore (es. email già esistente), eseguiamo il rollback per non lasciare dati orfani
             if (con != null) {
                 try { con.rollback(); } catch (SQLException ex) { ex.printStackTrace(); }
             }
             return false;
         } finally {
-            // Pulizia e chiusura della connessione (evita memory leak su Tomcat)
             if (con != null) {
                 try { 
                     con.setAutoCommit(true); 

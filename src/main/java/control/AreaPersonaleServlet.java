@@ -37,7 +37,6 @@ public class AreaPersonaleServlet extends HttpServlet {
 			return;
 		}
 
-		// Carica lo storico ordini dell'utente per la JSP
 		Utente_Bean utente = (Utente_Bean) session.getAttribute("utente");
 		List<Ordine_Bean> ordini = ordineDAO.getOrdiniByUtente(utente.getEmail());
 		request.setAttribute("ordini", ordini);

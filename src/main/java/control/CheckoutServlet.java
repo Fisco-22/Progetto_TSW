@@ -31,7 +31,6 @@ public class CheckoutServlet extends HttpServlet {
 		dao = new OrdineDAO(ds);
 	}
 
-	// GET: mostra il form di checkout (solo utenti loggati con carrello non vuoto)
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 
@@ -47,7 +46,6 @@ public class CheckoutServlet extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/view/checkout.jsp").forward(request, response);
 	}
 
-	// POST: conferma l'ordine
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession(false);
@@ -67,14 +65,12 @@ public class CheckoutServlet extends HttpServlet {
 		String metodoPagamento = request.getParameter("metodoPagamento");
 		String numeroCarta = request.getParameter("numeroCarta");
 
-		// Nel DB non va MAI il numero completo: solo le ultime 4 cifre
 		String ultime4 = null;
 		if (numeroCarta != null) {
 			String soloCifre = numeroCarta.replaceAll("\\D", "");
 			if (soloCifre.length() >= 4) ultime4 = soloCifre.substring(soloCifre.length() - 4);
 		}
 
-		// Costruzione dell'ordine: SNAPSHOT del carrello (prezzi attuali diventano storici)
 		Ordine_Bean ordine = new Ordine_Bean();
 		ordine.setEmailUtente(utente.getEmail());
 		ordine.setIndirizzoSpedizione(indirizzo);
@@ -86,7 +82,7 @@ public class CheckoutServlet extends HttpServlet {
 			DettaglioOrdine_Bean d = new DettaglioOrdine_Bean();
 			d.setCodiceViaggio(e.getViaggio().getCodiceViaggio());
 			d.setDestinazione(e.getViaggio().getDestinazione());
-			d.setPrezzoAcquisto(e.getViaggio().getCostoTotale()); // prezzo congelato qui
+			d.setPrezzoAcquisto(e.getViaggio().getCostoTotale());
 			d.setDataPartenza(e.getDataPartenza());
 			d.setNumPosti(e.getNumPosti());
 			ordine.aggiungiDettaglio(d);
@@ -97,7 +93,6 @@ public class CheckoutServlet extends HttpServlet {
 		int codiceOrdine = dao.salvaOrdine(ordine);
 
 		if (codiceOrdine > 0) {
-			// Requisito: a ordine confermato il carrello va svuotato
 			session.removeAttribute("carrello");
 			response.sendRedirect(request.getContextPath() + "/AreaPersonaleServlet");
 		} else {

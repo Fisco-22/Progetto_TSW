@@ -5,23 +5,19 @@ import java.io.Serializable;
 public class Utente_Bean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	// Nessun "id" numerico! La vera chiave primaria per te è l'Email
 	private String email;
 	private String nome;
 	private String cognome;
 	private String password;
 	private String indirizzo;
 	private String dataNascita;
-	
-	// Il ruolo che nel database è ENUM('utente', 'admin')
+
 	private String ruolo; 
 	
-	// Array per i numeri dinamici
 	private String[] telefoni; 
     
 	public Utente_Bean() {}
 
-	// --- GETTER E SETTER ---
 	public String getEmail() {
 		return email; 
 	}

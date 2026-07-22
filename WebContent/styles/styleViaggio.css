@@ -34,7 +34,7 @@ body {
     grid-row: span 2;
 }
 
-/* 2. Layout Principale: Info a sinistra, Card a destra */
+/* 2. Layout Principale: Informazioni a sinistra, Card a destra */
 .content-wrapper {
     display: flex;
     gap: 40px;
@@ -42,11 +42,11 @@ body {
 }
 
 .left-info {
-    flex: 2; /* Prende più spazio */
+    flex: 2; 
 }
 
 .right-card {
-    flex: 1; /* Prende meno spazio */
+    flex: 1; 
 }
 
 /* Stili del testo informativo */
@@ -55,22 +55,12 @@ body {
     font-size: 32px;
 }
 
-.rating {
-    display: inline-block;
-    background-color: DodgerBlue;
-    color: white;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
 .description {
     line-height: 1.6;
     color: DarkSlateGray;
 }
 
-/* 3. Booking Card (Il box per acquistare/carrello) */
+/* 3. Box per acquistare/carrello */
 .booking-box {
     background: white;
     border: 1px solid Gainsboro;
@@ -113,7 +103,7 @@ body {
     box-sizing: border-box;
 }
 
-/* Bottoni */
+/* pulsanti */
 .btn {
     width: 100%;
     padding: 14px;
@@ -144,7 +134,6 @@ body {
 .btn-secondary:hover {
     background-color: AliceBlue;
 }
-
 
 @media (max-width: 768px) {
     .container {

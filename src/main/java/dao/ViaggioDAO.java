@@ -14,7 +14,6 @@ public class ViaggioDAO {
 
 	private DataSource ds;
 
-	// Il DataSource viene iniettato dalla servlet (recuperato dal ServletContext)
 	public ViaggioDAO(DataSource ds) {
 		this.ds = ds;
 	}
@@ -46,8 +45,6 @@ public class ViaggioDAO {
 		}
 		return viaggio; 
 	}
-	
-	// ===== CRUD per l'area amministratore =====
 
 	public boolean salvaViaggio(Viaggio_Bean v) {
 		String query = "INSERT INTO VIAGGIO (Destinazione, Descrizione, Immagine_URL, Costo_Totale, n_posti, Email_Admin) VALUES (?, ?, ?, ?, ?, ?)";
@@ -82,7 +79,6 @@ public class ViaggioDAO {
 	}
 
 	public boolean cancellaViaggio(int codiceViaggio) {
-		// Grazie a ON DELETE SET NULL su DETTAGLIO_ORDINE, gli ordini passati NON vengono toccati
 		String query = "DELETE FROM VIAGGIO WHERE Codice_Viaggio = ?";
 		try (Connection con = getConnection(); PreparedStatement ps = con.prepareStatement(query)) {
 			ps.setInt(1, codiceViaggio);

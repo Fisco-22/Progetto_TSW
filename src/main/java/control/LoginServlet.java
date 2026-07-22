@@ -39,27 +39,21 @@ public class LoginServlet extends HttpServlet {
         Utente_Bean uAutentificato = dao.checkLogin(email, password);
         
         if (uAutentificato != null) {
-            // Login OK: creiamo la sessione ("utente" è il nome usato da tutte le JSP)
             HttpSession session = request.getSession();
             session.setAttribute("utente", uAutentificato);
             session.setAttribute("userEmail", uAutentificato.getEmail());
-            // Token di sessione per il controllo degli accessi alle servlet protette
             session.setAttribute("token", UUID.randomUUID().toString());
 
-            // Redirect (Post-Redirect-Get): evita il reinvio del form al refresh
             response.sendRedirect(request.getContextPath() + "/AreaPersonaleServlet");
         } else {
-            // Login Fallito: Inviamo il messaggio d'errore alla pagina di autenticazione
             request.setAttribute("messaggioErrore", "Email o password errate. Riprova.");
-            
-            // CORRETTO: Percorso assoluto completo per evitare il 404 di Tomcat
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/registrazione.jsp");
             dispatcher.forward(request, response);
         }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Il login via GET (credenziali nell'URL) non è ammesso: si torna alla pagina di autenticazione
+
         response.sendRedirect(request.getContextPath() + "/RegistrazioneServlet");
     }
 }

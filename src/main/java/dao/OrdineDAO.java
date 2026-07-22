@@ -15,7 +15,6 @@ public class OrdineDAO {
 
 private DataSource ds;
 
-// Il DataSource viene iniettato dalla servlet (recuperato dal ServletContext)
 public OrdineDAO(DataSource ds) {
 	this.ds = ds;
 }

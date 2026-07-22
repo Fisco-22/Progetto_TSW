@@ -42,7 +42,6 @@ public class RegistrazioneServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 
-		// 2. Recuperiamo tutti i dati testuali (inclusi i nuovi due!)
 		String nome = request.getParameter("nome");
 		String cognome = request.getParameter("cognome");
 		String email = request.getParameter("email");
@@ -52,25 +51,22 @@ public class RegistrazioneServlet extends HttpServlet {
 		
 		String[] telefoni = request.getParameterValues("telefono");
 
-		// --- DEBUG IN CONSOLE (Aggiornato per vedere se arrivano) ---
 		System.out.println("--- NUOVA RICHIESTA DI REGISTRAZIONE ---");
 		System.out.println("Nome: " + nome + " | Cognome: " + cognome);
 		System.out.println("Email: " + email + " | Indirizzo: " + indirizzo + " | Data Nascita: " + dataNascita);
-		// -----------------------------------------------------------
 
 		Utente_Bean utenteTemp = new Utente_Bean();
 		utenteTemp.setNome(nome);
 		utenteTemp.setCognome(cognome);
 		utenteTemp.setEmail(email);
-		utenteTemp.setPassword(password); // FONDAMENTALE passarla al DAO!
+		utenteTemp.setPassword(password); 
 		utenteTemp.setIndirizzo(indirizzo);
 		utenteTemp.setDataNascita(dataNascita);
 		utenteTemp.setTelefoni(telefoni);
 
-		// 5. CHIAMATA AL DAO (istanza creata in init() col DataSource iniettato)
 		boolean successo = dao.salvaUtente(utenteTemp);
 		
-		// 6. GESTIONE DEL RISULTATO
+
 		if (successo) {
 			request.setAttribute("registeredUser", utenteTemp);
 			request.getRequestDispatcher("/WEB-INF/view/registrazione_completata.jsp").forward(request, response);

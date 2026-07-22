@@ -8,11 +8,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-/**
- * All'avvio dell'applicazione recupera il DataSource dal JNDI di Tomcat
- * (una sola volta) e lo mette nel ServletContext con chiave "DataSource".
- * Le servlet lo leggono nel loro init() e lo iniettano nei DAO.
- */
+
 @WebListener
 public class DataSourceListener implements ServletContextListener {
 

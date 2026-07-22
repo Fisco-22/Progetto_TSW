@@ -1,6 +1,5 @@
-/* ==========================================================================
-   1. RESET E VARIABILI GLOBALI
-   ========================================================================== */
+/*RESET E VARIABILI GLOBALI*/
+
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
@@ -33,9 +32,7 @@ body {
     line-height: 1.5;
 }
 
-/* ==========================================================================
-   2. NAVBAR CON SEZIONE ASSISTENZA E CARRELLO (Stile Expedia)
-   ========================================================================== */
+/*NAVBAR CON SEZIONE ASSISTENZA E CARRELLO */
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -102,17 +99,7 @@ body {
     background-color: Black;
 }
 
-/* Link specifico per tornare alla home nella navbar delle pagine di errore/auth */
-.link-torna-home {
-    margin-left: 20px;
-    font-weight: bold;
-    color: var(--brand-primary);
-    text-decoration: none;
-}
-
-/* ==========================================================================
-   3. HERO & SEARCH BAR (Unificata e Responsiva)
-   ========================================================================== */
+/* Search Bar */
 .hero {
     text-align: center;
     padding: 60px 20px 80px 20px;
@@ -126,62 +113,7 @@ body {
     margin-bottom: 10px;
 }
 
-.search-container {
-    max-width: 950px;
-    margin: -35px auto 0 auto;
-    background: var(--bg-card);
-    padding: 20px;
-    border-radius: var(--radius-lg);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    align-items: flex-end;
-    justify-content: center;
-}
-
-.search-box {
-    flex: 1;
-    min-width: 180px;
-    display: flex;
-    flex-direction: column;
-}
-
-.search-box label {
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    margin-bottom: 6px;
-}
-
-.search-box input, .search-box select {
-    padding: 11px;
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-sm);
-    font-size: 14px;
-    outline: none;
-}
-
-.btn-cerca {
-    background-color: var(--brand-primary);
-    color: White;
-    border: none;
-    padding: 13px 30px;
-    border-radius: var(--radius-sm);
-    font-size: 15px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background-color var(--transition-fast);
-}
-
-.btn-cerca:hover {
-    background-color: Teal;
-}
-
-/* ==========================================================================
-   4. SEZIONI CATALOGO PRODOTTI (Griglia Card)
-   ========================================================================== */
+/*SEZIONI CATALOGO PRODOTTI (Griglia Card)*/
 .main-content {
     max-width: 1150px;
     margin: 40px auto;
@@ -255,18 +187,6 @@ body {
     backdrop-filter: blur(2px);
 }
 
-.badge-countdown {
-    position: absolute;
-    bottom: 12px;
-    right: 12px;
-    background: OrangeRed;
-    color: white;
-    font-size: 11px;
-    font-weight: 700;
-    padding: 3px 8px;
-    border-radius: var(--radius-sm);
-}
-
 .card-body {
     padding: 20px;
     display: flex;
@@ -295,28 +215,6 @@ body {
     flex: 1;
 }
 
-.card-rating {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 15px;
-}
-
-.rating-score {
-    background-color: var(--brand-primary);
-    color: white;
-    font-size: 12px;
-    font-weight: 700;
-    padding: 2px 6px;
-    border-radius: 4px;
-}
-
-.rating-text {
-    font-size: 12px;
-    color: var(--text-muted);
-    font-weight: 500;
-}
-
 .card-footer-price {
     border-top: 1px solid WhiteSmoke;
     padding-top: 12px;
@@ -340,36 +238,7 @@ body {
     color: var(--text-muted);
 }
 
-/* ==========================================================================
-   5. POP-UP MODALE (Risolto Conflitto Duplicazione)
-   ========================================================================== */
-.modal-overlay {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(15, 23, 42, 0.6);
-    backdrop-filter: blur(4px);
-    display: none; /* Gestito via JS o classe .active */
-    justify-content: center; align-items: center;
-    z-index: 9999;
-}
-
-.modal-overlay.active {
-    display: flex;
-}
-
-.modal-box {
-    background: var(--bg-card);
-    width: 100%; max-width: 520px;
-    border-radius: var(--radius-lg); padding: 40px;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-    position: relative; max-height: 85vh; overflow-y: auto;
-}
-
-.close-btn {
-    position: absolute; top: 20px; right: 20px;
-    font-size: 28px; background: none; border: none;
-    cursor: pointer; color: var(--text-muted);
-}
+/*POP-UP MODALE*/
 
 .modal-tabs {
     display: flex; border-bottom: 2px solid Lavender; margin-bottom: 30px;
@@ -385,61 +254,7 @@ body {
     color: var(--brand-primary); border-bottom: 3px solid var(--brand-primary);
 }
 
-.password-container { 
-    position: relative; 
-}
-
-.password-container input { 
-    padding-right: 45px; 
-}
-
-.toggle-password {
-    position: absolute; right: 14px; top: 36px;
-    background: none; border: none; cursor: pointer; font-size: 18px;
-}
-
-.signup-only { 
-    display: block; 
-}
-
-.mode-login .signup-only { 
-    display: none; 
-}
-
-.checkbox-group { 
-    display: flex; gap: 10px; margin-top: 8px; 
-}
-
-.checkbox-group input { 
-    width: 16px; height: 16px; accent-color: var(--brand-dark); 
-}
-
-.checkbox-group label { 
-    font-size: 13px; color: DarkSlateGray; 
-}
-
-.btn-submit {
-    width: 100%; padding: 14px; background-color: var(--brand-dark);
-    color: white; border: none; border-radius: var(--radius-pill);
-    font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 25px;
-    transition: background-color var(--transition-fast);
-}
-
-.btn-submit:hover {
-    background-color: Black;
-}
-
-.toggle-text { 
-    text-align: center; margin-top: 20px; font-size: 14px; color: var(--text-muted); 
-}
-
-.toggle-text span { 
-    color: var(--brand-primary); font-weight: 700; cursor: pointer; text-decoration: underline; 
-}
-	
-/* ==========================================================================
-   6. SCHERMATA DI SUCCESSO (Registrazione Completata)
-   ========================================================================== */
+/*SCHERMATA DI SUCCESSO*/
 .container-successo {
     display: flex;
     justify-content: center;
@@ -512,9 +327,7 @@ body {
     transform: scale(0.98);
 }
 
-/* ==========================================================================
-   7. PAGINE DI UTENTICAZIONE / REGISTRAZIONE STRUTTURATE (Allineate al Brand)
-   ========================================================================== */
+/*AGINE DI UTENTICAZIONE / REGISTRAZIONE STRUTTURATE (Allineate al Brand)*/
 .auth-body {
     background-color: var(--bg-main);
 }
@@ -536,29 +349,21 @@ body {
     max-width: 500px;
 }
 
-.auth-title {
-    margin-top: 0;
-    color: var(--text-main);
-    text-align: center;
-    font-weight: 800;
-    margin-bottom: 25px;
-}
 
-/* Corretti gli input riutilizzando lo schema globale */
-.form-container .form-group, .auth-card .form-group {
+.auth-card .form-group {
     margin-bottom: 20px;
     display: flex;
     flex-direction: column;
 }
 
-.form-container .form-group label, .auth-card .form-group label {
+.auth-card .form-group label {
     font-size: 14px;
     font-weight: 700;
     color: var(--text-main);
     margin-bottom: 6px;
 }
 
-.form-container .form-group input, .auth-card .form-group input {
+.auth-card .form-group input {
     padding: 12px;
     border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
@@ -567,11 +372,11 @@ body {
     transition: border-color var(--transition-fast);
 }
 
-.form-container .form-group input:focus, .auth-card .form-group input:focus {
+.auth-card .form-group input:focus {
     border-color: var(--brand-primary);
 }
 
-/* Allineati i bottoni submit al brand (Verde scuro e Verde brillante) */
+
 .btn-submit-login, .btn-submit-signup {
     width: 100%;
     margin-top: 20px;
@@ -615,22 +420,6 @@ body {
     background: LightGray;
 }
 
-.auth-switch-text {
-    text-align: center;
-    margin-top: 25px;
-    font-size: 14px;
-    color: var(--text-muted);
-}
-
-.auth-link {
-    color: var(--brand-primary);
-    font-weight: bold;
-    text-decoration: none;
-}
-.auth-link:hover {
-    text-decoration: underline;
-}
-
 .error-span {
     color: Tomato;
     font-size: 13px;
@@ -639,9 +428,7 @@ body {
     display: block;
 }
 
-/* ==========================================================================
-   8. NUOVA SEZIONE: AREA PERSONALE (Migrata da codice incorporato)
-   ========================================================================== */
+/*AREA PERSONALE */
 .profile-container {
     max-width: 1150px;
     margin: 50px auto;

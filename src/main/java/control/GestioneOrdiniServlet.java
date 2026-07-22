@@ -56,7 +56,7 @@ public class GestioneOrdiniServlet extends HttpServlet {
 
 		try {
 			if ("carrello".equals(azione) || "acquista".equals(azione)) {
-				// Aggiunta di un viaggio al carrello
+
 				int codiceViaggio = Integer.parseInt(request.getParameter("codiceViaggio"));
 				int numPosti = Integer.parseInt(request.getParameter("numPosti"));
 				String dataPartenza = request.getParameter("dataPartenza");
@@ -72,24 +72,21 @@ public class GestioneOrdiniServlet extends HttpServlet {
 				}
 
 			} else if ("aggiorna".equals(azione)) {
-				// Variazione della quantità (numero posti) di un elemento
 				int codiceViaggio = Integer.parseInt(request.getParameter("codiceViaggio"));
 				int numPosti = Integer.parseInt(request.getParameter("numPosti"));
 				String dataPartenza = request.getParameter("dataPartenza");
 				carrello.aggiornaQuantita(codiceViaggio, dataPartenza, numPosti);
 
 			} else if ("rimuovi".equals(azione)) {
-				// Rimozione di un singolo elemento
 				int codiceViaggio = Integer.parseInt(request.getParameter("codiceViaggio"));
 				String dataPartenza = request.getParameter("dataPartenza");
 				carrello.rimuoviElemento(codiceViaggio, dataPartenza);
 
 			} else if ("svuota".equals(azione)) {
-				// Svuotamento completo del carrello
 				carrello.svuota();
 			}
 		} catch (NumberFormatException e) {
-			// Parametri malformati: nessuna modifica al carrello, si torna alla pagina
+			
 		}
 
 		if (isAjax) {

@@ -18,9 +18,7 @@
 	<session-config>
     <cookie-config>
         <http-only>true</http-only>
-        <!-- secure=true rimosso: su http://localhost il cookie di sessione non verrebbe
-             mai inviato e login/carrello smetterebbero di funzionare.
-             Da riattivare solo se Tomcat viene configurato con HTTPS. -->
+  
     </cookie-config>
     <tracking-mode>COOKIE</tracking-mode>
 	</session-config>

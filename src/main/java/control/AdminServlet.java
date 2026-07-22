@@ -33,7 +33,6 @@ public class AdminServlet extends HttpServlet {
 		ordineDAO = new OrdineDAO(ds);
 	}
 
-	// Controllo accessi: token in sessione + ruolo admin
 	private boolean isAdmin(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
 		if (session == null || session.getAttribute("token") == null) return false;
@@ -41,7 +40,7 @@ public class AdminServlet extends HttpServlet {
 		return u != null && "admin".equals(u.getRuolo());
 	}
 
-	// GET: dashboard (catalogo + ricerche ordini)
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (!isAdmin(request)) {
 			response.sendRedirect(request.getContextPath() + "/RegistrazioneServlet");
@@ -74,7 +73,6 @@ public class AdminServlet extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/view/admin.jsp").forward(request, response);
 	}
 
-	// POST: operazioni CRUD sul catalogo
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (!isAdmin(request)) {
 			response.sendRedirect(request.getContextPath() + "/RegistrazioneServlet");
@@ -100,7 +98,7 @@ public class AdminServlet extends HttpServlet {
 				viaggioDAO.cancellaViaggio(codice);
 			}
 		} catch (NumberFormatException e) {
-			// Parametri numerici malformati: nessuna operazione
+			
 		}
 
 		// Post-Redirect-Get

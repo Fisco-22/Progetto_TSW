@@ -149,9 +149,6 @@ function cambiaScheda(scheda) {
     }
 }
 
-// ==========================================================================
-// 5. TELEFONI DINAMICI
-// ==========================================================================
 function addPhone() {
     let container = document.getElementById("phonesContainer");
     if (!container) return;
@@ -212,9 +209,6 @@ function addPhone() {
     phoneCount++;
 }
 
-// ==========================================================================
-// 6. VALIDAZIONE REGISTRAZIONE AL SUBMIT
-// ==========================================================================
 function validateRegistrazione() {
     let valid = true;
 

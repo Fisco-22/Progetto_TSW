@@ -17,7 +17,6 @@ public class Carrello_Bean {
 	}
 	
 	public void aggiungiElemento(ElementoCarrello_Bean newElemento) {
-		// Se lo stesso viaggio con la stessa data è già nel carrello, somma i posti
 		for (ElementoCarrello_Bean e : elementi) {
 			if (stessoElemento(e, newElemento.getViaggio().getCodiceViaggio(), newElemento.getDataPartenza())) {
 				e.setNumPosti(e.getNumPosti() + newElemento.getNumPosti());
@@ -48,7 +47,6 @@ public class Carrello_Bean {
 		elementi.clear();
 	}
 
-	// Un elemento è identificato da viaggio + data di partenza
 	private boolean stessoElemento(ElementoCarrello_Bean e, int codiceViaggio, String dataPartenza) {
 		return e.getViaggio().getCodiceViaggio() == codiceViaggio
 				&& e.getDataPartenza() != null && e.getDataPartenza().equals(dataPartenza);
