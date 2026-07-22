@@ -13,7 +13,6 @@
         <a href="${pageContext.request.contextPath}/HomeServlet" class="logo">TravelBooking</a>
         <div class="nav-links">
             <span class="nav-info">Assistenza clienti: <strong class="phone-placeholder">+39 089 1234567</strong></span>
-            <a href="#">Recensioni</a>
             
             <a href="${pageContext.request.contextPath}/CarrelloServlet" class="cart-link"> I miei viaggi
                 <span class="cart-badge">${sessionScope.carrello != null ? sessionScope.carrello.numeroElementi : 0}</span>

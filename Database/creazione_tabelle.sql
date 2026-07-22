@@ -3,7 +3,7 @@ CREATE DATABASE IF NOT EXISTS travelbooking_db;
 USE travelbooking_db;
 
 -- 2. Ripulitura (prima i figli, poi i padri)
-DROP TABLE IF EXISTS DETTAGLIO_ORDINE, ORDINE, RECENSIONE, PRENOTARE, PERNOTTAMENTO,
+DROP TABLE IF EXISTS DETTAGLIO_ORDINE, ORDINE, PRENOTARE, PERNOTTAMENTO,
                      RITORNO, ANDATA, HOTEL, VOLO, TELEFONO_UTENTE, VIAGGIO, UTENTE;
 
 -- 3. Creazione tabelle
@@ -76,17 +76,6 @@ CREATE TABLE PERNOTTAMENTO (
     PRIMARY KEY(Codice_Viaggio, Codice_Hotel),
     FOREIGN KEY(Codice_Viaggio) REFERENCES VIAGGIO(Codice_Viaggio) ON UPDATE CASCADE ON DELETE CASCADE,
     FOREIGN KEY(Codice_Hotel) REFERENCES HOTEL(Codice_Hotel) ON UPDATE CASCADE ON DELETE CASCADE
-);
-
-CREATE TABLE RECENSIONE (
-    Codice_Recensione INT PRIMARY KEY AUTO_INCREMENT,
-    Voto SMALLINT NOT NULL CHECK(Voto >= 1 AND Voto <= 5),
-    Commento TEXT,
-    Data_Recensione DATE,
-    Email_Utente VARCHAR(128) NOT NULL,
-    Codice_Viaggio INT NOT NULL,
-    FOREIGN KEY(Email_Utente) REFERENCES UTENTE(Email) ON UPDATE CASCADE ON DELETE CASCADE,
-    FOREIGN KEY(Codice_Viaggio) REFERENCES VIAGGIO(Codice_Viaggio) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 -- ============================================================

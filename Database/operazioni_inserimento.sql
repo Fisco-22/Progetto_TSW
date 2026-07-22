@@ -48,23 +48,16 @@ VALUES
 
 (5, 'Venezia, Italia', 'Affacciato direttamente sulle acque del canale principale, interni eleganti in stile classico veneziano. Un\'esperienza magica e senza tempo nel cuore della città galleggiante più bella del mondo.', 'images/Venezia.jpg', 195.00, 95, 'francescopagliuchi@admin.com');
 
--- =========================================================================
--- PASSO 3: INSERIMENTO DI UNA RECENSIONE (Operazione eseguita dall'Utente)
--- =========================================================================
-
--- Ora che l'utente esiste e il viaggio 1 esiste, la recensione funzionerà alla perfezione!
-INSERT INTO RECENSIONE(Voto, Commento, Data_Recensione, Email_Utente, Codice_Viaggio)
-VALUES(
-    5, 
-    'Viaggio fantastico, organizzazione perfetta e hotel stupendo. Consigliatissimo!', 
-    CURDATE(), 
-    'f.verdi@gmail.com', 
-    1
-);
-
--- PASSO 4: ORDINE DI PROVA (l'utente compra il viaggio 1 a prezzo storico)
+-- PASSO 3: ORDINE DI PROVA (l'utente compra il viaggio 1 a prezzo storico)
 INSERT INTO ORDINE(Email_Utente, Totale_Ordine, Indirizzo_Spedizione, Metodo_Pagamento, Ultime4Cifre)
 VALUES('f.verdi@gmail.com', 218.00, 'Via delle Puglie 21, Benevento', 'Carta di credito', '4242');
 
 INSERT INTO DETTAGLIO_ORDINE(Codice_Ordine, Codice_Viaggio, Destinazione, Prezzo_Acquisto, Data_Partenza, Num_Posti)
 VALUES(LAST_INSERT_ID(), 1, 'Barcellona, Spagna', 109.00, '2026-10-15', 2);
+
+
+UPDATE VIAGGIO SET Immagine_URL = 'images/Barcellona.jpg' WHERE Codice_Viaggio = 1;
+UPDATE VIAGGIO SET Immagine_URL = 'images/Parigi.jpg'     WHERE Codice_Viaggio = 2;
+UPDATE VIAGGIO SET Immagine_URL = 'images/Amsterdam.jpg'  WHERE Codice_Viaggio = 3;
+UPDATE VIAGGIO SET Immagine_URL = 'images/Roma.jpg'       WHERE Codice_Viaggio = 4;
+UPDATE VIAGGIO SET Immagine_URL = 'images/Venezia.jpg'    WHERE Codice_Viaggio = 5;

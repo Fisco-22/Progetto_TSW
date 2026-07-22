@@ -1,1 +1,2 @@
-SELECT Codice_Viaggio, Destinazione, Costo_Totale, Email_Admin FROM VIAGGIO;
+USE travelbooking_db;
+SELECT Codice_Viaggio, Immagine_URL FROM VIAGGIO;

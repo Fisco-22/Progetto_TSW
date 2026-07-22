@@ -1,1 +1,2 @@
-SELECT Codice_Viaggio, Email_Utente, Voto, Commento FROM RECENSIONE;
+-- Funzionalita' RECENSIONE rimossa dal progetto.
+-- Questo file e' obsoleto: puoi cancellarlo.
