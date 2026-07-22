@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 public class DettaglioOrdine_Bean {
 private int idDettaglio;

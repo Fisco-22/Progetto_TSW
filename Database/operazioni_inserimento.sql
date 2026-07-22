@@ -38,15 +38,15 @@ VALUES(
 -- INSERIMENTO DEI 5 VIAGGI DI INDEX.HTML
 INSERT INTO VIAGGIO(Codice_Viaggio, Destinazione, Descrizione, Immagine_URL, Costo_Totale, n_posti, Email_Admin)
 VALUES
-(1, 'Barcellona, Spagna', 'Ottima posizione, a 20 metri dalla Ramblas, per chi vuole godersi al massimo il soggiorno. Struttura moderna con terrazza panoramica e colazione inclusa.', 'images/viaggio1.jpg', 109.00, 150, 'francescopagliuchi@admin.com'),
+(1, 'Barcellona, Spagna', 'Ottima posizione, a 20 metri dalla Ramblas, per chi vuole godersi al massimo il soggiorno. Struttura moderna con terrazza panoramica e colazione inclusa.', 'images/Barcellona.jpg', 109.00, 150, 'francescopagliuchi@admin.com'),
 
-(2, 'Parigi, Francia', 'Hotel in stile informale con arredi ispirati al design moderno e vicino ai musei principali. Camere dotate di ogni comfort, ideali per un weekend romantico a due passi dalla metropolitana.', 'images/viaggio2.jpg', 164.00, 120, 'francescopagliuchi@admin.com'),
+(2, 'Parigi, Francia', 'Hotel in stile informale con arredi ispirati al design moderno e vicino ai musei principali. Camere dotate di ogni comfort, ideali per un weekend romantico a due passi dalla metropolitana.', 'images/Parigi.jpg', 164.00, 120, 'francescopagliuchi@admin.com'),
 
-(3, 'Amsterdam, Paesi Bassi', 'Splendido alloggio ricavato in una struttura storica, con diverse tipologie di camere. Atmosfera accogliente e artistica, a pochi minuti dai canali principali e dalle attrazioni culturali.', 'images/viaggio3.jpg', 260.00, 80, 'francescopagliuchi@admin.com'),
+(3, 'Amsterdam, Paesi Bassi', 'Splendido alloggio ricavato in una struttura storica, con diverse tipologie di camere. Atmosfera accogliente e artistica, a pochi minuti dai canali principali e dalle attrazioni culturali.', 'images/Amsterdam.jpg', 260.00, 80, 'francescopagliuchi@admin.com'),
 
-(4, 'Roma, Italia', 'Camere spaziose immerse nel verde del quartiere EUR, ottimi collegamenti con il centro storico tramite la metro. Ideale per chi cerca tranquillità senza rinunciare alle meraviglie della Capitale.', 'images/viaggio4.jpg', 128.00, 200, 'francescopagliuchi@admin.com'),
+(4, 'Roma, Italia', 'Camere spaziose immerse nel verde del quartiere EUR, ottimi collegamenti con il centro storico tramite la metro. Ideale per chi cerca tranquillità senza rinunciare alle meraviglie della Capitale.', 'images/Roma.jpg', 128.00, 200, 'francescopagliuchi@admin.com'),
 
-(5, 'Venezia, Italia', 'Affacciato direttamente sulle acque del canale principale, interni eleganti in stile classico veneziano. Un\'esperienza magica e senza tempo nel cuore della città galleggiante più bella del mondo.', 'images/viaggio5.jpg', 195.00, 95, 'francescopagliuchi@admin.com');
+(5, 'Venezia, Italia', 'Affacciato direttamente sulle acque del canale principale, interni eleganti in stile classico veneziano. Un\'esperienza magica e senza tempo nel cuore della città galleggiante più bella del mondo.', 'images/Venezia.jpg', 195.00, 95, 'francescopagliuchi@admin.com');
 
 -- =========================================================================
 -- PASSO 3: INSERIMENTO DI UNA RECENSIONE (Operazione eseguita dall'Utente)

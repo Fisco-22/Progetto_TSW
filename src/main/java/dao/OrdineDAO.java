@@ -1,6 +1,6 @@
-package DAO;
-import Model.Ordine_Bean;
-import Model.DettaglioOrdine_Bean;
+package dao;
+import model.Ordine_Bean;
+import model.DettaglioOrdine_Bean;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

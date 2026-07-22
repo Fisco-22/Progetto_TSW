@@ -1,7 +1,7 @@
-package Control;
+package control;
 
-import DAO.*;
-import Model.*;
+import dao.*;
+import model.*;
 
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;

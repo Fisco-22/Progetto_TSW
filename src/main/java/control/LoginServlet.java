@@ -1,4 +1,4 @@
-package Control;
+package control;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletConfig;
@@ -13,8 +13,8 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.UUID;
 
-import Model.*;
-import DAO.*;
+import model.*;
+import dao.*;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {

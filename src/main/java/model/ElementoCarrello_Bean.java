@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 public class ElementoCarrello_Bean {
 	private Viaggio_Bean viaggio;

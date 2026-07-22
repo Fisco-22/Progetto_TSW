@@ -1,4 +1,4 @@
-package Control;
+package control;
 
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
@@ -9,8 +9,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.io.IOException;
 
-import Model.Viaggio_Bean;
-import DAO.ViaggioDAO;
+import model.Viaggio_Bean;
+import dao.ViaggioDAO;
 /**
  * Servlet implementation class DettaglioServlet
  */

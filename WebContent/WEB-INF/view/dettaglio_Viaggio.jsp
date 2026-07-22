@@ -8,6 +8,7 @@
     
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/styleViaggio.css">
+    <script src="${pageContext.request.contextPath}/scripts/ajaxCarrello.js" defer></script>
 </head>
 <body>
 
@@ -16,7 +17,7 @@
     <div class="nav-links">
         <span class="nav-info">Assistenza clienti: <strong class="phone-placeholder">+39 089 1234567</strong></span>
         <a href="#">Recensioni</a>
-        <a href="${pageContext.request.contextPath}/CarrelloServlet" class="cart-link"> I miei viaggi <span class="cart-badge">${sessionScope.carrello != null ? sessionScope.carrello.numeroElementi : 0}</span></a>
+        <a href="${pageContext.request.contextPath}/CarrelloServlet" class="cart-link"> I miei viaggi <span class="cart-badge" id="cartBadge">${sessionScope.carrello != null ? sessionScope.carrello.numeroElementi : 0}</span></a>
         
         <%-- Controllo se l'oggetto 'utente' esiste nella sessione --%>
         <% if (session.getAttribute("utente") != null) { %>
@@ -62,8 +63,8 @@
                 <p class="price-tag">€ ${viaggio.costoTotale}</p>
                 <p class="price-subtext">Prezzo totale per il soggiorno</p>
 
-                <form action="${pageContext.request.contextPath}/GestioneOrdiniServlet" method="POST">
-                    
+                <form id="formViaggio" action="${pageContext.request.contextPath}/GestioneOrdiniServlet" method="POST">
+
                     <input type="hidden" name="codiceViaggio" value="${viaggio.codiceViaggio}">
 
                     <div class="form-group">
@@ -81,10 +82,13 @@
                         </select>
                     </div>
 
-                    <%-- Aggiunge al carrello e resta sulla pagina/carrello --%>
-                    <button type="submit" name="azione" value="carrello" class="btn btn-primary">
+                    <%-- Aggiunge al carrello via AJAX: il badge si aggiorna senza reload
+                         (se JS e' disattivato, il submit normale funziona comunque) --%>
+                    <button type="submit" id="btnCarrello" name="azione" value="carrello" class="btn btn-primary">
                         Aggiungi al carrello
                     </button>
+
+                    <span id="ajaxMsg" style="display:none; margin-top:10px; font-weight:600;"></span>
 
                     <%-- Acquisto diretto: aggiunge al carrello e va subito al checkout --%>
                     <button type="submit" name="azione" value="acquista" class="btn btn-secondary" style="margin-top: 10px;">

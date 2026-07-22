@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="Model.Utente_Bean" %>
+<%@ page import="model.Utente_Bean" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <% 
     Utente_Bean connesso = (Utente_Bean) session.getAttribute("utente");

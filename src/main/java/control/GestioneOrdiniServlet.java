@@ -1,7 +1,7 @@
-package Control;
+package control;
 
-import DAO.*;
-import Model.*;
+import dao.*;
+import model.*;
 
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
@@ -52,6 +52,9 @@ public class GestioneOrdiniServlet extends HttpServlet {
 			session.setAttribute("carrello", carrello);
 		}
 
+		// Richiesta AJAX? (inviata dal fetch con header X-Requested-With)
+		boolean isAjax = "XMLHttpRequest".equals(request.getHeader("X-Requested-With"));
+
 		try {
 			if ("carrello".equals(azione) || "acquista".equals(azione)) {
 				// Aggiunta di un viaggio al carrello
@@ -89,6 +92,15 @@ public class GestioneOrdiniServlet extends HttpServlet {
 			}
 		} catch (NumberFormatException e) {
 			// Parametri malformati: nessuna modifica al carrello, si torna alla pagina
+		}
+
+		// Se la richiesta e' AJAX rispondiamo con il nuovo conteggio in JSON,
+		// cosi' il badge del carrello si aggiorna senza ricaricare la pagina.
+		if (isAjax) {
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+			response.getWriter().write("{\"numeroElementi\": " + carrello.getNumeroElementi() + "}");
+			return;
 		}
 
 		response.sendRedirect(request.getContextPath() + "/CarrelloServlet");

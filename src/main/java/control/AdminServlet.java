@@ -1,10 +1,10 @@
-package Control;
+package control;
 
-import DAO.OrdineDAO;
-import DAO.ViaggioDAO;
-import Model.Ordine_Bean;
-import Model.Utente_Bean;
-import Model.Viaggio_Bean;
+import dao.OrdineDAO;
+import dao.ViaggioDAO;
+import model.Ordine_Bean;
+import model.Utente_Bean;
+import model.Viaggio_Bean;
 
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;

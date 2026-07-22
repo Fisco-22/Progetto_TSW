@@ -1,11 +1,11 @@
-package Control;
+package control;
 
-import DAO.OrdineDAO;
-import Model.Carrello_Bean;
-import Model.DettaglioOrdine_Bean;
-import Model.ElementoCarrello_Bean;
-import Model.Ordine_Bean;
-import Model.Utente_Bean;
+import dao.OrdineDAO;
+import model.Carrello_Bean;
+import model.DettaglioOrdine_Bean;
+import model.ElementoCarrello_Bean;
+import model.Ordine_Bean;
+import model.Utente_Bean;
 
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;

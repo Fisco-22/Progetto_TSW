@@ -3,8 +3,8 @@
 -- Le immagini locali si trovano in WebContent/images/
 USE travelbooking_db;
 
-UPDATE VIAGGIO SET Immagine_URL = 'images/viaggio1.jpg' WHERE Codice_Viaggio = 1;
-UPDATE VIAGGIO SET Immagine_URL = 'images/viaggio2.jpg' WHERE Codice_Viaggio = 2;
-UPDATE VIAGGIO SET Immagine_URL = 'images/viaggio3.jpg' WHERE Codice_Viaggio = 3;
-UPDATE VIAGGIO SET Immagine_URL = 'images/viaggio4.jpg' WHERE Codice_Viaggio = 4;
-UPDATE VIAGGIO SET Immagine_URL = 'images/viaggio5.jpg' WHERE Codice_Viaggio = 5;
+UPDATE VIAGGIO SET Immagine_URL = 'images/Barcellona.jpg' WHERE Codice_Viaggio = 1;
+UPDATE VIAGGIO SET Immagine_URL = 'images/Parigi.jpg'     WHERE Codice_Viaggio = 2;
+UPDATE VIAGGIO SET Immagine_URL = 'images/Amsterdam.jpg'  WHERE Codice_Viaggio = 3;
+UPDATE VIAGGIO SET Immagine_URL = 'images/Roma.jpg'       WHERE Codice_Viaggio = 4;
+UPDATE VIAGGIO SET Immagine_URL = 'images/Venezia.jpg'    WHERE Codice_Viaggio = 5;

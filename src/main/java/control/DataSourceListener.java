@@ -1,4 +1,4 @@
-package Control;
+package control;
 
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;

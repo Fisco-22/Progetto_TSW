@@ -1,4 +1,4 @@
-package Control;
+package control;
 
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
@@ -9,8 +9,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.io.IOException;
 
-import DAO.UtenteDAO;
-import Model.Utente_Bean;
+import dao.UtenteDAO;
+import model.Utente_Bean;
 /**
  * Servlet implementation class RegistrazioneServlet
  */

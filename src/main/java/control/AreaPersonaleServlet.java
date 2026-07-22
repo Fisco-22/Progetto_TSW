@@ -1,4 +1,4 @@
-package Control;
+package control;
 
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
@@ -11,9 +11,9 @@ import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.List;
 
-import DAO.OrdineDAO;
-import Model.Ordine_Bean;
-import Model.Utente_Bean;
+import dao.OrdineDAO;
+import model.Ordine_Bean;
+import model.Utente_Bean;
 
 @WebServlet("/AreaPersonaleServlet")
 public class AreaPersonaleServlet extends HttpServlet {

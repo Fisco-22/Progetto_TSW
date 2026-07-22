@@ -1,6 +1,6 @@
-package DAO;
+package dao;
 
-import Model.Viaggio_Bean;
+import model.Viaggio_Bean;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
