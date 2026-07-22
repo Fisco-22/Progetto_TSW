@@ -33,10 +33,10 @@
 <div class="container">
 
     <div class="gallery-grid">
-        <img src="${viaggio.immagineUrl}" alt="${viaggio.destinazione}" class="gallery-item item-main">
-        
-        <img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Piscina Resort" class="gallery-item">
-        <img src="https://images.unsplash.com/photo-1582719478250-c89afe4dc84b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Camera da letto" class="gallery-item">
+        <img src="${pageContext.request.contextPath}/${viaggio.immagineUrl}" alt="${viaggio.destinazione}" class="gallery-item item-main">
+
+        <img src="${pageContext.request.contextPath}/images/gallery-piscina.jpg" alt="Piscina Resort" class="gallery-item">
+        <img src="${pageContext.request.contextPath}/images/gallery-camera.jpg" alt="Camera da letto" class="gallery-item">
     </div>
 
     <div class="content-wrapper">
@@ -81,11 +81,16 @@
                         </select>
                     </div>
 
-                    <%-- L'ordine si conclude dal carrello (checkout): qui si aggiunge soltanto --%>
+                    <%-- Aggiunge al carrello e resta sulla pagina/carrello --%>
                     <button type="submit" name="azione" value="carrello" class="btn btn-primary">
                         Aggiungi al carrello
                     </button>
-                    
+
+                    <%-- Acquisto diretto: aggiunge al carrello e va subito al checkout --%>
+                    <button type="submit" name="azione" value="acquista" class="btn btn-secondary" style="margin-top: 10px;">
+                        Acquista ora
+                    </button>
+
                 </form>
             </div>
         </div>

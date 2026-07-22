@@ -53,7 +53,7 @@ public class GestioneOrdiniServlet extends HttpServlet {
 		}
 
 		try {
-			if ("carrello".equals(azione)) {
+			if ("carrello".equals(azione) || "acquista".equals(azione)) {
 				// Aggiunta di un viaggio al carrello
 				int codiceViaggio = Integer.parseInt(request.getParameter("codiceViaggio"));
 				int numPosti = Integer.parseInt(request.getParameter("numPosti"));
@@ -62,6 +62,12 @@ public class GestioneOrdiniServlet extends HttpServlet {
 				Viaggio_Bean viaggio = dao.getViaggioById(codiceViaggio);
 				if (viaggio != null && dataPartenza != null && !dataPartenza.isEmpty() && numPosti > 0) {
 					carrello.aggiungiElemento(new ElementoCarrello_Bean(viaggio, dataPartenza, numPosti));
+				}
+
+				// Acquisto diretto: si va subito al checkout invece che al carrello
+				if ("acquista".equals(azione)) {
+					response.sendRedirect(request.getContextPath() + "/CheckoutServlet");
+					return;
 				}
 
 			} else if ("aggiorna".equals(azione)) {

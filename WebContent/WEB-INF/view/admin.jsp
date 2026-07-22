@@ -26,7 +26,7 @@
         <h3>Nuovo viaggio</h3>
         <form action="${pageContext.request.contextPath}/AdminServlet" method="POST" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 30px;">
             <input type="text" name="destinazione" placeholder="Destinazione" maxlength="32" required>
-            <input type="url" name="immagineUrl" placeholder="URL immagine" maxlength="500" required>
+            <input type="text" name="immagineUrl" placeholder="Percorso immagine (es. images/viaggio1.jpg)" maxlength="500" required>
             <textarea name="descrizione" placeholder="Descrizione" rows="2" style="grid-column: 1 / -1;" required></textarea>
             <input type="number" name="costoTotale" placeholder="Costo (€)" step="0.01" min="0" required>
             <input type="number" name="nPosti" placeholder="Posti disponibili" min="0" required>
@@ -42,7 +42,7 @@
                 <span>#${v.codiceViaggio}</span>
                 <input type="hidden" name="codiceViaggio" value="${v.codiceViaggio}">
                 <input type="text" name="destinazione" value="<c:out value='${v.destinazione}'/>" maxlength="32" required>
-                <input type="url" name="immagineUrl" value="<c:out value='${v.immagineUrl}'/>" maxlength="500" required>
+                <input type="text" name="immagineUrl" value="<c:out value='${v.immagineUrl}'/>" maxlength="500" required>
                 <input type="number" name="costoTotale" value="${v.costoTotale}" step="0.01" min="0" required>
                 <input type="number" name="nPosti" value="${v.nPosti}" min="0" required>
                 <textarea name="descrizione" rows="1" style="grid-column: 1 / 6;" required><c:out value="${v.descrizione}"/></textarea>

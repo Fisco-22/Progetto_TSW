@@ -51,8 +51,8 @@
                     <a href="${pageContext.request.contextPath}/DettaglioServlet?id=${viaggio.codiceViaggio}" style="text-decoration: none; color: inherit;"> 
                         <div class="travel-card">
                             <div class="card-image-wrap">
-                                <!-- L'immagine viene presa direttamente dal DB -->
-                                <img src="${viaggio.immagineUrl}" alt="${viaggio.destinazione}">
+                                <!-- L'immagine (percorso relativo, es. images/viaggio1.jpg) viene presa dal DB -->
+                                <img src="${pageContext.request.contextPath}/${viaggio.immagineUrl}" alt="${viaggio.destinazione}">
                                 <span class="badge-combo">Volo + Hotel</span>
                             </div>
                             <div class="card-body">
