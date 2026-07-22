@@ -1,2 +1,0 @@
--- Funzionalita' RECENSIONE rimossa dal progetto.
--- Questo file e' obsoleto: puoi cancellarlo.
